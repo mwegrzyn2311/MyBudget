@@ -1,0 +1,14 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Datasource local storage ignored files
+/../../../../../../../../:\Users\kicaj\Documents\Technologie obiektowe\Projekt\MyBudget\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+# Igonre build
+/build/
+# Ignore gradle
+/.gradle/
+# Ignore idea
+/.idea/
