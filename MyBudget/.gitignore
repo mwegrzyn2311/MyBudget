@@ -7,8 +7,8 @@
 # Editor-based HTTP Client requests
 /httpRequests/
 # Igonre build
-/build/
+build/
 # Ignore gradle
-/.gradle/
+.gradle/
 # Ignore idea
-/.idea/
+.idea/
