@@ -20,6 +20,11 @@ java {
     targetCompatibility = JavaVersion.VERSION_14
 }
 
+dependencies {
+    implementation group: 'com.google.inject', name: 'guice', version: '4.2.3'
+    implementation group: 'com.google.inject.extensions', name: 'guice-multibindings', version: '4.2.3'
+}
+
 javafx {
     version = '14'
     modules = ['javafx.base', 'javafx.controls', 'javafx.fxml', 'javafx.graphics', 'javafx.media', 'javafx.swing', 'javafx.web']
