@@ -7,13 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity"
-            minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="482.0" prefWidth="703.0"
-            xmlns="http://javafx.com/javafx/11.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="controller.MyBudgetAppController"
-            >
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="703.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MyBudgetAppController">
    <center>
       <SplitPane dividerPositions="0.23252496433666192" prefHeight="221.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <items>
@@ -21,6 +15,7 @@
                <children>
                    <Button fx:id="accountsLink" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Accounts" />
                    <Button fx:id="operationsLink" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Operations" />
+                  <Button fx:id="categoriesLink" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Transaction categories" />
                </children>
             </VBox>
             <TabPane fx:id="mainArea" prefHeight="385.0" prefWidth="574.0" tabClosingPolicy="UNAVAILABLE" />

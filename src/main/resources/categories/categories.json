@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Incomes",
+    "childCategories": [
+      {"name": "Salary"}, {"name":"Odd jobs"}, {"name":"Pension"}, {"name":"Personal savings"}
+    ]
+  },
+  {
+    "name": "Utility bills",
+    "childCategories": [
+      {"name":"Rent"}, {"name":"Gas"}, {"name":"Electricity"}, {"name":"Water"}, {"name":"Garbage"}
+    ]
+  },
+  {
+    "name": "Food",
+    "childCategories": [
+      {"name":"Eating out"}, {"name":"Bar"}
+    ]
+  },
+  {
+    "name": "Shopping",
+    "childCategories": [
+      {"name":"Groceries"}, {"name":"Clothes"}, {"name":"Shoes"}, {"name":"Presents"}
+    ]
+  },
+  {
+    "name": "Transport",
+    "childCategories": [
+      {"name":"Car expenses"}, {"name":"Fuel"}, {"name":"Insurance"}
+    ]
+  },
+  {
+    "name": "Entertainment",
+    "childCategories": [
+      {"name":"Books"}, {"name":"Cinema"}
+    ]
+  }
+]

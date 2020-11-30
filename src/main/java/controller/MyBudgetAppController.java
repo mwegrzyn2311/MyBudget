@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 public class MyBudgetAppController implements Initializable {
+
     private Map<String, Tab> openTabs = new HashMap<>();
 
     @FXML
@@ -26,9 +27,14 @@ public class MyBudgetAppController implements Initializable {
     @FXML
     private Button operationsLink;
 
+    @FXML
+    private Button categoriesLink;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         operationsLink.setOnAction(event -> openTab("/view/Operations.fxml", "Operations"));
+        //TODO
+        categoriesLink.setOnAction(event-> openTab("/view/Categories.fxml", "Transaction categories"));
     }
 
     private void openTab(String filename, String name) {
