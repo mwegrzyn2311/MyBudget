@@ -2,12 +2,16 @@ package controller;
 
 import com.google.inject.Inject;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.layout.GridPane;
 import service.FxmlLoaderService;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,18 +39,23 @@ public class MyBudgetAppController implements Initializable, ITabAreaController 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        openTab(fxmlLoaderService.getLoader(getClass().getResource("/view/AccountList.fxml")), "Account list");
     }
 
-    public void openTab(TabController tabController, String name) {
+    public void openTab(FXMLLoader loader, String name) {
         if(openTabs.containsKey(name)) {
             mainArea.getSelectionModel()
                     .select(openTabs.get(name));
         } else {
                 Tab newTab = new Tab();
                 newTab.setText(name);
-                newTab.setContent(tabController);
+                try {
+                    newTab.setContent(loader.load());
+                } catch(IOException ex) {
+                    ex.printStackTrace();
+                }
 
-                tabController.setTabAreaController(this);
+            ((TabController)loader.getController()).setTabAreaController(this);
 
                 mainArea.getTabs().add(newTab);
                 openTabs.put(name, newTab);

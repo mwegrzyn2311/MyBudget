@@ -23,8 +23,8 @@ public class FxmlLoaderService {
      * @param location location URI
      * @return Node
      */
-    public Parent load(final URL location) throws IOException {
-        return load(location, null);
+    public FXMLLoader getLoader(final URL location) {
+        return getLoader(location, null);
     }
 
     /**
@@ -33,9 +33,9 @@ public class FxmlLoaderService {
      * @param resources resources bundle
      * @return Node
      */
-    public Parent load(final URL location, ResourceBundle resources) throws IOException {
-        return FXMLLoader.load(location,
-                null,
+    public FXMLLoader getLoader(final URL location, ResourceBundle resources) {
+        return new FXMLLoader(location,
+                resources,
                 new JavaFXBuilderFactory(),
                 injector::getInstance);
     }

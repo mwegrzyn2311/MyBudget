@@ -17,7 +17,7 @@ public class MyBudgetApp extends Application {
         final Injector injector = Guice.createInjector(new MyBudgetModule());
         final FxmlLoaderService fxmlLoaderService = injector.getInstance(FxmlLoaderService.class);
         try {
-            Parent root = fxmlLoaderService.load(getClass().getResource("/view/MyBudgetApp.fxml"));
+            Parent root = fxmlLoaderService.getLoader(getClass().getResource("/view/MyBudgetApp.fxml")).load();
             Scene scene = new Scene(root);
 
             primaryStage.setScene(scene);

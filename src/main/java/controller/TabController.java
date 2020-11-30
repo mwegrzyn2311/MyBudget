@@ -1,7 +1,11 @@
 package controller;
 
-import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.layout.BorderPane;
 
-public abstract class TabController extends Node {
-    abstract void setTabAreaController(ITabAreaController tabAreaController);
+public abstract class TabController {
+    private ITabAreaController tabAreaController;
+    public void setTabAreaController(ITabAreaController tabAreaController) {
+        this.tabAreaController = tabAreaController;
+    }
 }

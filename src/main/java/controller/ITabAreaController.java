@@ -1,5 +1,7 @@
 package controller;
 
+import javafx.fxml.FXMLLoader;
+
 public interface ITabAreaController {
-    void openTab(TabController tabController, String name);
+    void openTab(FXMLLoader loader, String name);
 }
