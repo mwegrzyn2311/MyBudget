@@ -2,20 +2,18 @@ package controller;
 
 import com.google.inject.Inject;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import service.FxmlLoaderService;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class MyBudgetAppController implements Initializable {
+public class MyBudgetAppController implements Initializable, ITabAreaController {
     private final Map<String, Tab> openTabs = new HashMap<>();
 
     private final FxmlLoaderService fxmlLoaderService;
@@ -37,24 +35,23 @@ public class MyBudgetAppController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        operationsLink.setOnAction(event -> openTab("/view/Operations.fxml", "Operations"));
     }
 
-    private void openTab(String filename, String name) {
-        if(openTabs.containsKey(filename)) {
+    public void openTab(TabController tabController, String name) {
+        if(openTabs.containsKey(name)) {
             mainArea.getSelectionModel()
-                    .select(openTabs.get(filename));
+                    .select(openTabs.get(name));
         } else {
-            try {
                 Tab newTab = new Tab();
                 newTab.setText(name);
-                newTab.setContent(fxmlLoaderService.load(this.getClass().getResource(filename)));
+                newTab.setContent(tabController);
+
+                tabController.setTabAreaController(this);
+
                 mainArea.getTabs().add(newTab);
-                openTabs.put(filename, newTab);
-                newTab.setOnClosed(event -> openTabs.remove(filename));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+                openTabs.put(name, newTab);
+
+                newTab.setOnClosed(event -> openTabs.remove(name));
         }
     }
 }
