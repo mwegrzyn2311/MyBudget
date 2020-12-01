@@ -42,25 +42,26 @@ public class MyBudgetAppController implements Initializable, ITabAreaController 
         openTab(fxmlLoaderService.getLoader(getClass().getResource("/view/AccountList.fxml")), "Account list");
     }
 
-    public void openTab(FXMLLoader loader, String name) {
+    public void openTab(FXMLLoader loader, String name, Object param) {
         if(openTabs.containsKey(name)) {
             mainArea.getSelectionModel()
                     .select(openTabs.get(name));
         } else {
-                Tab newTab = new Tab();
-                newTab.setText(name);
-                try {
-                    newTab.setContent(loader.load());
-                } catch(IOException ex) {
-                    ex.printStackTrace();
-                }
+            Tab newTab = new Tab();
+            newTab.setText(name);
+            try {
+                newTab.setContent(loader.load());
+            } catch(IOException ex) {
+                ex.printStackTrace();
+            }
+            TabController tabController = (TabController)loader.getController();
+            tabController.setTabAreaController(this);
+            tabController.setTabParameter(param);
 
-            ((TabController)loader.getController()).setTabAreaController(this);
+            mainArea.getTabs().add(newTab);
+            openTabs.put(name, newTab);
 
-                mainArea.getTabs().add(newTab);
-                openTabs.put(name, newTab);
-
-                newTab.setOnClosed(event -> openTabs.remove(name));
+            newTab.setOnClosed(event -> openTabs.remove(name));
         }
     }
 }

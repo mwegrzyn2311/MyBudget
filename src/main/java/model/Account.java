@@ -21,7 +21,7 @@ public class Account {
 
     private ObjectProperty<BigDecimal> initialBalance;
 
-    //private ObservableList<Operation> operations;
+    private ObservableList<Operation> operations;
 
     public Account() {}
 
@@ -76,20 +76,14 @@ public class Account {
         return initialBalance;
     }
 
-
-    /*// TODO: Transient looks quite bad
-    @OneToMany(mappedBy = "Operation")
+    
     public List<Operation> getOperations() {
         return new LinkedList<>(operations);
     }
     public void setOperations(List<Operation> operations) {
         this.operations = FXCollections.observableArrayList(operations);
     }
-    @Transient
-    public ObservableList<Operation> getOperationsAsObservableList() {
+    public ObservableList<Operation> operationsObservableList() {
         return this.operations;
     }
-    public void setOperations(ObservableList<Operation> operations) {
-        this.operations = operations;
-    }*/
 }

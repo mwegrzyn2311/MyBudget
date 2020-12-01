@@ -4,8 +4,12 @@ import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
 
 public abstract class TabController {
-    private ITabAreaController tabAreaController;
+    protected ITabAreaController tabAreaController;
     public void setTabAreaController(ITabAreaController tabAreaController) {
         this.tabAreaController = tabAreaController;
+    }
+
+    public void setTabParameter(Object param) {
+
     }
 }
