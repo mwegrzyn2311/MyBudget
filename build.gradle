@@ -31,7 +31,6 @@ dependencies {
     compile group: 'org.hibernate', name: 'hibernate-core', version: '5.4.24.Final'
     compile group: 'org.springframework.data', name: 'spring-data-jpa', version: '2.4.1'
     compile group: 'org.xerial', name:'sqlite-jdbc', version:'3.20.1'
-    //compile group: 'com.zsoltfabok', name: 'sqlite-dialect', version: '1.0'
     compile group: 'com.github.gwenn', name: 'sqlite-dialect', version: '0.1.0'
 }
 

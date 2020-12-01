@@ -78,7 +78,7 @@ public class Account {
 
 
     /*// TODO: Transient looks quite bad
-    @OneToMany(mappedBy = "operations")
+    @OneToMany(mappedBy = "Operation")
     public List<Operation> getOperations() {
         return new LinkedList<>(operations);
     }
