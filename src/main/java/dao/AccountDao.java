@@ -5,6 +5,8 @@ import model.Account;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
+import java.math.BigDecimal;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,10 +18,12 @@ public class AccountDao extends GenericDao<Account> {
     }
 
 
-    public Optional<Account> create(String name) {
+    public Optional<Account> create(String name, String accountNumber, BigDecimal initialBalance) {
         try {
-            save(new Account());
-            return findByName(name);
+            Account account = new Account(name, accountNumber, initialBalance, new LinkedList<>());
+            save(account);
+            int id = account.getId();
+            return findById(id);
         } catch(PersistenceException e) {
             e.printStackTrace();
         }

@@ -25,12 +25,11 @@ public class Account {
 
     public Account() {}
 
-    public Account(int id, String name, String accountNumber, BigDecimal initialBalance/*, List<Operation> operations*/) {
-        this.id = id;
+    public Account(String name, String accountNumber, BigDecimal initialBalance, List<Operation> operations) {
         this.name = new SimpleStringProperty(name);
         this.accountNumber = new SimpleStringProperty(accountNumber);
         this.initialBalance = new SimpleObjectProperty<>(initialBalance);
-        //this.operations = FXCollections.observableArrayList(operations);
+        this.operations = FXCollections.observableArrayList(operations);
     }
     @Id
     @GeneratedValue
@@ -76,7 +75,8 @@ public class Account {
         return initialBalance;
     }
 
-    
+    @OneToMany
+    @JoinColumn(name = "account_fk")
     public List<Operation> getOperations() {
         return new LinkedList<>(operations);
     }

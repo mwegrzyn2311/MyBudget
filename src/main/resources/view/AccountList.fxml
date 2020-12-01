@@ -7,17 +7,17 @@
    <center>
       <TableView fx:id="accountTableView" prefHeight="200.0" prefWidth="340.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn fx:id="nameColumn" prefWidth="114.0" text="Name" />
-          <TableColumn fx:id="currBalanceColumn" minWidth="0.0" prefWidth="94.0" text="Current bilance" />
-            <TableColumn fx:id="anotherColumn" prefWidth="116.0" text="???" />
+          <TableColumn fx:id="nameColumn" prefWidth="113.0" text="Name" />
+          <TableColumn fx:id="currBalanceColumn" minWidth="0.0" prefWidth="117.0" text="Current balance" />
+            <TableColumn fx:id="initialBalanceColumn" prefWidth="109.0" text="Initial Balance" />
         </columns>
       </TableView>
    </center>
    <top>
-      <HBox prefHeight="42.0" prefWidth="340.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="35.0" prefWidth="340.0" styleClass="button-box" stylesheets="@../styles/ListViewStyles.css" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="addButton" mnemonicParsing="false" text="Add" />
-            <Button mnemonicParsing="false" text="Delete" />
+            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" text="Delete" />
          </children>
       </HBox>
    </top>
