@@ -12,4 +12,6 @@ public abstract class TabController {
     public void setTabParameter(Object param) {
 
     }
+
+    public abstract void onSelected();
 }

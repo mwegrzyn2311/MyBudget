@@ -13,8 +13,7 @@ import java.util.Optional;
 public class AccountDao extends GenericDao<Account> {
     @Inject
     public AccountDao(EntityManager entityManager) {
-        super(entityManager);
-        clazz = Account.class;
+        super(entityManager, Account.class);
     }
 
 
@@ -22,8 +21,8 @@ public class AccountDao extends GenericDao<Account> {
         try {
             Account account = new Account(name, accountNumber, initialBalance, new LinkedList<>());
             save(account);
-            int id = account.getId();
-            return findById(id);
+            Long id = account.getId();
+            return findOne(id);
         } catch(PersistenceException e) {
             e.printStackTrace();
         }
@@ -34,17 +33,6 @@ public class AccountDao extends GenericDao<Account> {
         try {
             Account account = entityManager.createQuery("SELECT c FROM Account c WHERE c.name = :name", Account.class)
                     .setParameter("name", name).getSingleResult();
-            return Optional.of(account);
-        } catch (PersistenceException e) {
-            e.printStackTrace();
-        }
-        return Optional.empty();
-    }
-
-    public Optional<Account> findById(final int id) {
-        try {
-            Account account = entityManager.createQuery("SELECT c FROM Account c WHERE c.id = :id", Account.class)
-                    .setParameter("id", id).getSingleResult();
             return Optional.of(account);
         } catch (PersistenceException e) {
             e.printStackTrace();

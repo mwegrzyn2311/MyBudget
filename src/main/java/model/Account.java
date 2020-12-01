@@ -5,15 +5,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.*;
 
 @Entity
 @Table(name = "Account")
 @Access(AccessType.PROPERTY)
-public class Account {
+public class Account implements Serializable {
 
-    private int id;
+    private Long id;
 
     private StringProperty name;
 
@@ -34,10 +35,10 @@ public class Account {
     @Id
     @GeneratedValue
     @Column(name = "id")
-    public int getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -75,8 +76,7 @@ public class Account {
         return initialBalance;
     }
 
-    @OneToMany
-    @JoinColumn(name = "account_fk")
+    @OneToMany(mappedBy = "account")
     public List<Operation> getOperations() {
         return new LinkedList<>(operations);
     }
@@ -85,5 +85,11 @@ public class Account {
     }
     public ObservableList<Operation> operationsObservableList() {
         return this.operations;
+    }
+    public void addOperation(Operation operation) {
+        operations.add(operation);
+    }
+    public void removeOperation(Operation operation) {
+        operations.remove(operation);
     }
 }

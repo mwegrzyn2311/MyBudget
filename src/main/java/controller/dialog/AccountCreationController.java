@@ -1,5 +1,6 @@
-package controller;
+package controller.dialog;
 
+import controller.AccountListController;
 import dao.AccountDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

@@ -20,7 +20,6 @@
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
                    <Button fx:id="accountsLink" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Accounts" />
-                   <Button fx:id="operationsLink" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Operations" />
                </children>
             </VBox>
             <TabPane fx:id="mainArea" prefHeight="385.0" prefWidth="574.0" tabClosingPolicy="UNAVAILABLE" />

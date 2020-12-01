@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../styles/CreationStyles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AccountCreationController">
+<BorderPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../../styles/CreationStyles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.dialog.AccountCreationController">
    <top>
       <Label prefHeight="54.0" prefWidth="270.0" styleClass="main-label" text="New Account" BorderPane.alignment="CENTER" />
    </top>

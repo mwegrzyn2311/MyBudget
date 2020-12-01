@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OperationListController">
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OperationListController">
     <center>
         <TableView fx:id="operationTableView" prefHeight="200.0" prefWidth="340.0" BorderPane.alignment="CENTER">
             <columns>
@@ -17,7 +17,8 @@
         <HBox prefHeight="42.0" prefWidth="340.0" styleClass="button-box" stylesheets="@../styles/ListViewStyles.css" BorderPane.alignment="CENTER">
             <children>
                 <Button fx:id="addButton" mnemonicParsing="false" text="Add" />
-                <Button mnemonicParsing="false" text="Delete" />
+                <Button fx:id="editButton" mnemonicParsing="false" text="Edit" />
+                <Button fx:id="deleteButton" mnemonicParsing="false" text="Delete" />
             </children>
         </HBox>
     </top>

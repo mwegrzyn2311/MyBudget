@@ -29,9 +29,6 @@ public class MyBudgetAppController implements Initializable, ITabAreaController 
     @FXML
     private Button accountsLink;
 
-    @FXML
-    private Button operationsLink;
-
     @Inject
     public MyBudgetAppController(final FxmlLoaderService fxmlLoaderService) {
         this.fxmlLoaderService = fxmlLoaderService;
@@ -39,6 +36,12 @@ public class MyBudgetAppController implements Initializable, ITabAreaController 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        mainArea.setTabClosingPolicy(TabPane.TabClosingPolicy.ALL_TABS);
+
+        accountsLink.setOnAction(event -> {
+            openTab(fxmlLoaderService.getLoader(getClass().getResource("/view/AccountList.fxml")), "Account list");
+        });
+
         openTab(fxmlLoaderService.getLoader(getClass().getResource("/view/AccountList.fxml")), "Account list");
     }
 
@@ -60,7 +63,9 @@ public class MyBudgetAppController implements Initializable, ITabAreaController 
 
             mainArea.getTabs().add(newTab);
             openTabs.put(name, newTab);
+            mainArea.getSelectionModel().select(newTab);
 
+            newTab.setOnSelectionChanged(event -> tabController.onSelected());
             newTab.setOnClosed(event -> openTabs.remove(name));
         }
     }

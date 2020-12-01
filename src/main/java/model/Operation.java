@@ -6,14 +6,15 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
 @Access(AccessType.PROPERTY)
 @Table(name = "Operation")
-public class Operation {
-    private int id;
+public class Operation implements Serializable {
+    private Long id;
 
     private ObjectProperty<Account> account;
 
@@ -24,7 +25,12 @@ public class Operation {
     private StringProperty comment;
 
 
-    public Operation() {}
+    public Operation() {
+        this.account = new SimpleObjectProperty<>();
+        this.amount = new SimpleObjectProperty<>();
+        this.date = new SimpleObjectProperty<>();
+        this.comment = new SimpleStringProperty();
+    }
 
     public Operation(Account account, BigDecimal amount, Date date, String comment) {
         this.account = new SimpleObjectProperty<>(account);
@@ -36,14 +42,13 @@ public class Operation {
     @Id
     @GeneratedValue
     @Column(name = "id")
-    public int getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    @Transient
     @ManyToOne
     public Account getAccount() {
         return account.getValue();

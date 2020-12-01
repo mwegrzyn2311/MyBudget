@@ -1,5 +1,6 @@
 package controller;
 
+import controller.dialog.AccountCreationController;
 import dao.AccountDao;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -20,8 +21,6 @@ import service.FxmlLoaderService;
 import javax.inject.Inject;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Optional;
 
 public class AccountListController extends TabController {
     AccountDao accountDao;
@@ -53,7 +52,7 @@ public class AccountListController extends TabController {
                     Account account = row.getItem();
                     tabAreaController.openTab(
                             fxmlLoaderService.getLoader(getClass().getResource("/view/OperationList.fxml")),
-                            "Account "+account.getName(),
+                            "[Account] "+account.getName(),
                             account.getId());
                 }
             });
@@ -63,7 +62,7 @@ public class AccountListController extends TabController {
         currBalanceColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData
                 .getValue()
                 .getInitialBalance()
-                .subtract(cellData.getValue()
+                .add(cellData.getValue()
                         .getOperations()
                         .stream()
                         .map(Operation::getAmount)
@@ -75,7 +74,7 @@ public class AccountListController extends TabController {
 
         addButton.addEventHandler(ActionEvent.ACTION, e -> {
             try {
-                FXMLLoader loader = fxmlLoaderService.getLoader(getClass().getResource("/view/AccountCreation.fxml"));
+                FXMLLoader loader = fxmlLoaderService.getLoader(getClass().getResource("/view/dialog/AccountCreation.fxml"));
                 Parent root = loader.load();
                 ((AccountCreationController) loader.getController()).setAccountListController(this);
                 Stage stage = new Stage();
@@ -86,9 +85,17 @@ public class AccountListController extends TabController {
                 ex.printStackTrace();
             }
         });
+
+
     }
 
     public void refreshAccountList() {
         accountTableView.setItems(FXCollections.observableArrayList(accountDao.findAll()));
+        accountTableView.refresh();
+    }
+
+    @Override
+    public void onSelected() {
+        refreshAccountList();
     }
 }

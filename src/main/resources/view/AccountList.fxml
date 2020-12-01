@@ -17,7 +17,7 @@
       <HBox prefHeight="35.0" prefWidth="340.0" styleClass="button-box" stylesheets="@../styles/ListViewStyles.css" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="addButton" mnemonicParsing="false" text="Add" />
-            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" text="Delete" />
+            <Button mnemonicParsing="false" disable="true" prefHeight="40.0" prefWidth="80.0" text="Delete" />
          </children>
       </HBox>
    </top>
