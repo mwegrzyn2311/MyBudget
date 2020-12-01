@@ -5,10 +5,11 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AccountListController">
    <center>
-      <TableView prefHeight="200.0" prefWidth="340.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="accountTableView" prefHeight="200.0" prefWidth="340.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn minWidth="0.0" prefWidth="92.0" text="C2" />
+          <TableColumn fx:id="nameColumn" prefWidth="114.0" text="Name" />
+          <TableColumn fx:id="currBalanceColumn" minWidth="0.0" prefWidth="94.0" text="Current bilance" />
+            <TableColumn fx:id="anotherColumn" prefWidth="116.0" text="???" />
         </columns>
       </TableView>
    </center>
