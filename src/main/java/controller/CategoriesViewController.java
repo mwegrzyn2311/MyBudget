@@ -33,9 +33,7 @@ public class CategoriesViewController extends TabController {
     }
 
     @Override
-    public void onSelected() {
-        initialize();
-    }
+    public void onSelected() { }
 
     public static void createTreeView(TopCategoryDao topCategoryDao, TreeItem<String> root) {
         List<TopCategory> categories = topCategoryDao.findAll();
