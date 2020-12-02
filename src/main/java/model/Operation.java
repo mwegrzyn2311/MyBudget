@@ -24,23 +24,27 @@ public class Operation implements Serializable {
 
     private StringProperty comment;
 
+    private ObjectProperty<Category> category;
+
 
     public Operation() {
         this.account = new SimpleObjectProperty<>();
         this.amount = new SimpleObjectProperty<>();
         this.date = new SimpleObjectProperty<>();
         this.comment = new SimpleStringProperty();
+        this.category = new SimpleObjectProperty<>();
     }
 
-    public Operation(Account account, BigDecimal amount, Date date, String comment) {
+    public Operation(Account account, BigDecimal amount, Date date, String comment, Category category) {
         this.account = new SimpleObjectProperty<>(account);
         this.amount = new SimpleObjectProperty<>(amount);
         this.date = new SimpleObjectProperty<>(date);
         this.comment = new SimpleStringProperty(comment);
+        this.category = new SimpleObjectProperty<>(category);
     }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     public Long getId() {
         return id;
@@ -94,5 +98,8 @@ public class Operation implements Serializable {
         return comment;
     }
 
-
+    @ManyToOne
+    public Category getCategory() {return this.category.getValue();}
+    public void setCategory(Category category) {this.category=new SimpleObjectProperty<>(category);}
+    public ObjectProperty<Category> categoryProperty() {return this.category;}
 }

@@ -1,13 +1,17 @@
 package controller.dialog;
 
+import controller.CategoriesViewController;
+import dao.CategoryDao;
+import dao.TopCategoryDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import model.Category;
 import model.Operation;
+import model.OperationType;
+import model.TopCategory;
 
+import javax.inject.Inject;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -15,6 +19,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 
 public class OperationEditController extends DialogController {
     Operation operation;
@@ -27,6 +32,19 @@ public class OperationEditController extends DialogController {
     DatePicker dateField;
     @FXML
     TextArea commentField;
+    @FXML
+    TreeView<String> categoryPicker;
+
+    private TopCategoryDao topCategoryDao;
+    private CategoryDao categoryDao;
+
+    private final TreeItem<String> root = new TreeItem<>("Categories");
+
+    @Inject
+    public OperationEditController(TopCategoryDao topCategoryDao, CategoryDao categoryDao){
+        this.topCategoryDao = topCategoryDao;
+        this.categoryDao = categoryDao;
+    }
 
     @FXML
     private void initialize() {
@@ -35,6 +53,9 @@ public class OperationEditController extends DialogController {
             approved = true;
             stage.close();
          });
+        root.setExpanded(false);
+        CategoriesViewController.createTreeView(topCategoryDao, root);
+        this.categoryPicker.setRoot(root);
     }
 
     public void setModel(Operation operation) {
@@ -47,10 +68,18 @@ public class OperationEditController extends DialogController {
     }
 
     private void updateModel() {
+        Category category = categoryDao.findByName(categoryPicker.getSelectionModel().getSelectedItem()
+                .getValue()).get();
+        operation.setCategory(category);
+
         DecimalFormat decimalFormatter= new DecimalFormat();
         decimalFormatter.setParseBigDecimal(true);
         try {
-            operation.setAmount((BigDecimal) decimalFormatter.parse(amountField.getText()));
+            if(category.getTopCategory().getOperationType().compareTo(OperationType.Income)==0){
+                operation.setAmount((BigDecimal) decimalFormatter.parse(amountField.getText()));}
+            else{
+                BigDecimal amount = (BigDecimal) decimalFormatter.parse(amountField.getText());
+                operation.setAmount(amount.negate());}
         } catch (ParseException e) {
             e.printStackTrace();
         }

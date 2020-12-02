@@ -11,9 +11,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import model.Account;
+import model.Category;
 import model.Operation;
+import model.OperationType;
 import service.FxmlLoaderService;
 
 import javax.inject.Inject;
@@ -24,6 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class OperationListController extends TabController {
+
     FxmlLoaderService fxmlLoaderService;
     AccountDao accountDao;
     OperationDao operationDao;
@@ -46,6 +51,13 @@ public class OperationListController extends TabController {
     TableColumn<Operation, Date> dateColumn;
     @FXML
     TableColumn<Operation, String> commentColumn;
+    @FXML
+    TableColumn<Operation, Category> categoryColumn;
+
+    @FXML
+    public TextFlow name;
+    @FXML
+    public TextFlow currentBalance;
 
     @Inject
     public OperationListController(FxmlLoaderService fxmlLoaderService, AccountDao accountDao, OperationDao operationDao) {
@@ -64,14 +76,6 @@ public class OperationListController extends TabController {
                     super.updateItem(item, empty);
                     setText(empty ? "" : getItem().toString());
                     setGraphic(null);
-                    TableRow<Operation> currentRow = getTableRow();
-                    if (!isEmpty()) {
-                        int comparison = item.compareTo(BigDecimal.ZERO);
-                        if(comparison > 0)
-                            currentRow.setStyle("-fx-background-color:lightgreen");
-                        else if(comparison < 0)
-                            currentRow.setStyle("-fx-background-color:lightred");
-                    }
                 }
             };
             return cell;
@@ -93,6 +97,25 @@ public class OperationListController extends TabController {
         });
         commentColumn.setCellValueFactory(cellData -> cellData.getValue().commentProperty());
 
+        categoryColumn.setCellValueFactory(cellData -> cellData.getValue().categoryProperty());
+        categoryColumn.setCellFactory(column -> {
+            return new TableCell<Operation, Category>() {
+                @Override
+                protected void updateItem(Category item, boolean empty) {
+                    super.updateItem(item, empty);
+                    setText(empty ? "" : getItem().getTopCategory().getName()+"/"+getItem().getName());
+                    setGraphic(null);
+                    TableRow<Operation> currentRow = getTableRow();
+                    if (!isEmpty()) {
+                        int comparison = item.getTopCategory().getOperationType().compareTo(OperationType.Income);
+                        if(comparison == 0)
+                            currentRow.setStyle("-fx-background-color:lightgreen");
+                        else currentRow.setStyle("-fx-background-color:orangered");
+                    }
+                }
+            };
+        });
+
         deleteButton.disableProperty().bind(
                 Bindings.isEmpty(
                         operationTableView.getSelectionModel()
@@ -112,8 +135,14 @@ public class OperationListController extends TabController {
     private void refreshList() {
         accountDao.refresh(account);
         if(account != null) {
-            operationTableView.setItems(account.operationsObservableList());
             operationTableView.refresh();
+            name.getChildren().clear();
+            name.getChildren().add(new Text(account.getName()));
+            currentBalance.getChildren().clear();
+            currentBalance.getChildren().add(new Text(account.getInitialBalance()
+                    .add(account.getOperations().stream().map(Operation::getAmount)
+                            .reduce(BigDecimal.ZERO, BigDecimal::add)).toString()));
+            operationTableView.setItems(account.operationsObservableList());
         }
     }
 
@@ -192,6 +221,11 @@ public class OperationListController extends TabController {
         Long accountId = (Long) param;
         account = accountDao.findOne(accountId).orElse(null);
         if(account != null) {
+            operationTableView.setItems(account.operationsObservableList());
+            name.getChildren().add(new Text(account.getName()));
+            currentBalance.getChildren().add(new Text(account.getInitialBalance()
+                    .add(account.getOperations().stream().map(Operation::getAmount)
+                            .reduce(BigDecimal.ZERO, BigDecimal::add)).toString()));
             operationTableView.setItems(account.operationsObservableList());
         }
     }

@@ -9,7 +9,7 @@ import javax.persistence.EntityManager;
 public class OperationDao extends GenericDao<Operation>  {
 
     @Inject
-    public OperationDao(EntityManager entityManager) {
+    public OperationDao(Provider<EntityManager> entityManager) {
         super(entityManager, Operation.class);
     }
 }

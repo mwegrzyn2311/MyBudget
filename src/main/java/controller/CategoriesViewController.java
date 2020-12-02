@@ -1,32 +1,44 @@
 package controller;
 
+import controller.dialog.OperationEditController;
+import dao.TopCategoryDao;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import model.Category;
 import model.TopCategory;
-import service.JSONLoaderService;
 
-import java.net.URL;
+import javax.inject.Inject;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class CategoriesViewController extends TabController {
+
+    private final TopCategoryDao topCategoryDao;
 
     @FXML
     private TreeView<String> categoriesView;
 
-    private final JSONLoaderService jsonLoaderService;
     private final TreeItem<String> root = new TreeItem<>("Categories");
 
-    public CategoriesViewController(){
-        this.jsonLoaderService = JSONLoaderService.getInstance();
+    @Inject
+    public CategoriesViewController(TopCategoryDao topCategoryDao){
+        this.topCategoryDao = topCategoryDao;
     }
 
+    @FXML
     public void initialize(){
         root.setExpanded(true);
-        List<TopCategory> categories = this.jsonLoaderService.getCategories();
+        createTreeView(topCategoryDao, root);
+        this.categoriesView.setRoot(root);
+    }
+
+    @Override
+    public void onSelected() {
+        initialize();
+    }
+
+    public static void createTreeView(TopCategoryDao topCategoryDao, TreeItem<String> root) {
+        List<TopCategory> categories = topCategoryDao.findAll();
         for(TopCategory topCategory: categories){
             TreeItem<String> topCategoryTree = new TreeItem<>(topCategory.getName());
             root.getChildren().add(topCategoryTree);
@@ -34,11 +46,5 @@ public class CategoriesViewController extends TabController {
                 topCategoryTree.getChildren().add(new TreeItem<>(category.getName()));
             }
         }
-        this.categoriesView.setRoot(root);
-    }
-
-    @Override
-    public void onSelected() {
-        initialize();
     }
 }

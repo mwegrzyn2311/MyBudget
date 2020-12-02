@@ -33,7 +33,7 @@ public class Account implements Serializable {
         this.operations = FXCollections.observableArrayList(operations);
     }
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     public Long getId() {
         return id;

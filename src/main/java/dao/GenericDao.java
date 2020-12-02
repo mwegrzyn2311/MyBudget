@@ -1,52 +1,47 @@
 package dao;
 
-import model.Account;
+import com.google.inject.Provider;
+import com.google.inject.persist.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
 public abstract class GenericDao<T extends Serializable> {
-	protected EntityManager entityManager;
+	protected Provider<EntityManager> entityManager;
 	private final Class< T > clazz;
 
-	public GenericDao(EntityManager entityManager, Class<T> clazz) {
+	public GenericDao(Provider<EntityManager> entityManager, Class<T> clazz) {
 	    this.entityManager = entityManager;
 	    this.clazz = clazz;
 	}
 
-	public void save(final T entity) throws PersistenceException {
-		entityManager.getTransaction().begin();
-		entityManager.persist(entity);
-		entityManager.getTransaction().commit();
-		entityManager.flush();
+    @Transactional
+    public void save(final T entity) throws PersistenceException {
+		entityManager.get().persist(entity);
 	}
 
-	public void update(T entity) {
-        entityManager.getTransaction().begin();
-        entityManager.merge(entity);
-        entityManager.getTransaction().commit();
+    @Transactional
+    public void update(T entity) {
+        entityManager.get().merge(entity);
     }
 
+    @Transactional
     public void delete(T entity) {
-        entityManager.getTransaction().begin();
-        entityManager.remove(entity);
-        entityManager.getTransaction().commit();
+        entityManager.get().remove(entity);
     }
 
     public Optional<T> findOne(Long id) {
-	    return Optional.of(entityManager.find(clazz, id));
+	    return Optional.of(entityManager.get().find(clazz, id));
     }
 
 	public List<T> findAll() {
-		return entityManager.createQuery("from " + clazz.getName()).getResultList();
+		return entityManager.get().createQuery("from " + clazz.getName()).getResultList();
 	}
 
-	public void refresh(T entity) {
-	    entityManager.refresh(entity);
+    public void refresh(T entity) {
+	    entityManager.get().refresh(entity);
     }
 }
