@@ -12,7 +12,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class CategoriesViewController implements Initializable {
+public class CategoriesViewController extends TabController {
 
     @FXML
     private TreeView<String> categoriesView;
@@ -24,8 +24,7 @@ public class CategoriesViewController implements Initializable {
         this.jsonLoaderService = JSONLoaderService.getInstance();
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources){
+    public void initialize(){
         root.setExpanded(true);
         List<TopCategory> categories = this.jsonLoaderService.getCategories();
         for(TopCategory topCategory: categories){
@@ -36,5 +35,10 @@ public class CategoriesViewController implements Initializable {
             }
         }
         this.categoriesView.setRoot(root);
+    }
+
+    @Override
+    public void onSelected() {
+        initialize();
     }
 }

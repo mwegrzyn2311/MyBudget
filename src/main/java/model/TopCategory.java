@@ -6,10 +6,12 @@ import java.util.List;
 public class TopCategory {
     private String name;
     private List<Category> childCategories;
+    private OperationType operationType;
 
-    public TopCategory(String name){
+    public TopCategory(String name, OperationType operationType){
         this.name = name;
         this.childCategories = new ArrayList<>();
+        this.operationType = operationType;
     }
 
     public List<Category> getChildCategories() {

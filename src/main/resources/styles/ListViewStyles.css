@@ -1,0 +1,9 @@
+.button-box {
+    -fx-padding: 5px;
+    -fx-spacing: 5px;
+    -fx-pref-height: 40px;
+}
+.button-box Button {
+    -fx-pref-height: 40px;
+    -fx-pref-width: 80px;
+}

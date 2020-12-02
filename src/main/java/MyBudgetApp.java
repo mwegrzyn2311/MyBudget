@@ -1,20 +1,23 @@
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import guice_module.MyBudgetModule;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import service.FxmlLoaderService;
 
 import java.io.IOException;
 
 public class MyBudgetApp extends Application {
 
-    public static FXMLLoader loader;
-
     @Override
     public void start(Stage primaryStage) {
+        final Injector injector = Guice.createInjector(new MyBudgetModule());
+        final FxmlLoaderService fxmlLoaderService = injector.getInstance(FxmlLoaderService.class);
         try {
-            loader = new FXMLLoader(getClass().getResource("/view/MyBudgetApp.fxml"));
-            Parent root = loader.load();
+            Parent root = fxmlLoaderService.getLoader(getClass().getResource("/view/MyBudgetApp.fxml")).load();
             Scene scene = new Scene(root);
 
             primaryStage.setScene(scene);

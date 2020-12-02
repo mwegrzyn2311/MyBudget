@@ -1,0 +1,24 @@
+.main-label {
+    -fx-font-size: 22px;
+    -fx-text-alignment: justify;
+    -fx-wrap-text: true;
+}
+.form-label {
+    -fx-font-size: 16px;
+}
+.empty-pane {
+    -fx-min-width: 30px;
+    -fx-max-width: 30px;
+}
+.button-box {
+    -fx-padding: 10px;
+    -fx-spacing: 10px;
+    -fx-alignment: right;
+}
+.button-box Button {
+    -fx-pref-height: 30px;
+    -fx-font-size: 18px;
+}
+TextField {
+    -fx-pref-height: 20px;
+}

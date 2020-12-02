@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AccountListController">
+   <center>
+      <TableView fx:id="accountTableView" prefHeight="200.0" prefWidth="340.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="nameColumn" prefWidth="113.0" text="Name" />
+          <TableColumn fx:id="currBalanceColumn" minWidth="0.0" prefWidth="117.0" text="Current balance" />
+            <TableColumn fx:id="initialBalanceColumn" prefWidth="109.0" text="Initial Balance" />
+        </columns>
+      </TableView>
+   </center>
+   <top>
+      <HBox prefHeight="35.0" prefWidth="340.0" styleClass="button-box" stylesheets="@../styles/ListViewStyles.css" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="addButton" mnemonicParsing="false" text="Add" />
+            <Button mnemonicParsing="false" disable="true" prefHeight="40.0" prefWidth="80.0" text="Delete" />
+         </children>
+      </HBox>
+   </top>
+</BorderPane>
