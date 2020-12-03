@@ -56,6 +56,9 @@ public class OperationEditController extends DialogController {
         root.setExpanded(false);
         CategoriesViewController.createTreeView(topCategoryDao, root);
         this.categoryPicker.setRoot(root);
+
+        // Text field formatters
+        textFieldIntoMoneyField(amountField);
     }
 
     public void setModel(Operation operation) {

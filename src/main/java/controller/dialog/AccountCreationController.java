@@ -11,10 +11,11 @@ import model.Account;
 import service.FxmlLoaderService;
 
 import javax.inject.Inject;
+import javax.swing.*;
 import java.math.BigDecimal;
 import java.util.Optional;
 
-public class AccountCreationController {
+public class AccountCreationController extends DialogController {
     AccountDao accountDao;
     FxmlLoaderService fxmlLoaderService;
 
@@ -50,6 +51,10 @@ public class AccountCreationController {
                 ((Node) e.getSource()).getScene().getWindow().hide();
             }
          });
+
+        // Text field formatters
+        textFieldIntoAccountNumberField(accountNumberField);
+        textFieldIntoMoneyField(initialBalanceField);
     }
 
 
