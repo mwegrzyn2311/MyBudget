@@ -20,7 +20,8 @@ public class MyBudgetApp extends Application {
         final FxmlLoaderService fxmlLoaderService = injector.getInstance(FxmlLoaderService.class);
         try {
             Parent root = fxmlLoaderService.getLoader(getClass().getResource("/view/MyBudgetApp.fxml")).load();
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root, 800, 600);
+
 
             primaryStage.setScene(scene);
 

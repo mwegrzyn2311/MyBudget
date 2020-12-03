@@ -31,11 +31,11 @@ public class AccountListController extends TabController {
     @FXML
     TableView<Account> accountTableView;
     @FXML
-    TableColumn<Account, String> nameColumn;
+    TableColumn<Account, String> nameCol;
     @FXML
-    TableColumn<Account, BigDecimal> currBalanceColumn;
+    TableColumn<Account, BigDecimal> currBalanceCol;
     @FXML
-    TableColumn<Account, BigDecimal> initialBalanceColumn;
+    TableColumn<Account, BigDecimal> initialBalanceCol;
 
     @Inject
     public AccountListController(final FxmlLoaderService fxmlLoaderService, AccountDao accountDao) {
@@ -45,6 +45,12 @@ public class AccountListController extends TabController {
 
     @FXML
     private void initialize() {
+        // Columns auto resize on window resize
+        nameCol.prefWidthProperty().bind(accountTableView.widthProperty().divide(2));
+        currBalanceCol.prefWidthProperty().bind(accountTableView.widthProperty().divide(4));
+        initialBalanceCol.prefWidthProperty().bind(accountTableView.widthProperty().divide(4));
+
+        //
         accountTableView.setRowFactory(tv -> {
             TableRow<Account> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
@@ -58,8 +64,8 @@ public class AccountListController extends TabController {
             });
             return row;
         });
-        nameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
-        currBalanceColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData
+        nameCol.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        currBalanceCol.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData
                 .getValue()
                 .getInitialBalance()
                 .add(cellData.getValue()
@@ -67,7 +73,7 @@ public class AccountListController extends TabController {
                         .stream()
                         .map(Operation::getAmount)
                         .reduce(BigDecimal.ZERO, BigDecimal::add))));
-        initialBalanceColumn.setCellValueFactory(cellData -> cellData.getValue().initialBalanceProperty());
+        initialBalanceCol.setCellValueFactory(cellData -> cellData.getValue().initialBalanceProperty());
 
 
         accountTableView.setItems(FXCollections.observableArrayList(accountDao.findAll()));
