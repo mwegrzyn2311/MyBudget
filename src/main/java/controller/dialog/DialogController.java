@@ -32,9 +32,14 @@ public abstract class DialogController {
 
     protected void textFieldIntoMoneyField(TextField textField) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
+            // Just so that the field can be empty
+            if(newValue.matches("[\\d]?")) {
+                return;
+            }
+            // Format: 1456.12 || 145.1 || 1561. || 156 -> Or semicolon instead of dot
             if (!newValue.matches("(\\d)+([,.]\\d{0,2})?")) {
-                // In this case, we basically abort user changes
-                textField.setText(newValue.replaceAll("[^\\d,.]", ""));
+                // We simply abort user changes
+                textField.setText(oldValue);
             }
         });
     }
