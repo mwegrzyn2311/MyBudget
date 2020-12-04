@@ -3,13 +3,13 @@ package controller.dialog;
 import controller.CategoriesViewController;
 import dao.CategoryDao;
 import dao.TopCategoryDao;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.Category;
 import model.Operation;
 import model.OperationType;
-import model.TopCategory;
 
 import javax.inject.Inject;
 import java.math.BigDecimal;
@@ -19,7 +19,6 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.List;
 
 public class OperationEditController extends DialogController {
     Operation operation;
@@ -57,6 +56,14 @@ public class OperationEditController extends DialogController {
         CategoriesViewController.createTreeView(topCategoryDao, root);
         this.categoryPicker.setRoot(root);
 
+        this.categoryPicker.getSelectionModel().selectionModeProperty().set(SelectionMode.SINGLE);
+
+        this.categoryPicker.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null && !newValue.isLeaf()) {
+                Platform.runLater(() -> categoryPicker.getSelectionModel().clearSelection());
+            }
+        });
+
         // Text field formatters
         textFieldIntoMoneyField(amountField);
     }
@@ -73,6 +80,8 @@ public class OperationEditController extends DialogController {
     private void updateModel() {
         Category category = categoryDao.findByName(categoryPicker.getSelectionModel().getSelectedItem()
                 .getValue()).get();
+        operation.setCategory(category);
+
         operation.setCategory(category);
 
         DecimalFormat decimalFormatter= new DecimalFormat();

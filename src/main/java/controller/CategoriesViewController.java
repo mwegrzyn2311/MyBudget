@@ -3,6 +3,7 @@ package controller;
 import controller.dialog.OperationEditController;
 import dao.TopCategoryDao;
 import javafx.fxml.FXML;
+import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import model.Category;
