@@ -55,6 +55,7 @@ public class OperationEditController extends DialogController {
         root.setExpanded(false);
         CategoriesViewController.createTreeView(topCategoryDao, root);
         this.categoryPicker.setRoot(root);
+        this.categoryPicker.setShowRoot(false);
 
         this.categoryPicker.getSelectionModel().selectionModeProperty().set(SelectionMode.SINGLE);
 
