@@ -147,9 +147,8 @@ public class OperationListController extends TabController {
     }
 
     private void onDeleteAction(ActionEvent event) {
-        for(Operation operation : operationTableView.getSelectionModel().getSelectedItems()) {
-            account.removeOperation(operation);
-        }
+        account.operationsObservableList()
+                .removeAll(operationTableView.getSelectionModel().getSelectedItems());
         accountDao.save(account);
 
         refreshList();
