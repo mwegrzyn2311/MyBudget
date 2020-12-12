@@ -147,7 +147,7 @@ public class OperationListController extends TabController {
     }
 
     private void onDeleteAction(ActionEvent event) {
-        account.operationsObservableList()
+        account.getOperations()
                 .removeAll(operationTableView.getSelectionModel().getSelectedItems());
         accountDao.save(account);
 
@@ -172,7 +172,7 @@ public class OperationListController extends TabController {
 
             if(controller.isApproved()) {
                 try {
-                    operationDao.update(operation);
+                    accountDao.update(account);
                     refreshList();
                 } catch (PersistenceException e) {
                     e.printStackTrace();
@@ -203,7 +203,6 @@ public class OperationListController extends TabController {
             if(controller.isApproved()) {
                 try {
                     account.addOperation(operation);
-                    operationDao.save(operation);
                     accountDao.save(account);
                     refreshList();
                 } catch (PersistenceException e) {
@@ -220,7 +219,6 @@ public class OperationListController extends TabController {
         Long accountId = (Long) param;
         account = accountDao.findOne(accountId).orElse(null);
         if(account != null) {
-            operationTableView.setItems(account.operationsObservableList());
             name.getChildren().add(new Text(account.getName()));
             currentBalance.getChildren().add(new Text(account.getInitialBalance()
                     .add(account.getOperations().stream().map(Operation::getAmount)

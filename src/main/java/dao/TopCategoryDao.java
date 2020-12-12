@@ -28,15 +28,4 @@ public class TopCategoryDao extends GenericDao<TopCategory> {
         }
         return Optional.empty();
     }
-
-    public List<TopCategory> findAll(){
-        List <TopCategory> topCategories =
-                entityManager.get().createQuery("SELECT c FROM TopCategory c", TopCategory.class).getResultList();
-        for(TopCategory topCategory: topCategories){
-            topCategory.setChildCategories(entityManager.get().createQuery("SELECT c FROM Category c WHERE " +
-                    "c.topCategory = :topCategory", Category.class).setParameter("topCategory", topCategory)
-                    .getResultList());
-        }
-        return topCategories;
-    }
 }

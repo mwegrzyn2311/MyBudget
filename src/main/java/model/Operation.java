@@ -98,7 +98,7 @@ public class Operation {
         return comment;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     public Category getCategory() {return this.category.getValue();}
     public void setCategory(Category category) {this.category=new SimpleObjectProperty<>(category);}
     public ObjectProperty<Category> categoryProperty() {return this.category;}
