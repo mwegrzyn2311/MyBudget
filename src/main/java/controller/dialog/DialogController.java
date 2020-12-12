@@ -1,6 +1,7 @@
 package controller.dialog;
 
 import javafx.scene.control.TextField;
+import javafx.scene.control.TreeItem;
 import javafx.stage.Stage;
 
 
@@ -42,5 +43,21 @@ public abstract class DialogController {
                 textField.setText(oldValue);
             }
         });
+    }
+
+    protected TreeItem<String> getTreeViewItem(TreeItem<String> root, String value) {
+        for (TreeItem<String> item : root.getChildren()) {
+            if(item !=null) {
+                if (item.getValue().equals(value))
+                    return item;
+
+                for (TreeItem<String> child : item.getChildren()) {
+                    if(child.getValue().equals(value)) {
+                        return child;
+                    }
+                }
+            }
+        }
+        return null;
     }
 }

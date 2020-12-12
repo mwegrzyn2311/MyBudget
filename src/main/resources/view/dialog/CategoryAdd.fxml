@@ -43,7 +43,7 @@
     <bottom>
         <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" styleClass="button-box" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="addButton" alignment="CENTER_RIGHT" contentDisplay="TOP" mnemonicParsing="false" text="Create" textAlignment="RIGHT" />
+                <Button fx:id="addButton" alignment="CENTER_RIGHT" contentDisplay="TOP" mnemonicParsing="false" text="Confirm" textAlignment="RIGHT" />
             </children>
         </HBox>
     </bottom>

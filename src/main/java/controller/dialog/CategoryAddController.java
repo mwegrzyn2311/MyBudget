@@ -113,7 +113,6 @@ public class CategoryAddController extends DialogController{
         if(topCategory!=null){
             topCategoryPicker.getSelectionModel().select(topCategoryPicker
                     .getRow(getTreeViewItem(root,topCategory.getName())));
-            addButton.setText("Edit");
         }
     }
 
@@ -131,20 +130,5 @@ public class CategoryAddController extends DialogController{
         category.setTopCategory(topCategory);
 
         category.setName(name.getText());
-    }
-
-    public static TreeItem<String> getTreeViewItem(TreeItem<String> root, String value) {
-        for (TreeItem<String> item : root.getChildren()) {
-            if (item != null && item.getValue().equals(value))
-                return item;
-
-            assert item != null;
-            for (TreeItem<String> child : item.getChildren()) {
-                TreeItem<String> s = getTreeViewItem(child, value);
-                if (s != null)
-                    return s;
-            }
-        }
-        return null;
     }
 }

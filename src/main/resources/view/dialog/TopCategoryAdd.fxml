@@ -25,7 +25,7 @@
     <bottom>
         <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="0.0" prefWidth="600.0" styleClass="button-box" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="createButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Create" />
+                <Button fx:id="createButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Confirm" />
             </children>
         </HBox>
     </bottom>

@@ -107,7 +107,7 @@ public class OperationEditController extends DialogController {
     private void updateControls() {
         BigDecimal amount = operation.getAmount();
         if(amount != null) {
-            amountField.setText(amount.toString());
+            amountField.setText(amount.abs().toString());
         }
 
         Date date = operation.getDate();
@@ -119,5 +119,12 @@ public class OperationEditController extends DialogController {
         }
 
         commentField.setText(operation.getComment());
+
+        Category category = operation.getCategory();
+        if(category!=null){
+            getTreeViewItem(root, category.getTopCategory().getName()).setExpanded(true);
+            categoryPicker.getSelectionModel().select(categoryPicker.
+                    getRow(getTreeViewItem(root, category.getName())));
+        }
     }
 }
