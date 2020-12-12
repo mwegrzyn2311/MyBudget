@@ -6,7 +6,7 @@ import java.io.Serializable;
 @Entity
 @Access(AccessType.PROPERTY)
 @Table(name = "Category")
-public class Category implements Serializable {
+public class Category {
     private Long id;
     private String name;
     private TopCategory topCategory;

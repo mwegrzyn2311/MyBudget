@@ -13,7 +13,7 @@ import java.util.Date;
 @Entity
 @Access(AccessType.PROPERTY)
 @Table(name = "Operation")
-public class Operation implements Serializable {
+public class Operation {
     private Long id;
 
     private ObjectProperty<Account> account;

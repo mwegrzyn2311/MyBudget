@@ -12,7 +12,7 @@ import java.util.*;
 @Entity
 @Table(name = "Account")
 @Access(AccessType.PROPERTY)
-public class Account implements Serializable {
+public class Account {
 
     private Long id;
 

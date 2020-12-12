@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class GenericDao<T extends Serializable> {
+public abstract class GenericDao<T> {
 	protected Provider<EntityManager> entityManager;
 	private final Class< T > clazz;
 

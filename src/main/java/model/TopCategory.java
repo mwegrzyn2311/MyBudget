@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 @Access(AccessType.PROPERTY)
 @Table(name = "TopCategory")
-public class TopCategory implements Serializable {
+public class TopCategory {
     private Long id;
     private String name;
     private List<Category> childCategories;
