@@ -99,6 +99,7 @@ public class Operation {
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="category_fk")
     public Category getCategory() {return this.category.getValue();}
     public void setCategory(Category category) {this.category=new SimpleObjectProperty<>(category);}
     public ObjectProperty<Category> categoryProperty() {return this.category;}

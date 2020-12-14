@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../../styles/CreationStyles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.dialog.CategoryBudgetEditController">
+    <top>
+        <Label prefHeight="54.0" prefWidth="270.0" styleClass="main-label" text="New category budget" BorderPane.alignment="CENTER" />
+    </top>
+    <center>
+        <GridPane BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="75.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label styleClass="form-label" text="Amount" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <TextField fx:id="initialBudgetField" GridPane.columnIndex="1" />
+                <Label styleClass="form-label" text="Category" GridPane.rowIndex="1" />
+                <TreeView fx:id="categoryPicker" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            </children>
+        </GridPane>
+    </center>
+    <left>
+        <Pane prefHeight="200.0" prefWidth="200.0" styleClass="empty-pane" BorderPane.alignment="CENTER" />
+    </left>
+    <right>
+        <Pane prefHeight="200.0" prefWidth="200.0" styleClass="empty-pane" BorderPane.alignment="CENTER" />
+    </right>
+    <bottom>
+        <HBox prefHeight="100.0" prefWidth="200.0" styleClass="button-box" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="confirmButton" mnemonicParsing="false" text="Create" />
+            </children>
+        </HBox>
+    </bottom>
+</BorderPane>
