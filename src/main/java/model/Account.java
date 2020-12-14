@@ -22,7 +22,8 @@ public class Account {
 
     private ObjectProperty<BigDecimal> initialBalance;
 
-    private ObservableList<Operation> operations;
+    //private ObservableList<Operation> operations;
+    private List<Operation> operations;
 
     public Account() {}
 
@@ -30,7 +31,7 @@ public class Account {
         this.name = new SimpleStringProperty(name);
         this.accountNumber = new SimpleStringProperty(accountNumber);
         this.initialBalance = new SimpleObjectProperty<>(initialBalance);
-        this.operations = FXCollections.observableArrayList(operations);
+        this.operations = operations;
     }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -76,15 +77,15 @@ public class Account {
         return initialBalance;
     }
 
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, orphanRemoval = true)
     public List<Operation> getOperations() {
-        return new LinkedList<>(operations);
+        return operations;
     }
     public void setOperations(List<Operation> operations) {
-        this.operations = FXCollections.observableArrayList(operations);
+        this.operations = operations;
     }
     public ObservableList<Operation> operationsObservableList() {
-        return this.operations;
+        return FXCollections.observableList(this.operations);
     }
     public void addOperation(Operation operation) {
         operations.add(operation);

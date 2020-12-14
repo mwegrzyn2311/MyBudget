@@ -1,15 +1,18 @@
 package controller.dialog;
 
 import controller.CategoriesViewController;
+import controller.CategoryTreeListHelper;
 import dao.CategoryDao;
 import dao.TopCategoryDao;
 import javafx.application.Platform;
+import javafx.beans.binding.Binding;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import model.Category;
-import model.Operation;
-import model.OperationType;
+import javafx.util.Callback;
+import model.*;
 
 import javax.inject.Inject;
 import java.math.BigDecimal;
@@ -19,12 +22,12 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.Optional;
 
 public class OperationEditController extends DialogController {
     Operation operation;
 
-    @FXML
-    Button confirmButton;
+
     @FXML
     TextField amountField;
     @FXML
@@ -32,17 +35,13 @@ public class OperationEditController extends DialogController {
     @FXML
     TextArea commentField;
     @FXML
-    TreeView<String> categoryPicker;
+    TreeView<BaseCategory> categoryPicker;
 
-    private TopCategoryDao topCategoryDao;
-    private CategoryDao categoryDao;
-
-    private final TreeItem<String> root = new TreeItem<>("Categories");
+    final private TopCategoryDao topCategoryDao;
 
     @Inject
-    public OperationEditController(TopCategoryDao topCategoryDao, CategoryDao categoryDao){
+    public OperationEditController(TopCategoryDao topCategoryDao){
         this.topCategoryDao = topCategoryDao;
-        this.categoryDao = categoryDao;
     }
 
     @FXML
@@ -52,18 +51,20 @@ public class OperationEditController extends DialogController {
             approved = true;
             stage.close();
          });
-        root.setExpanded(false);
-        CategoriesViewController.createTreeView(topCategoryDao, root);
-        this.categoryPicker.setRoot(root);
-        this.categoryPicker.setShowRoot(false);
 
-        this.categoryPicker.getSelectionModel().selectionModeProperty().set(SelectionMode.SINGLE);
+        final TreeItem<BaseCategory> root = CategoryTreeListHelper.createTreeView(topCategoryDao.findAll(), false);
+        categoryPicker.setRoot(root);
+        categoryPicker.setShowRoot(false);
 
-        this.categoryPicker.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+        categoryPicker.getSelectionModel().selectionModeProperty().set(SelectionMode.SINGLE);
+
+        categoryPicker.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null && !newValue.isLeaf()) {
                 Platform.runLater(() -> categoryPicker.getSelectionModel().clearSelection());
             }
         });
+
+        categoryPicker.setCellFactory(CategoryTreeListHelper::buildTreeCell);
 
         // Text field formatters
         textFieldIntoMoneyField(amountField);
@@ -74,15 +75,8 @@ public class OperationEditController extends DialogController {
         updateControls();
     }
 
-    public void setConfirmButtonText(String text) {
-        confirmButton.setText(text);
-    }
-
     private void updateModel() {
-        Category category = categoryDao.findByName(categoryPicker.getSelectionModel().getSelectedItem()
-                .getValue()).get();
-        operation.setCategory(category);
-
+        final Category category = (Category) categoryPicker.getSelectionModel().getSelectedItem().getValue();
         operation.setCategory(category);
 
         DecimalFormat decimalFormatter= new DecimalFormat();
@@ -109,6 +103,17 @@ public class OperationEditController extends DialogController {
         if(amount != null) {
             amountField.setText(amount.abs().toString());
         }
+        final Category category = operation.getCategory();
+        if(category != null) {
+            categoryPicker.getRoot().getChildren().stream()
+                    .filter(item -> item.getValue() == category.getTopCategory())
+                    .findFirst().flatMap(subtree -> subtree.getChildren().stream()
+                    .filter(child -> child.getValue() == category)
+                    .findFirst()).ifPresent(cat -> {
+                categoryPicker.getSelectionModel().select(cat);
+                categoryPicker.scrollTo(categoryPicker.getSelectionModel().getSelectedIndex());
+            });
+        }
 
         Date date = operation.getDate();
         if(date != null) {
@@ -119,12 +124,10 @@ public class OperationEditController extends DialogController {
         }
 
         commentField.setText(operation.getComment());
+    }
 
-        Category category = operation.getCategory();
-        if(category!=null){
-            getTreeViewItem(root, category.getTopCategory().getName()).setExpanded(true);
-            categoryPicker.getSelectionModel().select(categoryPicker.
-                    getRow(getTreeViewItem(root, category.getName())));
-        }
+    @Override
+    public void setConfirmButtonText(String text) {
+        confirmButton.setText(text);
     }
 }

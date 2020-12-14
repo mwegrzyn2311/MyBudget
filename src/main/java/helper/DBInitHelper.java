@@ -31,11 +31,10 @@ public class DBInitHelper {
         for(int i = 0; i < topCategories.length; ++i)
         {
             TopCategory topCategory = new TopCategory(topCategories[i], categoryTypes[i]);
-            topCategoryDao.save(topCategory);
             Arrays.stream(categories[i]).forEach(s ->  {
-                Category category = new Category(s, topCategory);
-                categoryDao.save(category);
+                topCategory.addChildCategory(new Category(s, topCategory));
             });
+            topCategoryDao.save(topCategory);
         }
     }
 }

@@ -1,9 +1,7 @@
 package controller.dialog;
 
-import controller.CategoriesViewController;
-import dao.CategoryDao;
 import dao.TopCategoryDao;
-import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 import model.Category;
 import model.TopCategory;
 import service.FxmlLoaderService;
@@ -28,20 +27,16 @@ public class CategoryAddController extends DialogController{
     @FXML
     Button addButton;
     @FXML
-    TreeView<String> topCategoryPicker;
+    ChoiceBox<TopCategory> topCategorySelection;
     @FXML
     TextField name;
 
-    FxmlLoaderService fxmlLoaderService;
-    private TopCategoryDao topCategoryDao;
-    private CategoryDao categoryDao;
-
-    private final TreeItem<String> root = new TreeItem<>("Top categories");
+    private final FxmlLoaderService fxmlLoaderService;
+    private final TopCategoryDao topCategoryDao;
 
     @Inject
-    public CategoryAddController(FxmlLoaderService loaderService, TopCategoryDao topCategoryDao, CategoryDao categoryDao){
+    public CategoryAddController(FxmlLoaderService loaderService, TopCategoryDao topCategoryDao){
         this.topCategoryDao = topCategoryDao;
-        this.categoryDao = categoryDao;
         this.fxmlLoaderService = loaderService;
     }
 
@@ -49,27 +44,15 @@ public class CategoryAddController extends DialogController{
     private void initialize() {
         addTopButton.setOnAction(this::onTopCategoryAddAction);
 
-        addButton.addEventHandler(ActionEvent.ACTION, e -> {
+        confirmButton.addEventHandler(ActionEvent.ACTION, e -> {
             if(! name.getText().isEmpty()) {
-                addCategory();
+                updateModel();
                 approved = true;
                 stage.close();
             }
         });
-        root.setExpanded(false);
-        topCategoryPicker.setShowRoot(false);
-        CategoriesViewController.createTopTreeView(topCategoryDao, root);
-        this.topCategoryPicker.setRoot(root);
 
-        this.topCategoryPicker.getSelectionModel().selectionModeProperty().set(SelectionMode.SINGLE);
-
-        this.topCategoryPicker.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null && !newValue.isLeaf()) {
-                Platform.runLater(() -> topCategoryPicker.getSelectionModel().clearSelection());
-            }
-        });
-
-        
+        refreshList();
     }
 
     private void onTopCategoryAddAction(ActionEvent event) {
@@ -91,8 +74,8 @@ public class CategoryAddController extends DialogController{
             if(controller.isApproved()) {
                 try {
                     topCategoryDao.save(topCategory);
-                    topCategoryDao.refresh(topCategory);
                     refreshList();
+                    topCategorySelection.getSelectionModel().select(topCategory);
                 } catch (PersistenceException e) {
                     e.printStackTrace();
                 }
@@ -111,24 +94,17 @@ public class CategoryAddController extends DialogController{
         name.setText(category.getName());
         TopCategory topCategory = category.getTopCategory();
         if(topCategory!=null){
-            topCategoryPicker.getSelectionModel().select(topCategoryPicker
-                    .getRow(getTreeViewItem(root,topCategory.getName())));
+            topCategorySelection.getSelectionModel().select(topCategory);
         }
     }
 
     private void refreshList() {
-        this.root.getChildren().clear();
-        CategoriesViewController.createTopTreeView(topCategoryDao, root);
-        this.topCategoryPicker.setRoot(root);
+        topCategorySelection.setItems(FXCollections.observableList(topCategoryDao.findAll()));
     }
 
-    private void addCategory() {
-
-        TopCategory topCategory = topCategoryDao.findByName(this.topCategoryPicker.getSelectionModel().getSelectedItem()
-                .getValue()).get();
-
+    private void updateModel() {
+        TopCategory topCategory = topCategorySelection.getValue();
         category.setTopCategory(topCategory);
-
         category.setName(name.getText());
     }
 }

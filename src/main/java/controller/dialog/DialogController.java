@@ -1,11 +1,15 @@
 package controller.dialog;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TreeItem;
 import javafx.stage.Stage;
 
 
 public abstract class DialogController {
+    @FXML
+    protected Button confirmButton;
+
     protected boolean approved = false;
     protected Stage stage;
 
@@ -45,19 +49,7 @@ public abstract class DialogController {
         });
     }
 
-    protected TreeItem<String> getTreeViewItem(TreeItem<String> root, String value) {
-        for (TreeItem<String> item : root.getChildren()) {
-            if(item !=null) {
-                if (item.getValue().equals(value))
-                    return item;
-
-                for (TreeItem<String> child : item.getChildren()) {
-                    if(child.getValue().equals(value)) {
-                        return child;
-                    }
-                }
-            }
-        }
-        return null;
+    public void setConfirmButtonText(String text) {
+        confirmButton.setText(text);
     }
 }

@@ -28,11 +28,11 @@ public class MyBudgetApp extends Application {
         if(!dbAlreadyExisted) {
             DBInitHelper.initializeDB(injector.getInstance(TopCategoryDao.class), injector.getInstance(CategoryDao.class));
         }
+
         final FxmlLoaderService fxmlLoaderService = injector.getInstance(FxmlLoaderService.class);
         try {
             Parent root = fxmlLoaderService.getLoader(getClass().getResource("/view/MyBudgetApp.fxml")).load();
             Scene scene = new Scene(root, 800, 600);
-
 
             primaryStage.setScene(scene);
 
