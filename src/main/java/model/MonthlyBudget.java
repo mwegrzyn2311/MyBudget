@@ -79,7 +79,6 @@ public class MonthlyBudget {
     }
 
 
-    // TODO: Consider placing it in another place
     public Date lastDay() {
         Calendar c = Calendar.getInstance();
         c.setTime(firstDay.getValue());
@@ -96,5 +95,14 @@ public class MonthlyBudget {
         return categoryBudgets.stream()
                 .map(CategoryBudget::currentBalance)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+    @Transient
+    public boolean isPreserved() {
+        for(CategoryBudget cb : categoryBudgets) {
+            if(cb.currentBalance().compareTo(BigDecimal.ZERO) < 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }

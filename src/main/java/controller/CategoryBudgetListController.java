@@ -61,6 +61,10 @@ public class CategoryBudgetListController extends TabController {
 
     @FXML
     private void initialize() {
+        categoryCol.prefWidthProperty().bind(categoryBudgetTableView.widthProperty().divide(2));
+        initialBalanceCol.prefWidthProperty().bind(categoryBudgetTableView.widthProperty().divide(4));
+        currBalanceCol.prefWidthProperty().bind(categoryBudgetTableView.widthProperty().divide(4));
+
         initialBalanceCol.setCellValueFactory(cellData -> cellData.getValue().initialBudgetProperty());
         initialBalanceCol.setCellFactory(column -> {
             TableCell<CategoryBudget, BigDecimal> cell = new TableCell<>() {

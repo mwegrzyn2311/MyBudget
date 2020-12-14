@@ -10,20 +10,20 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Category;
 import model.MonthlyBudget;
 import model.Operation;
+import model.OperationType;
 import service.FxmlLoaderService;
 
 import javax.inject.Inject;
 import javax.persistence.PersistenceException;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MonthlyBudgetListController extends TabController {
@@ -62,7 +62,7 @@ public class MonthlyBudgetListController extends TabController {
     public void initialize() {
         nameCol.prefWidthProperty().bind(monthlyBudgetTableView.widthProperty().divide(5));
         firstDayCol.prefWidthProperty().bind(monthlyBudgetTableView.widthProperty().divide(5));
-        currBalanceCol.prefWidthProperty().bind(monthlyBudgetTableView.widthProperty().divide(5));
+        lastDayCol.prefWidthProperty().bind(monthlyBudgetTableView.widthProperty().divide(5));
         initialBalanceCol.prefWidthProperty().bind(monthlyBudgetTableView.widthProperty().divide(5));
         currBalanceCol.prefWidthProperty().bind(monthlyBudgetTableView.widthProperty().divide(5));
 
@@ -83,7 +83,29 @@ public class MonthlyBudgetListController extends TabController {
 
         nameCol.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         firstDayCol.setCellValueFactory(cellData -> cellData.getValue().firstDayProperty());
+        firstDayCol.setCellFactory(column -> new TableCell<>() {
+            private final SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+            @Override
+            protected void updateItem(Date item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty ? "" : format.format(item));
+            }
+        });
+
         lastDayCol.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().lastDay()));
+        lastDayCol.setCellFactory(column -> new TableCell<>() {
+            private final SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+            @Override
+            protected void updateItem(Date item, boolean empty) {
+                super.updateItem(item, empty);
+                if(empty) {
+                    setText(null);
+                }
+                else {
+                    setText(format.format(item));
+                }
+            }
+        });
         initialBalanceCol.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().initialBalance()));
         currBalanceCol.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().currentBalance()));
 
@@ -159,6 +181,6 @@ public class MonthlyBudgetListController extends TabController {
 
     @Override
     public void onSelected() {
-
+        refreshList();
     }
 }
