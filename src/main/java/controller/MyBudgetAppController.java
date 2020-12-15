@@ -27,13 +27,18 @@ public class MyBudgetAppController implements Initializable, ITabAreaController 
     @FXML
     private Button accountsLink;
 
+    @FXML
+    private Button categoriesLink;
+
+    @FXML
+    private Button monthlyBudgetsLink;
+
+
     @Inject
     public MyBudgetAppController(final FxmlLoaderService fxmlLoaderService) {
         this.fxmlLoaderService = fxmlLoaderService;
     }
 
-    @FXML
-    private Button categoriesLink;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -46,6 +51,10 @@ public class MyBudgetAppController implements Initializable, ITabAreaController 
         categoriesLink.setOnAction(event->
                 openTab(fxmlLoaderService.getLoader(getClass()
                         .getResource("/view/Categories.fxml")), "Transaction categories"));
+
+        monthlyBudgetsLink.setOnAction(event ->
+            openTab(fxmlLoaderService.getLoader(getClass()
+                    .getResource("/view/MonthlyBudgetList.fxml")), "Monthly budgets"));
 
         openTab(fxmlLoaderService.getLoader(getClass().getResource("/view/AccountList.fxml")), "Account list");
     }

@@ -1,17 +1,14 @@
 package controller.dialog;
 
-import controller.CategoriesViewController;
 import controller.CategoryTreeListHelper;
-import dao.CategoryDao;
 import dao.TopCategoryDao;
 import javafx.application.Platform;
-import javafx.beans.binding.Binding;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.BooleanBinding;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.util.Callback;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
 import model.*;
 
 import javax.inject.Inject;
@@ -22,35 +19,31 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.Optional;
 
-public class OperationEditController extends DialogController {
-    Operation operation;
+public class CategoryBudgetEditController extends DialogController {
 
+    private CategoryBudget catBud;
 
-    @FXML
-    TextField amountField;
-    @FXML
-    DatePicker dateField;
-    @FXML
-    TextArea commentField;
     @FXML
     TreeView<BaseCategory> categoryPicker;
+    @FXML
+    TextField initialBudgetField;
 
     final private TopCategoryDao topCategoryDao;
 
     @Inject
-    public OperationEditController(TopCategoryDao topCategoryDao){
+    public CategoryBudgetEditController(TopCategoryDao topCategoryDao){
         this.topCategoryDao = topCategoryDao;
     }
 
     @FXML
     private void initialize() {
+        // TODO: Extract to abstract class
         confirmButton.addEventHandler(ActionEvent.ACTION, e -> {
             updateModel();
             approved = true;
             stage.close();
-         });
+        });
 
         final TreeItem<BaseCategory> root = CategoryTreeListHelper.createTreeView(topCategoryDao.findAll(), false);
         categoryPicker.setRoot(root);
@@ -66,45 +59,33 @@ public class OperationEditController extends DialogController {
 
         categoryPicker.setCellFactory(CategoryTreeListHelper::buildTreeCell);
 
-        // Text field formatters
-        textFieldIntoMoneyField(amountField);
+        textFieldIntoMoneyField(initialBudgetField);
     }
 
-    public void setModel(Operation operation) {
-        this.operation = operation;
+    public void setModel(CategoryBudget catBud) {
+        this.catBud = catBud;
         updateControls();
     }
 
     private void updateModel() {
         final Category category = (Category) categoryPicker.getSelectionModel().getSelectedItem().getValue();
-        operation.setCategory(category);
+        catBud.setCategory(category);
 
         DecimalFormat decimalFormatter = new DecimalFormat();
         decimalFormatter.setParseBigDecimal(true);
         try {
-            if(category.getTopCategory().getOperationType().compareTo(OperationType.Income)==0){
-                operation.setAmount((BigDecimal) decimalFormatter.parse(amountField.getText()));
-            } else {
-                BigDecimal amount = (BigDecimal) decimalFormatter.parse(amountField.getText());
-                operation.setAmount(amount.negate());
-            }
+            catBud.setInitialBudget((BigDecimal) decimalFormatter.parse(initialBudgetField.getText()));
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-        LocalDate localDate = dateField.getValue();
-        Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-        operation.setDate(Date.from(instant));
-
-        operation.setComment(commentField.getText());
     }
 
-    private void updateControls() {
-        BigDecimal amount = operation.getAmount();
-        if(amount != null) {
-            amountField.setText(amount.abs().toString());
+    public void updateControls() {
+        BigDecimal initialBalance = catBud.getInitialBudget();
+        if(initialBalance != null) {
+            initialBudgetField.setText(initialBalance.toString());
         }
-        final Category category = operation.getCategory();
+        final Category category = catBud.getCategory();
         if(category != null) {
             categoryPicker.getRoot().getChildren().stream()
                     .filter(item -> item.getValue() == category.getTopCategory())
@@ -115,15 +96,5 @@ public class OperationEditController extends DialogController {
                 categoryPicker.scrollTo(categoryPicker.getSelectionModel().getSelectedIndex());
             });
         }
-
-        Date date = operation.getDate();
-        if(date != null) {
-            dateField.setValue(date
-                    .toInstant()
-                    .atZone(ZoneId.systemDefault())
-                    .toLocalDate());
-        }
-
-        commentField.setText(operation.getComment());
     }
 }

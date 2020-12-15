@@ -167,7 +167,7 @@ public class OperationListController extends TabController {
             controller.setModel(operation);
             controller.setConfirmButtonText("Confirm");
 
-            stage.setTitle("Edit operation creation");
+            stage.setTitle("Operation edit");
             stage.showAndWait();
 
             if(controller.isApproved()) {

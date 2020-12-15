@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="346.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MonthlyBudgetListController">
+    <center>
+        <TableView fx:id="monthlyBudgetTableView" prefHeight="200.0" prefWidth="600.0">
+            <columns>
+            <TableColumn fx:id="nameCol" prefWidth="114.0" text="Name" />
+                <TableColumn fx:id="firstDayCol" prefWidth="114.0" text="FirstDay" />
+                <TableColumn fx:id="lastDayCol" minWidth="0.0" prefWidth="94.0" text="LastDay" />
+                <TableColumn fx:id="initialBalanceCol" prefWidth="116.0" text="InitialBalance" />
+                <TableColumn fx:id="currBalanceCol" prefWidth="116.0" text="CurrentBalance" />
+            </columns>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
+        </TableView>
+    </center>
+    <top>
+        <Pane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="55.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="addButton" layoutX="14.0" layoutY="13.0" maxHeight="30.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="69.0" text="Add" />
+                <Button fx:id="editButton" layoutX="103.0" layoutY="13.0" maxHeight="30.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="69.0" text="Edit" />
+                <Button fx:id="deleteButton" layoutX="193.0" layoutY="13.0" maxHeight="30.0" maxWidth="69.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="69.0" text="Delete" />
+            </children>
+        </Pane>
+    </top>
+</BorderPane>
