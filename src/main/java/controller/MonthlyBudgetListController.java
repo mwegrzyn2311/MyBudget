@@ -92,7 +92,7 @@ public class MonthlyBudgetListController extends TabController {
             }
         });
 
-        lastDayCol.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().lastDay()));
+        lastDayCol.setCellValueFactory(cellData -> cellData.getValue().lastDayProperty());
         lastDayCol.setCellFactory(column -> new TableCell<>() {
             private final SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
             @Override

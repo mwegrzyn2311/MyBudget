@@ -143,6 +143,7 @@ public class CategoryBudgetListController extends TabController {
     private void onEditAction(ActionEvent event) {
         CategoryBudget categoryBudget = categoryBudgetTableView.getSelectionModel().getSelectedItem();
         Stage stage = new Stage();
+        categoryBudget.setMonthlyBudget(mb);
 
         FXMLLoader loader = fxmlLoaderService.getLoader(getClass().getResource("/view/dialog/OperationEdit.fxml"));
         try {
@@ -172,6 +173,7 @@ public class CategoryBudgetListController extends TabController {
     private void onAddAction(ActionEvent event) {
         CategoryBudget categoryBudget = new CategoryBudget();
         Stage stage = new Stage();
+        categoryBudget.setMonthlyBudget(mb);
 
         FXMLLoader loader = fxmlLoaderService.getLoader(getClass().getResource("/view/dialog/CategoryBudgetEdit.fxml"));
         try {

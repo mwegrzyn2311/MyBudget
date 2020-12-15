@@ -21,17 +21,20 @@ public class MonthlyBudget {
     private Long id;
     private StringProperty name;
     private ObjectProperty<Date> firstDay;
+    private ObjectProperty<Date> lastDay;
     private List<CategoryBudget> categoryBudgets;
 
     public MonthlyBudget() {
         this.name = new SimpleStringProperty();
         this.firstDay = new SimpleObjectProperty<>();
+        this.lastDay = new SimpleObjectProperty<>();
         this.categoryBudgets = new LinkedList<>();
     }
 
     public MonthlyBudget(String name, Date firstDay, List<CategoryBudget> categoryBudgets) {
         this.name = new SimpleStringProperty(name);
         this.firstDay = new SimpleObjectProperty<>(firstDay);
+        this.lastDay = new SimpleObjectProperty<>(calculateLastDay());
         this.categoryBudgets = categoryBudgets;
     }
 
@@ -51,17 +54,36 @@ public class MonthlyBudget {
     }
     public void setFirstDay(Date firstDay) {
         this.firstDay.set(firstDay);
+        this.lastDay.set(calculateLastDay());
     }
     public ObjectProperty<Date> firstDayProperty() {
         return this.firstDay;
     }
 
-    @Column(name = "name")
-    public String getName() { return this.name.getValue(); }
-    public void setName(String name) { this.name.set(name); }
-    public StringProperty nameProperty() { return this.name; }
+    @Column(name = "lastDay")
+    public Date getLastDay() {
+        return this.lastDay.getValue();
+    }
+    public void setLastDay(Date lastDay) {
+        this.lastDay.set(lastDay);
+    }
+    public ObjectProperty<Date> lastDayProperty() {
+        return this.lastDay;
+    }
 
-    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, orphanRemoval = true)
+    @Column(name = "name")
+    public String getName() {
+        return this.name.getValue();
+    }
+    public void setName(String name) {
+        this.name.set(name);
+    }
+    public StringProperty nameProperty() {
+        return this.name;
+    }
+
+
+    @OneToMany(mappedBy = "monthlyBudget", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, orphanRemoval = true)
     public List<CategoryBudget> getCategoryBudgets() {
         return categoryBudgets;
     }
@@ -79,7 +101,7 @@ public class MonthlyBudget {
     }
 
 
-    public Date lastDay() {
+    private Date calculateLastDay() {
         Calendar c = Calendar.getInstance();
         c.setTime(firstDay.getValue());
         c.add(Calendar.MONTH, 1);
