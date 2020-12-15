@@ -22,10 +22,14 @@ public class Account {
 
     private ObjectProperty<BigDecimal> initialBalance;
 
-    //private ObservableList<Operation> operations;
     private List<Operation> operations;
 
-    public Account() {}
+    public Account() {
+        this.name = new SimpleStringProperty();
+        this.accountNumber = new SimpleStringProperty();
+        this.initialBalance = new SimpleObjectProperty<>();
+        this.operations = new LinkedList<>();
+    }
 
     public Account(String name, String accountNumber, BigDecimal initialBalance, List<Operation> operations) {
         this.name = new SimpleStringProperty(name);

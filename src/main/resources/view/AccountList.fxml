@@ -8,6 +8,7 @@
       <TableView fx:id="accountTableView" prefHeight="200.0" prefWidth="340.0" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn fx:id="nameCol" minWidth="-1.0" prefWidth="113.0" text="Name" />
+            <TableColumn fx:id="accountNumberCol" minWidth="-1.0" prefWidth="113.0" text="Account number" />
           <TableColumn fx:id="currBalanceCol" minWidth="-1.0" prefWidth="117.0" text="Current balance" />
             <TableColumn fx:id="initialBalanceCol" prefWidth="109.0" text="Initial Balance" />
         </columns>
@@ -20,7 +21,8 @@
       <HBox prefHeight="35.0" prefWidth="340.0" styleClass="button-box" stylesheets="@../styles/ListViewStyles.css" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="addButton" mnemonicParsing="false" text="Add" />
-            <Button disable="true" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" text="Delete" />
+            <Button fx:id="editButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" text="Edit" />
+            <Button fx:id="deleteButton" layoutX="100.0" layoutY="15.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" text="Delete" />
          </children>
       </HBox>
    </top>

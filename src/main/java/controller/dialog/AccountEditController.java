@@ -8,19 +8,24 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import model.Account;
+import model.MonthlyBudget;
 import service.FxmlLoaderService;
 
 import javax.inject.Inject;
 import javax.swing.*;
 import java.math.BigDecimal;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.Optional;
 
-public class AccountCreationController extends DialogController {
+public class AccountEditController extends DialogController {
     AccountDao accountDao;
     FxmlLoaderService fxmlLoaderService;
 
-    @FXML
-    Button createButton;
+    Account account;
+
     @FXML
     TextField nameField;
     @FXML
@@ -30,16 +35,16 @@ public class AccountCreationController extends DialogController {
 
     Optional<AccountListController> accountListController;
 
-
+/*
     @Inject
-    public AccountCreationController(final FxmlLoaderService fxmlLoaderService, AccountDao accountDao) {
+    public AccountEditController(final FxmlLoaderService fxmlLoaderService, AccountDao accountDao) {
         this.accountDao = accountDao;
         this.fxmlLoaderService = fxmlLoaderService;
     }
 
     @FXML
     private void initialize() {
-        createButton.addEventHandler(ActionEvent.ACTION, e -> {
+        confirmButton.addEventHandler(ActionEvent.ACTION, e -> {
             Optional<Account> newAccount = accountDao.create(nameField.getText(), accountNumberField.getText(), BigDecimal.valueOf(Double.parseDouble(initialBalanceField.getText())));
             if(newAccount.isEmpty()) {
                 System.out.println("New account creation failed");
@@ -60,5 +65,41 @@ public class AccountCreationController extends DialogController {
 
     public void setAccountListController(AccountListController accountListController) {
         this.accountListController = Optional.of(accountListController);
+    }
+    */
+
+    @FXML
+    public void initialize() {
+        textFieldIntoAccountNumberField(accountNumberField);
+        textFieldIntoMoneyField(initialBalanceField);
+
+        confirmButton.addEventHandler(ActionEvent.ACTION, e -> {
+            updateModel();
+            approved = true;
+            stage.close();
+        });
+    }
+
+    private void updateModel() {
+        account.setName(nameField.getText());
+        account.setInitialBalance(BigDecimal.valueOf(Double.parseDouble(initialBalanceField.getText())));
+        account.setAccountNumber(accountNumberField.getText());
+    }
+
+    public void updateControls() {
+        nameField.setText(account.getName());
+        BigDecimal initialBalance = account.getInitialBalance();
+        if(initialBalance != null) {
+            initialBalanceField.setText(initialBalance.toString());
+        }
+        String accNumber = account.getAccountNumber();
+        if(accNumber != null) {
+            accountNumberField.setText(account.getAccountNumber());
+        }
+    }
+
+    public void setModel(Account account) {
+        this.account = account;
+        updateControls();
     }
 }

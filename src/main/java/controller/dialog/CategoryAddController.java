@@ -25,8 +25,6 @@ public class CategoryAddController extends DialogController{
     @FXML
     Button addTopButton;
     @FXML
-    Button addButton;
-    @FXML
     ChoiceBox<TopCategory> topCategorySelection;
     @FXML
     TextField name;
