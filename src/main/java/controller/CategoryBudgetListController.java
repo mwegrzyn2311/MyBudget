@@ -15,9 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
-import model.Category;
-import model.CategoryBudget;
-import model.MonthlyBudget;
+import model.*;
 import service.FxmlLoaderService;
 
 import javax.inject.Inject;
@@ -85,6 +83,13 @@ public class CategoryBudgetListController extends TabController {
                     super.updateItem(item, empty);
                     setText(empty ? "" : getItem().toString());
                     setGraphic(null);
+                    TableRow<CategoryBudget> currentRow = getTableRow();
+                    if (!isEmpty()) {
+                        int comparison = item.compareTo(BigDecimal.ZERO);
+                        if(comparison >= 0)
+                            currentRow.setStyle("-fx-background-color:lightgreen");
+                        else currentRow.setStyle("-fx-background-color:orangered");
+                    }
                 }
             };
             return cell;

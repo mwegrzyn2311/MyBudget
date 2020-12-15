@@ -45,7 +45,7 @@ public class CategoryAddController extends DialogController{
         addTopButton.setOnAction(this::onTopCategoryAddAction);
 
         confirmButton.addEventHandler(ActionEvent.ACTION, e -> {
-            if(! name.getText().isEmpty()) {
+            if(!name.getText().isEmpty()) {
                 updateModel();
                 approved = true;
                 stage.close();

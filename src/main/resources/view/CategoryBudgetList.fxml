@@ -9,7 +9,7 @@
         <TableView fx:id="categoryBudgetTableView" prefHeight="200.0" prefWidth="600.0">
             <columns>
                 <TableColumn fx:id="categoryCol" prefWidth="114.0" text="Category" />
-                <TableColumn fx:id="initialBalanceCol" minWidth="0.0" prefWidth="94.0" text="Inittial Balance" />
+                <TableColumn fx:id="initialBalanceCol" minWidth="0.0" prefWidth="94.0" text="Initial Balance" />
                 <TableColumn fx:id="currBalanceCol" prefWidth="116.0" text="Current Balance" />
             </columns>
             <columnResizePolicy>

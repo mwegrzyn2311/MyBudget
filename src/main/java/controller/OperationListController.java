@@ -28,7 +28,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class OperationListController extends TabController {
-
     FxmlLoaderService fxmlLoaderService;
     AccountDao accountDao;
     OperationDao operationDao;
@@ -55,9 +54,11 @@ public class OperationListController extends TabController {
     TableColumn<Operation, Category> categoryColumn;
 
     @FXML
-    public TextFlow name;
+    TextFlow name;
     @FXML
-    public TextFlow currentBalance;
+    TextFlow currentBalance;
+    @FXML
+    TextFlow initialBalance;
 
     @Inject
     public OperationListController(FxmlLoaderService fxmlLoaderService, AccountDao accountDao, OperationDao operationDao) {
@@ -138,6 +139,8 @@ public class OperationListController extends TabController {
             operationTableView.refresh();
             name.getChildren().clear();
             name.getChildren().add(new Text(account.getName()));
+            initialBalance.getChildren().clear();
+            initialBalance.getChildren().add(new Text(account.getInitialBalance().toString()));
             currentBalance.getChildren().clear();
             currentBalance.getChildren().add(new Text(account.getInitialBalance()
                     .add(account.getOperations().stream().map(Operation::getAmount)
@@ -220,6 +223,7 @@ public class OperationListController extends TabController {
         account = accountDao.findOne(accountId).orElse(null);
         if(account != null) {
             name.getChildren().add(new Text(account.getName()));
+            initialBalance.getChildren().add(new Text(account.getInitialBalance().toString()));
             currentBalance.getChildren().add(new Text(account.getInitialBalance()
                     .add(account.getOperations().stream().map(Operation::getAmount)
                             .reduce(BigDecimal.ZERO, BigDecimal::add)).toString()));

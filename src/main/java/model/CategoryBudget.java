@@ -69,6 +69,11 @@ public class CategoryBudget {
 
     // TODO: Consider moving it to another place
     public BigDecimal currentBalance() {
-        return this.getInitialBudget().add(this.currentSpending);
+        if(this.getCategory().getTopCategory().getOperationType().compareTo(OperationType.Income)==0){
+            return this.getInitialBudget().negate().add(this.currentSpending);
+        }
+        else {
+            return this.getInitialBudget().add(this.currentSpending);
+        }
     }
 }

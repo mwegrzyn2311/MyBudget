@@ -40,9 +40,11 @@ public class CategoryBudgetEditController extends DialogController {
     private void initialize() {
         // TODO: Extract to abstract class
         confirmButton.addEventHandler(ActionEvent.ACTION, e -> {
-            updateModel();
-            approved = true;
-            stage.close();
+            if(!initialBudgetField.getText().isEmpty()) {
+                updateModel();
+                approved = true;
+                stage.close();
+            }
         });
 
         final TreeItem<BaseCategory> root = CategoryTreeListHelper.createTreeView(topCategoryDao.findAll(), false);
