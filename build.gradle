@@ -17,6 +17,9 @@ repositories {
 
 application {
     mainClassName = 'MyBudgetApp'
+    applicationDefaultJvmArgs =  [
+            "--add-opens=javafx.graphics/javafx.scene=ALL-UNNAMED",
+    ]
 }
 java {
     sourceCompatibility = JavaVersion.VERSION_14
@@ -29,6 +32,7 @@ dependencies {
     implementation group: 'com.google.inject', name: 'guice', version: '4.2.3'
     implementation group: 'com.google.inject.extensions', name: 'guice-multibindings', version: '4.2.3'
     implementation group: 'com.google.inject.extensions', name: 'guice-persist', version: '4.2.3'
+    implementation group:'org.controlsfx', name: 'controlsfx', version: '11.0.3'
     compile group: 'org.hibernate', name: 'hibernate-core', version: '5.4.24.Final'
     compile group: 'org.springframework.data', name: 'spring-data-jpa', version: '2.4.1'
     compile group: 'org.xerial', name:'sqlite-jdbc', version:'3.20.1'

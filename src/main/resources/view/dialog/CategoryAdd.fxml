@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../../styles/CreationStyles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.dialog.CategoryAddController">
+<BorderPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../../styles/CreationStyles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.dialog.CategoryEditController">
     <top>
         <Label alignment="CENTER" prefHeight="54.0" prefWidth="270.0" styleClass="main-label" text="New Category" textAlignment="CENTER" BorderPane.alignment="CENTER" />
     </top>

@@ -7,6 +7,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import model.MonthlyBudget;
 import model.Operation;
+import org.controlsfx.validation.ValidationSupport;
+import org.controlsfx.validation.Validator;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -14,19 +16,28 @@ import java.time.ZoneId;
 import java.util.Date;
 
 public class MonthlyBudgetEditController extends DialogController {
+    private MonthlyBudget mb;
+
+    ValidationSupport validationSupport = new ValidationSupport();
+
     @FXML
     TextField nameField;
     @FXML
     DatePicker dateField;
 
-    private MonthlyBudget mb;
-
     @FXML
     public void initialize() {
+        validationSupport.registerValidator(nameField, true,  Validator.createEmptyValidator("Name is required"));
+        validationSupport.registerValidator(dateField, true,  Validator.createEmptyValidator("Date is required"));
+        validationSupport.setErrorDecorationEnabled(false);
+
         confirmButton.addEventHandler(ActionEvent.ACTION, e -> {
-            updateModel();
-            approved = true;
-            stage.close();
+            validationSupport.setErrorDecorationEnabled(true);
+            if(!validationSupport.isInvalid()) {
+                updateModel();
+                approved = true;
+                stage.close();
+            }
         });
     }
 

@@ -10,6 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import model.*;
+import org.controlsfx.validation.ValidationSupport;
+import org.controlsfx.validation.Validator;
 
 import javax.inject.Inject;
 import java.math.BigDecimal;
@@ -21,8 +23,9 @@ import java.time.ZoneId;
 import java.util.Date;
 
 public class CategoryBudgetEditController extends DialogController {
-
     private CategoryBudget catBud;
+
+    ValidationSupport validationSupport = new ValidationSupport();
 
     @FXML
     TreeView<BaseCategory> categoryPicker;
@@ -38,15 +41,6 @@ public class CategoryBudgetEditController extends DialogController {
 
     @FXML
     private void initialize() {
-        // TODO: Extract to abstract class
-        confirmButton.addEventHandler(ActionEvent.ACTION, e -> {
-            if(!initialBudgetField.getText().isEmpty()) {
-                updateModel();
-                approved = true;
-                stage.close();
-            }
-        });
-
         final TreeItem<BaseCategory> root = CategoryTreeListHelper.createTreeView(topCategoryDao.findAll(), false);
         categoryPicker.setRoot(root);
         categoryPicker.setShowRoot(false);
@@ -62,6 +56,19 @@ public class CategoryBudgetEditController extends DialogController {
         categoryPicker.setCellFactory(CategoryTreeListHelper::buildTreeCell);
 
         textFieldIntoMoneyField(initialBudgetField);
+
+        validationSupport.registerValidator(initialBudgetField, true, Validator.createEmptyValidator("Initial budget is required"));
+        validationSupport.registerValidator(categoryPicker, true, Validator.createEmptyValidator("Category is required"));
+        validationSupport.setErrorDecorationEnabled(false);
+
+        confirmButton.addEventHandler(ActionEvent.ACTION, e -> {
+            validationSupport.setErrorDecorationEnabled(true);
+            if(!validationSupport.isInvalid()) {
+                updateModel();
+                approved = true;
+                stage.close();
+            }
+        });
     }
 
     public void setModel(CategoryBudget catBud) {

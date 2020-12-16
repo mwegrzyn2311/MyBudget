@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import model.Account;
 import model.MonthlyBudget;
+import org.controlsfx.validation.ValidationSupport;
+import org.controlsfx.validation.Validator;
 import service.FxmlLoaderService;
 
 import javax.inject.Inject;
@@ -21,10 +23,9 @@ import java.util.Date;
 import java.util.Optional;
 
 public class AccountEditController extends DialogController {
-    AccountDao accountDao;
-    FxmlLoaderService fxmlLoaderService;
-
     Account account;
+
+    ValidationSupport validationSupport = new ValidationSupport();
 
     @FXML
     TextField nameField;
@@ -33,50 +34,22 @@ public class AccountEditController extends DialogController {
     @FXML
     TextField accountNumberField;
 
-    Optional<AccountListController> accountListController;
-
-/*
-    @Inject
-    public AccountEditController(final FxmlLoaderService fxmlLoaderService, AccountDao accountDao) {
-        this.accountDao = accountDao;
-        this.fxmlLoaderService = fxmlLoaderService;
-    }
-
-    @FXML
-    private void initialize() {
-        confirmButton.addEventHandler(ActionEvent.ACTION, e -> {
-            Optional<Account> newAccount = accountDao.create(nameField.getText(), accountNumberField.getText(), BigDecimal.valueOf(Double.parseDouble(initialBalanceField.getText())));
-            if(newAccount.isEmpty()) {
-                System.out.println("New account creation failed");
-            } else {
-                System.out.println("New account created");
-
-                accountListController.ifPresent(AccountListController::refreshAccountList);
-                // Close the window after new account is created
-                ((Node) e.getSource()).getScene().getWindow().hide();
-            }
-         });
-
-        // Text field formatters
-        textFieldIntoAccountNumberField(accountNumberField);
-        textFieldIntoMoneyField(initialBalanceField);
-    }
-
-
-    public void setAccountListController(AccountListController accountListController) {
-        this.accountListController = Optional.of(accountListController);
-    }
-    */
-
     @FXML
     public void initialize() {
         textFieldIntoAccountNumberField(accountNumberField);
         textFieldIntoMoneyField(initialBalanceField);
 
+        validationSupport.registerValidator(nameField, true, Validator.createEmptyValidator("Account name is required"));
+        validationSupport.registerValidator(initialBalanceField, true, Validator.createEmptyValidator("Initial balance is required"));
+        validationSupport.setErrorDecorationEnabled(false);
         confirmButton.addEventHandler(ActionEvent.ACTION, e -> {
-            updateModel();
-            approved = true;
-            stage.close();
+            validationSupport.setErrorDecorationEnabled(true);
+            if(!validationSupport.isInvalid())
+            {
+                updateModel();
+                approved = true;
+                stage.close();
+            }
         });
     }
 

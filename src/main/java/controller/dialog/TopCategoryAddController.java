@@ -6,11 +6,15 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import model.OperationType;
 import model.TopCategory;
+import org.controlsfx.validation.ValidationSupport;
+import org.controlsfx.validation.Validator;
 
 import java.util.Arrays;
 
 public class TopCategoryAddController extends DialogController{
     TopCategory topCategory;
+
+    ValidationSupport validationSupport = new ValidationSupport();
 
     @FXML
     public ChoiceBox<OperationType> typeChoice;
@@ -19,13 +23,19 @@ public class TopCategoryAddController extends DialogController{
 
     @FXML
     private void initialize() {
+        validationSupport.registerValidator(typeChoice, true, Validator.createEmptyValidator("Type is required"));
+        validationSupport.registerValidator(nameChoice, true, Validator.createEmptyValidator("Name is required"));
+        validationSupport.setErrorDecorationEnabled(false);
+
         confirmButton.addEventHandler(ActionEvent.ACTION, e -> {
-            if(!nameChoice.getText().isEmpty()) {
+            validationSupport.setErrorDecorationEnabled(true);
+            if(!validationSupport.isInvalid()) {
                 updateModel();
                 approved = true;
                 stage.close();
             }
         });
+
         typeChoice.getItems().addAll(Arrays.asList(OperationType.values()));
     }
 

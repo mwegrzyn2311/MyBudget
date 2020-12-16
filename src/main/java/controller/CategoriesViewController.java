@@ -1,13 +1,9 @@
 package controller;
 
-import controller.dialog.CategoryAddController;
-import controller.dialog.OperationEditController;
+import controller.dialog.CategoryEditController;
 import controller.dialog.TopCategoryAddController;
-import dao.CategoryDao;
 import dao.TopCategoryDao;
-import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +19,6 @@ import service.FxmlLoaderService;
 import javax.inject.Inject;
 import javax.persistence.PersistenceException;
 import java.io.IOException;
-import java.util.List;
 
 public class CategoriesViewController extends TabController {
 
@@ -92,7 +87,7 @@ public class CategoriesViewController extends TabController {
             try {
                 Parent root = loader.load();
                 stage.setScene(new Scene(root, 600 ,400));
-                CategoryAddController controller = loader.getController();
+                CategoryEditController controller = loader.getController();
                 controller.setStage(stage);
                 controller.setModel(category);
                 controller.setConfirmButtonText("Edit");
@@ -152,7 +147,7 @@ public class CategoriesViewController extends TabController {
         try {
             Parent root = loader.load();
             stage.setScene(new Scene(root, 600 ,400));
-            CategoryAddController controller = loader.getController();
+            CategoryEditController controller = loader.getController();
             controller.setStage(stage);
             controller.setModel(category);
             controller.setConfirmButtonText("Create");

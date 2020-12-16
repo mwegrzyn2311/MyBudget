@@ -12,15 +12,19 @@ import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import model.Category;
 import model.TopCategory;
+import org.controlsfx.validation.ValidationSupport;
+import org.controlsfx.validation.Validator;
 import service.FxmlLoaderService;
 
 import javax.inject.Inject;
 import javax.persistence.PersistenceException;
 import java.io.IOException;
 
-public class CategoryAddController extends DialogController{
+public class CategoryEditController extends DialogController{
 
     Category category;
+
+    ValidationSupport validationSupport = new ValidationSupport();
 
     @FXML
     Button addTopButton;
@@ -33,7 +37,7 @@ public class CategoryAddController extends DialogController{
     private final TopCategoryDao topCategoryDao;
 
     @Inject
-    public CategoryAddController(FxmlLoaderService loaderService, TopCategoryDao topCategoryDao){
+    public CategoryEditController(FxmlLoaderService loaderService, TopCategoryDao topCategoryDao){
         this.topCategoryDao = topCategoryDao;
         this.fxmlLoaderService = loaderService;
     }
@@ -42,8 +46,13 @@ public class CategoryAddController extends DialogController{
     private void initialize() {
         addTopButton.setOnAction(this::onTopCategoryAddAction);
 
+        validationSupport.registerValidator(topCategorySelection, true, Validator.createEmptyValidator("Top category is required"));
+        validationSupport.registerValidator(name, true, Validator.createEmptyValidator("Name is required"));
+        validationSupport.setErrorDecorationEnabled(false);
+
         confirmButton.addEventHandler(ActionEvent.ACTION, e -> {
-            if(!name.getText().isEmpty()) {
+            validationSupport.setErrorDecorationEnabled(true);
+            if(!validationSupport.isInvalid()) {
                 updateModel();
                 approved = true;
                 stage.close();
