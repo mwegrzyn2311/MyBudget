@@ -3,7 +3,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="346.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MonthlyBudgetListController">
+<?import org.controlsfx.glyphfont.Glyph?>
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../styles/CreationStyles.css"  prefHeight="346.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MonthlyBudgetListController">
     <center>
         <TableView fx:id="monthlyBudgetTableView" prefHeight="200.0" prefWidth="600.0">
             <columns>
@@ -19,12 +20,24 @@
         </TableView>
     </center>
     <top>
-        <Pane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="55.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+        <HBox prefHeight="35.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" prefWidth="340.0" styleClass="button-box" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="addButton" layoutX="14.0" layoutY="13.0" maxHeight="30.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="69.0" text="Add" />
-                <Button fx:id="editButton" layoutX="103.0" layoutY="13.0" maxHeight="30.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="69.0" text="Edit" />
-                <Button fx:id="deleteButton" layoutX="193.0" layoutY="13.0" maxHeight="30.0" maxWidth="69.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="69.0" text="Delete" />
+                <Button fx:id="addButton" mnemonicParsing="false" text="Add">
+                    <graphic>
+                        <Glyph fontFamily="FontAwesome" icon="PLUS" />
+                    </graphic>
+                </Button>
+                <Button fx:id="editButton" mnemonicParsing="false" text="Edit">
+                    <graphic>
+                        <Glyph fontFamily="FontAwesome" icon="EDIT" />
+                    </graphic>
+                </Button>
+                <Button fx:id="deleteButton" layoutX="100.0" layoutY="15.0" mnemonicParsing="false" text="Delete">
+                    <graphic>
+                        <Glyph fontFamily="FontAwesome" icon="TRASH" />
+                    </graphic>
+                </Button>
             </children>
-        </Pane>
+        </HBox>
     </top>
 </BorderPane>

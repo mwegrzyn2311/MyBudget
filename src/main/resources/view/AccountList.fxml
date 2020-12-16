@@ -3,7 +3,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AccountListController">
+<?import org.controlsfx.glyphfont.Glyph?>
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../styles/CreationStyles.css" fx:controller="controller.AccountListController">
    <center>
       <TableView fx:id="accountTableView" prefHeight="200.0" prefWidth="340.0" BorderPane.alignment="CENTER">
         <columns>
@@ -18,12 +19,24 @@
       </TableView>
    </center>
    <top>
-      <HBox prefHeight="35.0" prefWidth="340.0" styleClass="button-box" stylesheets="@../styles/ListViewStyles.css" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="addButton" mnemonicParsing="false" text="Add" />
-            <Button fx:id="editButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" text="Edit" />
-            <Button fx:id="deleteButton" layoutX="100.0" layoutY="15.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" text="Delete" />
-         </children>
-      </HBox>
+       <HBox prefHeight="35.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" prefWidth="340.0" styleClass="button-box" BorderPane.alignment="CENTER">
+           <children>
+               <Button fx:id="addButton" mnemonicParsing="false" text="Add">
+                   <graphic>
+                       <Glyph fontFamily="FontAwesome" icon="PLUS" />
+                   </graphic>
+               </Button>
+               <Button fx:id="editButton" mnemonicParsing="false" text="Edit">
+                   <graphic>
+                       <Glyph fontFamily="FontAwesome" icon="EDIT" />
+                   </graphic>
+               </Button>
+               <Button fx:id="deleteButton" layoutX="100.0" layoutY="15.0" mnemonicParsing="false" text="Delete">
+                   <graphic>
+                       <Glyph fontFamily="FontAwesome" icon="TRASH" />
+                   </graphic>
+               </Button>
+           </children>
+       </HBox>
    </top>
 </BorderPane>

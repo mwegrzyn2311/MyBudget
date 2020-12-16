@@ -68,14 +68,13 @@ public class OperationEditController extends DialogController {
         // Text field formatters
         textFieldIntoMoneyField(amountField);
 
-        validationSupport.setErrorDecorationEnabled(false);
         validationSupport.registerValidator(commentField, true, Validator.createEmptyValidator("Comment is required"));
         validationSupport.registerValidator(amountField, true, Validator.createEmptyValidator("Amount is required"));
         validationSupport.registerValidator(categoryPicker, true, Validator.createEmptyValidator("Category is required"));
         validationSupport.registerValidator(dateField, true, Validator.createEmptyValidator("Operation date is required"));
+        confirmButton.disableProperty().bind(validationSupport.invalidProperty());
+
         confirmButton.addEventHandler(ActionEvent.ACTION, e -> {
-            validationSupport.setErrorDecorationEnabled(true);
-            validationSupport.redecorate();
             if(!validationSupport.isInvalid()) {
                 updateModel();
                 approved = true;

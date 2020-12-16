@@ -59,11 +59,9 @@ public class CategoryBudgetEditController extends DialogController {
 
         validationSupport.registerValidator(initialBudgetField, true, Validator.createEmptyValidator("Initial budget is required"));
         validationSupport.registerValidator(categoryPicker, true, Validator.createEmptyValidator("Category is required"));
-        validationSupport.setErrorDecorationEnabled(false);
+        confirmButton.disableProperty().bind(validationSupport.invalidProperty());
 
         confirmButton.addEventHandler(ActionEvent.ACTION, e -> {
-            validationSupport.setErrorDecorationEnabled(true);
-            validationSupport.redecorate();
             if(!validationSupport.isInvalid()) {
                 updateModel();
                 approved = true;

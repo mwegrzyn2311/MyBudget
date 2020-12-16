@@ -26,13 +26,13 @@ public class CategoriesViewController extends TabController {
     private final FxmlLoaderService fxmlLoaderService;
 
     @FXML
-    private Button editCategory;
+    private Button editButton;
 
     @FXML
-    private Button deleteCategory;
+    private Button deleteButton;
 
     @FXML
-    private Button addCategory;
+    private Button addButton;
 
     @FXML
     private TreeView<BaseCategory> categoriesView;
@@ -49,15 +49,15 @@ public class CategoriesViewController extends TabController {
 
     @FXML
     public void initialize(){
-        addCategory.setOnAction(this::addCategory);
-        editCategory.setOnAction(this::editCategory);
-        deleteCategory.setOnAction(this::deleteCategory);
+        addButton.setOnAction(this::addCategory);
+        editButton.setOnAction(this::editCategory);
+        deleteButton.setOnAction(this::deleteCategory);
         refreshList();
         categoriesView.setShowRoot(false);
         categoriesView.setCellFactory(CategoryTreeListHelper::buildTreeCell);
 
-        deleteCategory.disableProperty().bind(Bindings.isEmpty(categoriesView.getSelectionModel().getSelectedItems()));
-        editCategory.disableProperty().bind(Bindings.size(categoriesView.getSelectionModel().getSelectedItems())
+        deleteButton.disableProperty().bind(Bindings.isEmpty(categoriesView.getSelectionModel().getSelectedItems()));
+        editButton.disableProperty().bind(Bindings.size(categoriesView.getSelectionModel().getSelectedItems())
                 .isNotEqualTo(1));
         this.categoriesView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }

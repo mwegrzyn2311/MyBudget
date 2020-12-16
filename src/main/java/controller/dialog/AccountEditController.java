@@ -41,10 +41,8 @@ public class AccountEditController extends DialogController {
 
         validationSupport.registerValidator(nameField, true, Validator.createEmptyValidator("Account name is required"));
         validationSupport.registerValidator(initialBalanceField, true, Validator.createEmptyValidator("Initial balance is required"));
-        validationSupport.setErrorDecorationEnabled(false);
+        confirmButton.disableProperty().bind(validationSupport.invalidProperty());
         confirmButton.addEventHandler(ActionEvent.ACTION, e -> {
-            validationSupport.setErrorDecorationEnabled(true);
-            validationSupport.redecorate();
             if(!validationSupport.isInvalid())
             {
                 updateModel();

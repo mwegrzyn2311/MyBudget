@@ -4,7 +4,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="346.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CategoryBudgetListController">
+<?import org.controlsfx.glyphfont.Glyph?>
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="346.0" stylesheets="@../styles/CreationStyles.css" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CategoryBudgetListController">
     <center>
         <TableView fx:id="categoryBudgetTableView" prefHeight="200.0" prefWidth="600.0">
             <columns>
@@ -20,9 +21,25 @@
     <top>
         <Pane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="addButton" layoutX="14.0" layoutY="13.0" maxHeight="30.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="69.0" text="Add" />
-                <Button fx:id="editButton" layoutX="103.0" layoutY="13.0" maxHeight="30.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="69.0" text="Edit" />
-                <Button fx:id="deleteButton" layoutX="193.0" layoutY="13.0" maxHeight="30.0" maxWidth="69.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="69.0" text="Delete" />
+                <HBox prefHeight="35.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" prefWidth="340.0" styleClass="button-box" BorderPane.alignment="CENTER">
+                    <children>
+                        <Button fx:id="addButton" mnemonicParsing="false" text="Add">
+                            <graphic>
+                                <Glyph fontFamily="FontAwesome" icon="PLUS" />
+                            </graphic>
+                        </Button>
+                        <Button fx:id="editButton" mnemonicParsing="false" text="Edit">
+                            <graphic>
+                                <Glyph fontFamily="FontAwesome" icon="EDIT" />
+                            </graphic>
+                        </Button>
+                        <Button fx:id="deleteButton" layoutX="100.0" layoutY="15.0" mnemonicParsing="false" text="Delete">
+                            <graphic>
+                                <Glyph fontFamily="FontAwesome" icon="TRASH" />
+                            </graphic>
+                        </Button>
+                    </children>
+                </HBox>
                 <Label layoutX="39.0" layoutY="55.0" prefHeight="18.0" prefWidth="125.0" text="Monthly Budget Name" />
                 <TextFlow fx:id="mbName" layoutX="172.0" layoutY="53.0" prefHeight="23.0" prefWidth="416.0" />
             </children>
