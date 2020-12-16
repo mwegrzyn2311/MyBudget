@@ -145,7 +145,7 @@ public class CategoryBudgetListController extends TabController {
         Stage stage = new Stage();
         categoryBudget.setMonthlyBudget(mb);
 
-        FXMLLoader loader = fxmlLoaderService.getLoader(getClass().getResource("/view/dialog/OperationEdit.fxml"));
+        FXMLLoader loader = fxmlLoaderService.getLoader(getClass().getResource("/view/dialog/CategoryBudgetEdit.fxml"));
         try {
             Parent root = loader.load();
             stage.setScene(new Scene(root, 600 ,400));
