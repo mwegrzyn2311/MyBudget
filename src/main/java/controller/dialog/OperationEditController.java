@@ -1,17 +1,11 @@
 package controller.dialog;
 
-import controller.CategoriesViewController;
-import controller.CategoryTreeListHelper;
-import dao.CategoryDao;
+import helper.CategoryTreeListHelper;
 import dao.TopCategoryDao;
 import javafx.application.Platform;
-import javafx.beans.binding.Binding;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.BooleanBinding;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.util.Callback;
 import model.*;
 
 import javax.inject.Inject;
@@ -22,7 +16,6 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.Optional;
 
 public class OperationEditController extends DialogController {
     Operation operation;

@@ -1,13 +1,10 @@
 package controller;
 
 import controller.dialog.CategoryAddController;
-import controller.dialog.OperationEditController;
 import controller.dialog.TopCategoryAddController;
-import dao.CategoryDao;
 import dao.TopCategoryDao;
-import javafx.beans.Observable;
+import helper.CategoryTreeListHelper;
 import javafx.beans.binding.Bindings;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +20,6 @@ import service.FxmlLoaderService;
 import javax.inject.Inject;
 import javax.persistence.PersistenceException;
 import java.io.IOException;
-import java.util.List;
 
 public class CategoriesViewController extends TabController {
 
