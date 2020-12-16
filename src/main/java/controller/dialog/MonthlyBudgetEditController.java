@@ -33,6 +33,7 @@ public class MonthlyBudgetEditController extends DialogController {
 
         confirmButton.addEventHandler(ActionEvent.ACTION, e -> {
             validationSupport.setErrorDecorationEnabled(true);
+            validationSupport.redecorate();
             if(!validationSupport.isInvalid()) {
                 updateModel();
                 approved = true;

@@ -75,6 +75,7 @@ public class OperationEditController extends DialogController {
         validationSupport.registerValidator(dateField, true, Validator.createEmptyValidator("Operation date is required"));
         confirmButton.addEventHandler(ActionEvent.ACTION, e -> {
             validationSupport.setErrorDecorationEnabled(true);
+            validationSupport.redecorate();
             if(!validationSupport.isInvalid()) {
                 updateModel();
                 approved = true;

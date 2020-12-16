@@ -13,10 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import model.Category;
-import model.MonthlyBudget;
-import model.Operation;
-import model.OperationType;
+import model.*;
 import service.FxmlLoaderService;
 
 import javax.inject.Inject;
@@ -67,7 +64,22 @@ public class MonthlyBudgetListController extends TabController {
         currBalanceCol.prefWidthProperty().bind(monthlyBudgetTableView.widthProperty().divide(5));
 
         monthlyBudgetTableView.setRowFactory(tv -> {
-            TableRow<MonthlyBudget> row = new TableRow<>();
+            TableRow<MonthlyBudget> row = new TableRow<>(){
+                @Override
+                protected void updateItem(MonthlyBudget item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if(!isEmpty()) {
+                        MonthlyBudget mb = getItem();
+                        final boolean overflow = mb.getCategoryBudgets().stream().anyMatch(categoryBudget -> categoryBudget.currentBalance().compareTo(BigDecimal.ZERO) < 0);
+                        if(!overflow) {
+                            setStyle("-fx-background-color:lightgreen");
+                        } else {
+                            setStyle("-fx-background-color:orangered");
+                        }
+                        applyCss();
+                    }
+                }
+            };
             row.setOnMouseClicked(event -> {
                 if(event.getClickCount() == 2 && !row.isEmpty()) {
                     MonthlyBudget mb = row.getItem();
@@ -79,6 +91,7 @@ public class MonthlyBudgetListController extends TabController {
             });
             return row;
         });
+
         monthlyBudgetTableView.setItems(FXCollections.observableArrayList(monthlyBudgetDao.findAll()));
 
         nameCol.setCellValueFactory(cellData -> cellData.getValue().nameProperty());

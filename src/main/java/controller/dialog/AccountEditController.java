@@ -44,6 +44,7 @@ public class AccountEditController extends DialogController {
         validationSupport.setErrorDecorationEnabled(false);
         confirmButton.addEventHandler(ActionEvent.ACTION, e -> {
             validationSupport.setErrorDecorationEnabled(true);
+            validationSupport.redecorate();
             if(!validationSupport.isInvalid())
             {
                 updateModel();
