@@ -8,11 +8,16 @@ import javafx.application.Platform;
 import javafx.beans.binding.Binding;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.MapChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.util.Callback;
 import model.*;
+import org.controlsfx.tools.ValueExtractor;
+import org.controlsfx.validation.ValidateEvent;
+import org.controlsfx.validation.ValidationResult;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
 
@@ -25,6 +30,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 public class OperationEditController extends DialogController {
     Operation operation;
@@ -72,6 +78,9 @@ public class OperationEditController extends DialogController {
         validationSupport.registerValidator(amountField, true, Validator.createEmptyValidator("Amount is required"));
         validationSupport.registerValidator(categoryPicker, true, Validator.createEmptyValidator("Category is required"));
         validationSupport.registerValidator(dateField, true, Validator.createEmptyValidator("Operation date is required"));
+        // Force validation redecoration
+        validationSupport.initInitialDecoration();
+
         confirmButton.disableProperty().bind(validationSupport.invalidProperty());
 
         confirmButton.addEventHandler(ActionEvent.ACTION, e -> {

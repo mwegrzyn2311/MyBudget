@@ -5,13 +5,11 @@ import dao.TopCategoryDao;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
+import javafx.scene.control.*;
 import model.*;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
+import org.w3c.dom.Text;
 
 import javax.inject.Inject;
 import java.math.BigDecimal;
@@ -60,6 +58,8 @@ public class CategoryBudgetEditController extends DialogController {
         validationSupport.registerValidator(initialBudgetField, true, Validator.createEmptyValidator("Initial budget is required"));
         validationSupport.registerValidator(categoryPicker, true, Validator.createEmptyValidator("Category is required"));
         confirmButton.disableProperty().bind(validationSupport.invalidProperty());
+        // Force validation redecoration
+        validationSupport.initInitialDecoration();
 
         confirmButton.addEventHandler(ActionEvent.ACTION, e -> {
             if(!validationSupport.isInvalid()) {

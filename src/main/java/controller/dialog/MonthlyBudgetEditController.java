@@ -29,6 +29,8 @@ public class MonthlyBudgetEditController extends DialogController {
     public void initialize() {
         validationSupport.registerValidator(nameField, true,  Validator.createEmptyValidator("Name is required"));
         validationSupport.registerValidator(dateField, true,  Validator.createEmptyValidator("Date is required"));
+        // Force validation redecoration
+        validationSupport.initInitialDecoration();
         confirmButton.disableProperty().bind(validationSupport.invalidProperty());
 
         confirmButton.addEventHandler(ActionEvent.ACTION, e -> {

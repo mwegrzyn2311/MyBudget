@@ -9,7 +9,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TreeView;
 import javafx.stage.Stage;
+import org.controlsfx.tools.ValueExtractor;
 import service.FxmlLoaderService;
 
 import javax.persistence.EntityManager;
@@ -20,6 +22,9 @@ public class MyBudgetApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        // Hack to fix controlsfx library
+        ValueExtractor.addObservableValueExtractor(con -> con instanceof TreeView, con -> ((TreeView<?>)con).getSelectionModel().selectedItemProperty());
+
         final File db = new File("dby.db");
         final boolean dbAlreadyExisted = db.exists();
 

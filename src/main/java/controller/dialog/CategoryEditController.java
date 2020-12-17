@@ -48,6 +48,9 @@ public class CategoryEditController extends DialogController{
 
         validationSupport.registerValidator(topCategorySelection, true, Validator.createEmptyValidator("Top category is required"));
         validationSupport.registerValidator(name, true, Validator.createEmptyValidator("Name is required"));
+        // Force validation redecoration
+        validationSupport.initInitialDecoration();
+
         confirmButton.disableProperty().bind(validationSupport.invalidProperty());
 
         confirmButton.addEventHandler(ActionEvent.ACTION, e -> {

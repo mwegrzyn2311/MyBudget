@@ -25,6 +25,9 @@ public class TopCategoryAddController extends DialogController{
     private void initialize() {
         validationSupport.registerValidator(typeChoice, true, Validator.createEmptyValidator("Type is required"));
         validationSupport.registerValidator(nameChoice, true, Validator.createEmptyValidator("Name is required"));
+        // Force validation redecoration
+        validationSupport.initInitialDecoration();
+
         confirmButton.disableProperty().bind(validationSupport.invalidProperty());
 
         confirmButton.addEventHandler(ActionEvent.ACTION, e -> {
