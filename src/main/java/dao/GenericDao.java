@@ -5,7 +5,6 @@ import com.google.inject.persist.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
-import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 

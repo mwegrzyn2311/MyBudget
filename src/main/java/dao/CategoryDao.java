@@ -2,7 +2,6 @@ package dao;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import model.Account;
 import model.Category;
 
 import javax.persistence.EntityManager;

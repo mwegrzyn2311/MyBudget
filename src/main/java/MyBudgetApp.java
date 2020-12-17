@@ -6,7 +6,6 @@ import dao.TopCategoryDao;
 import guice_module.MyBudgetModule;
 import helper.DBInitHelper;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TreeView;
@@ -14,7 +13,6 @@ import javafx.stage.Stage;
 import org.controlsfx.tools.ValueExtractor;
 import service.FxmlLoaderService;
 
-import javax.persistence.EntityManager;
 import java.io.File;
 import java.io.IOException;
 

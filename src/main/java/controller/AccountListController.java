@@ -1,7 +1,6 @@
 package controller;
 
 import controller.dialog.AccountEditController;
-import controller.dialog.MonthlyBudgetEditController;
 import dao.AccountDao;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleObjectProperty;
@@ -14,7 +13,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Account;
-import model.MonthlyBudget;
 import model.Operation;
 import service.FxmlLoaderService;
 
@@ -63,7 +61,26 @@ public class AccountListController extends TabController {
 
         //
         accountTableView.setRowFactory(tv -> {
-            TableRow<Account> row = new TableRow<>();
+            TableRow<Account> row = new TableRow<>() {
+                @Override
+                protected void updateItem(Account item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if(!isEmpty()) {
+                        Account acc = getItem();
+                        final boolean overflow = (acc.getInitialBalance()
+                                .add(acc.getOperations()
+                                        .stream()
+                                        .map(Operation::getAmount)
+                                        .reduce(BigDecimal.ZERO, BigDecimal::add)).compareTo(BigDecimal.ZERO) < 0);
+                        if(!overflow) {
+                            setStyle("-fx-background-color:lightgreen");
+                        } else {
+                            setStyle("-fx-background-color:orangered");
+                        }
+                        applyCss();
+                    }
+                }
+            };
             row.setOnMouseClicked(event -> {
                 if(event.getClickCount() ==2 && !row.isEmpty()) {
                     Account account = row.getItem();

@@ -109,9 +109,15 @@ public class MonthlyBudget {
         return c.getTime();
     }
     public BigDecimal initialBalance() {
-        return categoryBudgets.stream()
-                .map(CategoryBudget::getInitialBudget)
+        BigDecimal expenses = categoryBudgets.stream().filter(categoryBudget ->
+             categoryBudget.getCategory().getTopCategory().getOperationType().compareTo(OperationType.Expense)==0
+        ).map(CategoryBudget::getInitialBudget)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal incomes = categoryBudgets.stream().filter(categoryBudget ->
+            categoryBudget.getCategory().getTopCategory().getOperationType().compareTo(OperationType.Income)==0
+        ).map(CategoryBudget::getInitialBudget)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        return incomes.subtract(expenses);
     }
     public BigDecimal currentBalance() {
         return categoryBudgets.stream()

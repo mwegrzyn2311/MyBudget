@@ -6,7 +6,6 @@ import model.Category;
 import model.OperationType;
 import model.TopCategory;
 
-import javax.persistence.EntityManager;
 import java.util.Arrays;
 
 public class DBInitHelper {

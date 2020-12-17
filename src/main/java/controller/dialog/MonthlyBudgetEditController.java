@@ -1,12 +1,10 @@
 package controller.dialog;
 
-import controller.MonthlyBudgetListController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import model.MonthlyBudget;
-import model.Operation;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
 

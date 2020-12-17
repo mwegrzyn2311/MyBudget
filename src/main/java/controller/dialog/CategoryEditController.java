@@ -9,7 +9,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.util.StringConverter;
 import model.Category;
 import model.TopCategory;
 import org.controlsfx.validation.ValidationSupport;

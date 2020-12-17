@@ -1,7 +1,6 @@
 package controller;
 
 import controller.dialog.MonthlyBudgetEditController;
-import controller.dialog.OperationEditController;
 import dao.MonthlyBudgetDao;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -11,7 +10,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.*;
 import service.FxmlLoaderService;

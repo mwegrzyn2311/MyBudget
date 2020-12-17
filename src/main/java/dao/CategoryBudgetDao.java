@@ -2,7 +2,6 @@ package dao;
 
 import com.google.inject.Provider;
 import model.CategoryBudget;
-import model.MonthlyBudget;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
