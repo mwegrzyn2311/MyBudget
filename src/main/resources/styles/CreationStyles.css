@@ -41,13 +41,33 @@ TextField {
 }
 
 .medium-background{
-    -fx-background-color: #219ebc;
+    -fx-background-color: #8ecae6;
 }
 
 .menu-button-style{
-    -fx-background-color: #219ebc;
+    -fx-background-color: #8ecae6;
     -fx-border-color: #023047;
-    -fx-text-fill: #023047;
+    -fx-text-fill: #8ecae6;
+}
+.menu-button-style:hover {
+    -fx-cursor: hand;
+}
+
+.menu-button-style:hover Label, .menu-button-style:hover Glyph {
+    -fx-text-fill: #5d5d5d;
+}
+
+.menu-button-style VBox {
+    -fx-pref-width: 153px;
+    -fx-pref-height: 85px;
+    -fx-alignment: center;
+}
+.menu-button-style Label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-max-width:153px;
+    -fx-alignment: center;
+    /*-fx-text-overrun: CLIP;*/
 }
 
 .bright-text{

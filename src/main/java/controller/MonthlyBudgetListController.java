@@ -68,7 +68,7 @@ public class MonthlyBudgetListController extends TabController {
                     super.updateItem(item, empty);
                     if(!isEmpty()) {
                         MonthlyBudget mb = getItem();
-                        final boolean overflow = mb.getCategoryBudgets().stream().anyMatch(categoryBudget -> categoryBudget.currentBalance().compareTo(BigDecimal.ZERO) < 0);
+                        final boolean overflow = mb.getCategoryBudgets().stream().anyMatch(categoryBudget -> categoryBudget.getCurrentBalance().compareTo(BigDecimal.ZERO) < 0);
                         if(!overflow) {
                             setStyle("-fx-background-color:lightgreen");
                         } else {

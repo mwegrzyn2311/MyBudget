@@ -75,7 +75,7 @@ public class CategoryBudgetListController extends TabController {
             };
             return cell;
         });
-        currBalanceCol.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().currentBalance()));
+        currBalanceCol.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCurrentBalance()));
         currBalanceCol.setCellFactory(column -> {
             TableCell<CategoryBudget, BigDecimal> cell = new TableCell<>() {
                 @Override
@@ -206,7 +206,6 @@ public class CategoryBudgetListController extends TabController {
         mb = monthlyBudgetDao.findOne(accountId).orElse(null);
         if(mb != null) {
             setTextFloats();
-            categoryBudgetTableView.setItems(mb.categoryBudgetsObservableList());
         }
     }
 

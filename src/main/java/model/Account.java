@@ -23,11 +23,14 @@ public class Account {
 
     private List<Operation> operations;
 
+    private ObservableList<Operation> obsOperations;
+
     public Account() {
         this.name = new SimpleStringProperty();
         this.accountNumber = new SimpleStringProperty();
         this.initialBalance = new SimpleObjectProperty<>();
         this.operations = new LinkedList<>();
+        this.obsOperations = FXCollections.observableList(new LinkedList<>());
     }
 
     public Account(String name, String accountNumber, BigDecimal initialBalance, List<Operation> operations) {
@@ -35,6 +38,7 @@ public class Account {
         this.accountNumber = new SimpleStringProperty(accountNumber);
         this.initialBalance = new SimpleObjectProperty<>(initialBalance);
         this.operations = operations;
+        this.operations = FXCollections.observableList(operations);
     }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -86,14 +90,15 @@ public class Account {
     }
     public void setOperations(List<Operation> operations) {
         this.operations = operations;
+        this.obsOperations = FXCollections.observableList(this.operations);
     }
     public ObservableList<Operation> operationsObservableList() {
-        return FXCollections.observableList(this.operations);
+        return this.obsOperations;
     }
     public void addOperation(Operation operation) {
-        operations.add(operation);
+        obsOperations.add(operation);
     }
     public void removeOperation(Operation operation) {
-        operations.remove(operation);
+        obsOperations.remove(operation);
     }
 }

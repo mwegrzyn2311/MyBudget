@@ -71,9 +71,10 @@ public class MyBudgetAppController implements Initializable, ITabAreaController 
             } catch(IOException ex) {
                 ex.printStackTrace();
             }
-            TabController tabController = (TabController)loader.getController();
+            TabController tabController = loader.getController();
             tabController.setTabAreaController(this);
             tabController.setTabParameter(param);
+            tabController.onSelected();
 
             mainArea.getTabs().add(newTab);
             openTabs.put(name, newTab);

@@ -121,13 +121,13 @@ public class MonthlyBudget {
     }
     public BigDecimal currentBalance() {
         return categoryBudgets.stream()
-                .map(CategoryBudget::currentBalance)
+                .map(CategoryBudget::getCurrentBalance)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
     @Transient
     public boolean isPreserved() {
         for(CategoryBudget cb : categoryBudgets) {
-            if(cb.currentBalance().compareTo(BigDecimal.ZERO) < 0) {
+            if(cb.getCurrentBalance().compareTo(BigDecimal.ZERO) < 0) {
                 return false;
             }
         }

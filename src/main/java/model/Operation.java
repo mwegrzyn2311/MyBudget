@@ -8,6 +8,7 @@ import javafx.beans.property.StringProperty;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Access(AccessType.PROPERTY)
