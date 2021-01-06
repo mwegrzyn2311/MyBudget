@@ -44,20 +44,16 @@ public class MonthlyBudgetEditController extends DialogController {
         mb.setName(nameField.getText());
 
         LocalDate localDate = dateField.getValue();
-        Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-        mb.setFirstDay(Date.from(instant));
+        mb.setFirstDay(localDate);
 
     }
 
     public void updateControls() {
         nameField.setText(mb.getName());
 
-        Date date = mb.getFirstDay();
+        LocalDate date = mb.getFirstDay();
         if(date != null) {
-            dateField.setValue(date
-                    .toInstant()
-                    .atZone(ZoneId.systemDefault())
-                    .toLocalDate());
+            dateField.setValue(date);
         }
     }
 

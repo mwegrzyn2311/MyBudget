@@ -101,9 +101,7 @@ public class OperationEditController extends DialogController {
             e.printStackTrace();
         }
 
-        LocalDate localDate = dateField.getValue();
-        Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-        operation.setDate(Date.from(instant));
+        operation.setDate(dateField.getValue());
 
         operation.setComment(commentField.getText());
     }
@@ -125,12 +123,9 @@ public class OperationEditController extends DialogController {
             });
         }
 
-        Date date = operation.getDate();
+        LocalDate date = operation.getDate();
         if(date != null) {
-            dateField.setValue(date
-                    .toInstant()
-                    .atZone(ZoneId.systemDefault())
-                    .toLocalDate());
+            dateField.setValue(date);
         }
 
         commentField.setText(operation.getComment());

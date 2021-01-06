@@ -25,8 +25,8 @@ import javax.inject.Inject;
 import javax.persistence.PersistenceException;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class OperationListController extends TabController {
     FxmlLoaderService fxmlLoaderService;
@@ -48,7 +48,7 @@ public class OperationListController extends TabController {
     @FXML
     TableColumn<Operation, BigDecimal> amountColumn;
     @FXML
-    TableColumn<Operation, Date> dateColumn;
+    TableColumn<Operation, LocalDate> dateColumn;
     @FXML
     TableColumn<Operation, String> commentColumn;
     @FXML
@@ -84,16 +84,15 @@ public class OperationListController extends TabController {
         });
 
         dateColumn.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
-        dateColumn.setCellFactory(column -> new TableCell<Operation, Date>() {
-            private final SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+        dateColumn.setCellFactory(column -> new TableCell<Operation, LocalDate>() {
             @Override
-            protected void updateItem(Date item, boolean empty) {
+            protected void updateItem(LocalDate item, boolean empty) {
                 super.updateItem(item, empty);
                 if(empty) {
                     setText(null);
                 }
                 else {
-                    setText(format.format(item));
+                    setText(item.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
                 }
             }
         });

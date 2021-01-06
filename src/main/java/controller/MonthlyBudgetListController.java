@@ -18,8 +18,8 @@ import javax.inject.Inject;
 import javax.persistence.PersistenceException;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class MonthlyBudgetListController extends TabController {
     MonthlyBudgetDao monthlyBudgetDao;
@@ -39,9 +39,9 @@ public class MonthlyBudgetListController extends TabController {
     @FXML
     TableColumn<MonthlyBudget, String> nameCol;
     @FXML
-    TableColumn<MonthlyBudget, Date> firstDayCol;
+    TableColumn<MonthlyBudget, LocalDate> firstDayCol;
     @FXML
-    TableColumn<MonthlyBudget, Date> lastDayCol;
+    TableColumn<MonthlyBudget, LocalDate> lastDayCol;
     @FXML
     TableColumn<MonthlyBudget, BigDecimal> initialBalanceCol;
     @FXML
@@ -95,25 +95,23 @@ public class MonthlyBudgetListController extends TabController {
         nameCol.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         firstDayCol.setCellValueFactory(cellData -> cellData.getValue().firstDayProperty());
         firstDayCol.setCellFactory(column -> new TableCell<>() {
-            private final SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
             @Override
-            protected void updateItem(Date item, boolean empty) {
+            protected void updateItem(LocalDate item, boolean empty) {
                 super.updateItem(item, empty);
-                setText(empty ? "" : format.format(item));
+                setText(empty ? "" : item.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
             }
         });
 
         lastDayCol.setCellValueFactory(cellData -> cellData.getValue().lastDayProperty());
         lastDayCol.setCellFactory(column -> new TableCell<>() {
-            private final SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
             @Override
-            protected void updateItem(Date item, boolean empty) {
+            protected void updateItem(LocalDate item, boolean empty) {
                 super.updateItem(item, empty);
                 if(empty) {
                     setText(null);
                 }
                 else {
-                    setText(format.format(item));
+                    setText(item.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
                 }
             }
         });

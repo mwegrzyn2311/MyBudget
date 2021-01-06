@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
@@ -20,21 +21,21 @@ import java.util.List;
 public class MonthlyBudget {
     private Long id;
     private StringProperty name;
-    private ObjectProperty<Date> firstDay;
-    private ObjectProperty<Date> lastDay;
+    private ObjectProperty<LocalDate> firstDay;
+    private ObjectProperty<LocalDate> lastDay;
     private List<CategoryBudget> categoryBudgets;
 
     public MonthlyBudget() {
         this.name = new SimpleStringProperty();
-        this.firstDay = new SimpleObjectProperty<>();
-        this.lastDay = new SimpleObjectProperty<>();
+        this.firstDay = new SimpleObjectProperty<LocalDate>();
+        this.lastDay = new SimpleObjectProperty<LocalDate>();
         this.categoryBudgets = new LinkedList<>();
     }
 
-    public MonthlyBudget(String name, Date firstDay, List<CategoryBudget> categoryBudgets) {
+    public MonthlyBudget(String name, LocalDate firstDay, List<CategoryBudget> categoryBudgets) {
         this.name = new SimpleStringProperty(name);
-        this.firstDay = new SimpleObjectProperty<>(firstDay);
-        this.lastDay = new SimpleObjectProperty<>(calculateLastDay());
+        this.firstDay = new SimpleObjectProperty<LocalDate>(firstDay);
+        this.lastDay = new SimpleObjectProperty<LocalDate>(calculateLastDay());
         this.categoryBudgets = categoryBudgets;
     }
 
@@ -49,25 +50,25 @@ public class MonthlyBudget {
     }
 
     @Column(name = "firstDay")
-    public Date getFirstDay() {
+    public LocalDate getFirstDay() {
         return this.firstDay.getValue();
     }
-    public void setFirstDay(Date firstDay) {
+    public void setFirstDay(LocalDate firstDay) {
         this.firstDay.set(firstDay);
         this.lastDay.set(calculateLastDay());
     }
-    public ObjectProperty<Date> firstDayProperty() {
+    public ObjectProperty<LocalDate> firstDayProperty() {
         return this.firstDay;
     }
 
     @Column(name = "lastDay")
-    public Date getLastDay() {
+    public LocalDate getLastDay() {
         return this.lastDay.getValue();
     }
-    public void setLastDay(Date lastDay) {
+    public void setLastDay(LocalDate lastDay) {
         this.lastDay.set(lastDay);
     }
-    public ObjectProperty<Date> lastDayProperty() {
+    public ObjectProperty<LocalDate> lastDayProperty() {
         return this.lastDay;
     }
 
@@ -100,14 +101,15 @@ public class MonthlyBudget {
         categoryBudgets.remove(cb);
     }
 
-
-    private Date calculateLastDay() {
-        Calendar c = Calendar.getInstance();
-        c.setTime(firstDay.getValue());
-        c.add(Calendar.MONTH, 1);
-        c.add(Calendar.DAY_OF_MONTH, -1);
-        return c.getTime();
+    private LocalDate calculateLastDay() {
+        LocalDate first = this.firstDay.get();
+        return first.plusMonths(1).minusDays(1);
+//        Calendar c = Calendar.getInstance();
+//        c.setTime(firstDay.getValue());
+//        c.add(Calendar.MONTH, 1);
+//        c.add(Calendar.DAY_OF_MONTH, -1);
     }
+
     public BigDecimal initialBalance() {
         BigDecimal expenses = categoryBudgets.stream().filter(categoryBudget ->
              categoryBudget.getCategory().getTopCategory().getOperationType().compareTo(OperationType.Expense)==0

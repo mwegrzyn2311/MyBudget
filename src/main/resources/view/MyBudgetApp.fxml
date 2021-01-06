@@ -42,7 +42,7 @@
                   <VBox>
                      <children>
                         <Glyph alignment="CENTER" contentDisplay="CENTER" fontFamily="FontAwesome" fontSize="36.0" icon="LIST_UL" prefHeight="55.0" prefWidth="55.0" styleClass="medium-background" />
-                        <Label text="Transaction Categories" wrapText="true" />
+                        <Label text="Transaction&#xD; Categories" wrapText="true" />
                      </children>
                   </VBox>
                </graphic>
@@ -55,7 +55,7 @@
                   <VBox>
                      <children>
                         <Glyph alignment="CENTER" contentDisplay="CENTER" fontFamily="FontAwesome" fontSize="36.0" graphicTextGap="0.0" icon="MONEY" prefHeight="55.0" prefWidth="55.0" styleClass="medium-background" />
-                        <Label text="Monthly Budgets" wrapText="true" />
+                        <Label text="Monthly&#xD;Budgets" wrapText="true" />
                      </children>
                   </VBox>
                </graphic>
