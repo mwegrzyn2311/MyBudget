@@ -1,10 +1,14 @@
 .main-label {
-    -fx-font-size: 22px;
+    -fx-font-size: 24px;
     -fx-text-alignment: justify;
+    -fx-font-weight: bold;
     -fx-wrap-text: true;
+    -fx-text-fill: #023047;
 }
 .form-label {
     -fx-font-size: 16px;
+    -fx-text-fill: #023047;
+    -fx-font-weight: bold;
 }
 .empty-pane {
     -fx-min-width: 30px;
@@ -21,4 +25,31 @@
 }
 TextField {
     -fx-pref-height: 20px;
+}
+
+.dark-background{
+    -fx-background-color: #023047;
+}
+
+.yellow-background{
+    -fx-background-color: #ffb703;
+    -fx-text-fill: #023047;
+}
+
+.light-blue-background{
+    -fx-background-color: #8ecae6;
+}
+
+.medium-background{
+    -fx-background-color: #219ebc;
+}
+
+.menu-button-style{
+    -fx-background-color: #219ebc;
+    -fx-border-color: #023047;
+    -fx-text-fill: #023047;
+}
+
+.bright-text{
+    -fx-text-fill: #8ecae6;
 }

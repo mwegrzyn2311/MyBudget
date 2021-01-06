@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
@@ -138,13 +139,9 @@ public class OperationListController extends TabController {
         if(account != null) {
             operationTableView.refresh();
             name.getChildren().clear();
-            name.getChildren().add(new Text(account.getName()));
             initialBalance.getChildren().clear();
-            initialBalance.getChildren().add(new Text(account.getInitialBalance().toString()));
             currentBalance.getChildren().clear();
-            currentBalance.getChildren().add(new Text(account.getInitialBalance()
-                    .add(account.getOperations().stream().map(Operation::getAmount)
-                            .reduce(BigDecimal.ZERO, BigDecimal::add)).toString()));
+            setTextFloats();
             operationTableView.setItems(account.operationsObservableList());
         }
     }
@@ -222,17 +219,29 @@ public class OperationListController extends TabController {
         Long accountId = (Long) param;
         account = accountDao.findOne(accountId).orElse(null);
         if(account != null) {
-            name.getChildren().add(new Text(account.getName()));
-            initialBalance.getChildren().add(new Text(account.getInitialBalance().toString()));
-            currentBalance.getChildren().add(new Text(account.getInitialBalance()
-                    .add(account.getOperations().stream().map(Operation::getAmount)
-                            .reduce(BigDecimal.ZERO, BigDecimal::add)).toString()));
-            operationTableView.setItems(account.operationsObservableList());
+            setTextFloats();
         }
     }
 
     @Override
     public void onSelected() {
         refreshList();
+    }
+
+    private void setTextFloats(){
+        Text nameText = new Text(account.getName());
+        nameText.setFill(Color.web("0xffb703"));
+        nameText.setStyle("-fx-font-weight: bold");
+        name.getChildren().add(nameText);
+        Text initialText = new Text(account.getInitialBalance().toString());
+        initialText.setFill(Color.web("0xffb703"));
+        initialText.setStyle("-fx-font-weight: bold");
+        initialBalance.getChildren().add(initialText);
+        Text currentText = new Text(account.getInitialBalance()
+                .add(account.getOperations().stream().map(Operation::getAmount)
+                        .reduce(BigDecimal.ZERO, BigDecimal::add)).toString());
+        currentText.setFill(Color.web("0xffb703"));
+        currentText.setStyle("-fx-font-weight: bold");
+        currentBalance.getChildren().add(currentText);
     }
 }

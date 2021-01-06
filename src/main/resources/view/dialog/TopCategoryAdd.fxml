@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="185.0" prefWidth="423.0" stylesheets="@../../styles/CreationStyles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.dialog.TopCategoryAddController">
+<BorderPane prefHeight="185.0" prefWidth="423.0" styleClass="light-blue-background" stylesheets="@../../styles/CreationStyles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.dialog.TopCategoryAddController">
     <top>
         <Label alignment="CENTER" prefHeight="54.0" prefWidth="270.0" styleClass="main-label" text="New Top Category" BorderPane.alignment="CENTER" />
     </top>
@@ -25,7 +25,7 @@
     <bottom>
         <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="0.0" prefWidth="600.0" styleClass="button-box" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="confirmButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Create" />
+                <Button fx:id="confirmButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Create" styleClass="yellow-background"/>
             </children>
         </HBox>
     </bottom>

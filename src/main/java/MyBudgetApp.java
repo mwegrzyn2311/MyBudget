@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TreeView;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.controlsfx.tools.ValueExtractor;
 import service.FxmlLoaderService;
@@ -38,6 +39,8 @@ public class MyBudgetApp extends Application {
             Scene scene = new Scene(root, 800, 600);
 
             primaryStage.setScene(scene);
+            primaryStage.getIcons().add(new Image(MyBudgetApp.class.getResourceAsStream("icons/wallet.png")));
+            primaryStage.setTitle("My Budget App");
 
             primaryStage.show();
         } catch (IOException e) {

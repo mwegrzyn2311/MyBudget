@@ -1,21 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.glyphfont.Glyph?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="703.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MyBudgetAppController">
+<BorderPane stylesheets="@../styles/CreationStyles.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="703.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MyBudgetAppController">
    <center>
-      <SplitPane dividerPositions="0.23252496433666192" prefHeight="221.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <SplitPane prefHeight="526.0" prefWidth="756.0" BorderPane.alignment="CENTER">
          <items>
-            <VBox maxWidth="180.0" minWidth="180.0" prefHeight="200.0" prefWidth="180.0">
-               <children>
-                   <Button fx:id="accountsLink" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Accounts" />
-                  <Button fx:id="categoriesLink" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Transaction categories" />
-                  <Button fx:id="monthlyBudgetsLink" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Monthly Budgets" />
-               </children>
-            </VBox>
-            <TabPane fx:id="mainArea" prefHeight="385.0" prefWidth="574.0" tabClosingPolicy="UNAVAILABLE" />
+            <TabPane fx:id="mainArea" prefHeight="481.0" prefWidth="398.0" styleClass="light-blue-background" tabClosingPolicy="UNAVAILABLE" SplitPane.resizableWithParent="false" />
          </items>
       </SplitPane>
    </center>
+   <left>
+      <Pane prefHeight="482.0" prefWidth="151.0" styleClass="dark-background" BorderPane.alignment="CENTER">
+         <children>
+             <Button fx:id="accountsLink" alignment="BOTTOM_CENTER" contentDisplay="CENTER" layoutX="-1.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="85.0" prefWidth="153.0" styleClass="menu-button-style" text="Accounts" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="categoriesLink" alignment="BOTTOM_CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="85.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="85.0" prefWidth="153.0" styleClass="menu-button-style" text="Transaction Categories">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="monthlyBudgetsLink" alignment="BOTTOM_CENTER" layoutX="-1.0" layoutY="170.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="85.0" prefWidth="153.0" styleClass="menu-button-style" text="Monthly Budgets">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Button>
+             <Glyph alignment="CENTER" contentDisplay="CENTER" fontFamily="FontAwesome" fontSize="36.0" icon="CREDIT_CARD" layoutX="48.0" layoutY="8.0" prefHeight="55.0" prefWidth="55.0" styleClass="medium-background" textAlignment="CENTER">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Glyph>
+            <Glyph alignment="CENTER" contentDisplay="CENTER" fontFamily="FontAwesome" fontSize="36.0" icon="LIST_UL" layoutX="48.0" layoutY="94.0" prefHeight="55.0" prefWidth="55.0" styleClass="medium-background" />
+            <Glyph alignment="CENTER" contentDisplay="CENTER" fontFamily="FontAwesome" fontSize="36.0" graphicTextGap="0.0" icon="MONEY" layoutX="48.0" layoutY="178.0" prefHeight="55.0" prefWidth="55.0" styleClass="medium-background" />
+         </children>
+      </Pane>
+   </left>
 </BorderPane>

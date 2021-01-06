@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
@@ -126,7 +127,7 @@ public class CategoryBudgetListController extends TabController {
         if(mb != null) {
             categoryBudgetTableView.refresh();
             mbName.getChildren().clear();
-            mbName.getChildren().add(new Text(mb.getName()));
+            setTextFloats();
             categoryBudgetTableView.setItems(mb.categoryBudgetsObservableList());
         }
     }
@@ -204,7 +205,7 @@ public class CategoryBudgetListController extends TabController {
         Long accountId = (Long) param;
         mb = monthlyBudgetDao.findOne(accountId).orElse(null);
         if(mb != null) {
-            mbName.getChildren().add(new Text(mb.getName()));
+            setTextFloats();
             categoryBudgetTableView.setItems(mb.categoryBudgetsObservableList());
         }
     }
@@ -212,5 +213,12 @@ public class CategoryBudgetListController extends TabController {
     @Override
     public void onSelected() {
         refreshList();
+    }
+
+    private void setTextFloats(){
+        Text text = new Text(mb.getName());
+        text.setFill(Color.web("0xffb703"));
+        text.setStyle("-fx-font-weight: bold");
+        mbName.getChildren().add(text);
     }
 }

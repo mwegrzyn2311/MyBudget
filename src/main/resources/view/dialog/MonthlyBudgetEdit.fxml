@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../../styles/CreationStyles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.dialog.MonthlyBudgetEditController">
+<BorderPane prefHeight="400.0" prefWidth="600.0" styleClass="light-blue-background" stylesheets="@../../styles/CreationStyles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.dialog.MonthlyBudgetEditController">
     <top>
         <Label prefHeight="54.0" prefWidth="270.0" styleClass="main-label" text="New monthly budget" BorderPane.alignment="CENTER" />
     </top>
@@ -34,7 +34,7 @@
     <bottom>
         <HBox prefHeight="100.0" prefWidth="200.0" styleClass="button-box" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="confirmButton" mnemonicParsing="false" text="Create" />
+                <Button fx:id="confirmButton" mnemonicParsing="false" text="Create" styleClass="yellow-background"/>
             </children>
         </HBox>
     </bottom>
