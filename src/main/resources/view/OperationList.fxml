@@ -12,7 +12,7 @@
 <?import javafx.scene.text.TextFlow?>
 <?import org.controlsfx.glyphfont.Glyph?>
 
-<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="346.0" prefWidth="600.0" stylesheets="@../styles/CreationStyles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OperationListController">
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="346.0" prefWidth="600.0" stylesheets="@../styles/ListViewStyles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OperationListController">
     <center>
         <TableView fx:id="operationTableView" prefHeight="200.0" prefWidth="600.0">
             <columns>

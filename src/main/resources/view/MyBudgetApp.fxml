@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 <?import org.controlsfx.glyphfont.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="703.0" stylesheets="@../styles/CreationStyles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MyBudgetAppController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="703.0" stylesheets="@../styles/ListViewStyles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MyBudgetAppController">
    <center>
       <SplitPane prefHeight="526.0" prefWidth="756.0" BorderPane.alignment="CENTER">
          <items>
@@ -29,7 +29,11 @@
                               <Insets />
                            </opaqueInsets>
                         </Glyph>
-                        <Label text="Accounts" wrapText="true" />
+                        <TextFlow>
+                           <children>
+                              <Text text="Accounts" />
+                           </children>
+                        </TextFlow>
                      </children>
                   </VBox>
                </graphic>
@@ -42,7 +46,11 @@
                   <VBox>
                      <children>
                         <Glyph alignment="CENTER" contentDisplay="CENTER" fontFamily="FontAwesome" fontSize="36.0" icon="LIST_UL" prefHeight="55.0" prefWidth="55.0" styleClass="medium-background" />
-                        <Label text="Transaction&#xD; Categories" wrapText="true" />
+                        <TextFlow>
+                           <children>
+                              <Text text="Transaction Categories" />
+                           </children>
+                        </TextFlow>
                      </children>
                   </VBox>
                </graphic>
@@ -55,7 +63,11 @@
                   <VBox>
                      <children>
                         <Glyph alignment="CENTER" contentDisplay="CENTER" fontFamily="FontAwesome" fontSize="36.0" graphicTextGap="0.0" icon="MONEY" prefHeight="55.0" prefWidth="55.0" styleClass="medium-background" />
-                        <Label text="Monthly&#xD;Budgets" wrapText="true" />
+                        <TextFlow>
+                           <children>
+                              <Text text="Monthly Budgets" />
+                           </children>
+                        </TextFlow>
                      </children>
                   </VBox>
                </graphic>

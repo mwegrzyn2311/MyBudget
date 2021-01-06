@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import org.controlsfx.glyphfont.Glyph?>
 
-<BorderPane prefHeight="400.0" prefWidth="705.0" styleClass="light-blue-background" stylesheets="@../styles/CreationStyles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CategoriesViewController">
+<BorderPane prefHeight="400.0" prefWidth="705.0" styleClass="light-blue-background" stylesheets="@../styles/ListViewStyles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CategoriesViewController">
    <center>
       <TreeView fx:id="categoriesView" prefHeight="335.0" prefWidth="670.0" styleClass="light-blue-background" BorderPane.alignment="CENTER" />
    </center>
