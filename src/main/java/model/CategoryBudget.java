@@ -82,8 +82,6 @@ public class CategoryBudget {
         return monthlyBudget;
     }
 
-
-    // TODO: Consider moving it to another place
     @Transient
     public BigDecimal getCurrentBalance() {
         if(this.getCategory().getTopCategory().getOperationType().compareTo(OperationType.Income)==0){
