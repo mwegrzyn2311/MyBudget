@@ -5,14 +5,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.*;
 
 @Entity
 @Table(name = "Account")
 @Access(AccessType.PROPERTY)
-public class Account implements Serializable {
+public class Account {
 
     private Long id;
 
@@ -22,15 +21,24 @@ public class Account implements Serializable {
 
     private ObjectProperty<BigDecimal> initialBalance;
 
-    private ObservableList<Operation> operations;
+    private List<Operation> operations;
 
-    public Account() {}
+    private ObservableList<Operation> obsOperations;
+
+    public Account() {
+        this.name = new SimpleStringProperty();
+        this.accountNumber = new SimpleStringProperty();
+        this.initialBalance = new SimpleObjectProperty<>();
+        this.operations = new LinkedList<>();
+        this.obsOperations = FXCollections.observableList(new LinkedList<>());
+    }
 
     public Account(String name, String accountNumber, BigDecimal initialBalance, List<Operation> operations) {
         this.name = new SimpleStringProperty(name);
         this.accountNumber = new SimpleStringProperty(accountNumber);
         this.initialBalance = new SimpleObjectProperty<>(initialBalance);
-        this.operations = FXCollections.observableArrayList(operations);
+        this.operations = operations;
+        this.operations = FXCollections.observableList(operations);
     }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -76,20 +84,21 @@ public class Account implements Serializable {
         return initialBalance;
     }
 
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, orphanRemoval = true)
     public List<Operation> getOperations() {
-        return new LinkedList<>(operations);
+        return operations;
     }
     public void setOperations(List<Operation> operations) {
-        this.operations = FXCollections.observableArrayList(operations);
+        this.operations = operations;
+        this.obsOperations = FXCollections.observableList(this.operations);
     }
     public ObservableList<Operation> operationsObservableList() {
-        return this.operations;
+        return this.obsOperations;
     }
     public void addOperation(Operation operation) {
-        operations.add(operation);
+        obsOperations.add(operation);
     }
     public void removeOperation(Operation operation) {
-        operations.remove(operation);
+        obsOperations.remove(operation);
     }
 }

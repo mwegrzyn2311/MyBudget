@@ -1,10 +1,14 @@
 package controller.dialog;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 
 public abstract class DialogController {
+    @FXML
+    protected Button confirmButton;
     protected boolean approved = false;
     protected Stage stage;
 
@@ -42,5 +46,9 @@ public abstract class DialogController {
                 textField.setText(oldValue);
             }
         });
+    }
+
+    public void setConfirmButtonText(String text) {
+        confirmButton.setText(text);
     }
 }

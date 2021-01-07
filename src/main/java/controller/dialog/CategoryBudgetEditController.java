@@ -14,36 +14,26 @@ import javax.inject.Inject;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.ParseException;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 
-public class OperationEditController extends DialogController {
-    Operation operation;
-
-
-    @FXML
-    TextField amountField;
-    @FXML
-    DatePicker dateField;
-    @FXML
-    TextArea commentField;
-    @FXML
-    TreeView<BaseCategory> categoryPicker;
+public class CategoryBudgetEditController extends DialogController {
+    private CategoryBudget catBud;
 
     ValidationSupport validationSupport = new ValidationSupport();
+
+    @FXML
+    TreeView<BaseCategory> categoryPicker;
+    @FXML
+    TextField initialBudgetField;
 
     final private TopCategoryDao topCategoryDao;
 
     @Inject
-    public OperationEditController(TopCategoryDao topCategoryDao){
+    public CategoryBudgetEditController(TopCategoryDao topCategoryDao){
         this.topCategoryDao = topCategoryDao;
     }
 
     @FXML
     private void initialize() {
-
         final TreeItem<BaseCategory> root = CategoryTreeListHelper.createTreeView(topCategoryDao.findAll(), false);
         categoryPicker.setRoot(root);
         categoryPicker.setShowRoot(false);
@@ -58,17 +48,13 @@ public class OperationEditController extends DialogController {
 
         categoryPicker.setCellFactory(CategoryTreeListHelper::buildTreeCell);
 
-        // Text field formatters
-        textFieldIntoMoneyField(amountField);
+        textFieldIntoMoneyField(initialBudgetField);
 
-        validationSupport.registerValidator(commentField, true, Validator.createEmptyValidator("Comment is required"));
-        validationSupport.registerValidator(amountField, true, Validator.createEmptyValidator("Amount is required"));
+        validationSupport.registerValidator(initialBudgetField, true, Validator.createEmptyValidator("Initial budget is required"));
         validationSupport.registerValidator(categoryPicker, true, Validator.createEmptyValidator("Category is required"));
-        validationSupport.registerValidator(dateField, true, Validator.createEmptyValidator("Operation date is required"));
+        confirmButton.disableProperty().bind(validationSupport.invalidProperty());
         // Force validation redecoration
         validationSupport.initInitialDecoration();
-
-        confirmButton.disableProperty().bind(validationSupport.invalidProperty());
 
         confirmButton.addEventHandler(ActionEvent.ACTION, e -> {
             if(!validationSupport.isInvalid()) {
@@ -79,39 +65,30 @@ public class OperationEditController extends DialogController {
         });
     }
 
-    public void setModel(Operation operation) {
-        this.operation = operation;
+    public void setModel(CategoryBudget catBud) {
+        this.catBud = catBud;
         updateControls();
     }
 
     private void updateModel() {
         final Category category = (Category) categoryPicker.getSelectionModel().getSelectedItem().getValue();
-        operation.setCategory(category);
+        catBud.setCategory(category);
 
         DecimalFormat decimalFormatter = new DecimalFormat();
         decimalFormatter.setParseBigDecimal(true);
         try {
-            if(category.getTopCategory().getOperationType().compareTo(OperationType.Income)==0){
-                operation.setAmount((BigDecimal) decimalFormatter.parse(amountField.getText()));
-            } else {
-                BigDecimal amount = (BigDecimal) decimalFormatter.parse(amountField.getText());
-                operation.setAmount(amount.negate());
-            }
+            catBud.setInitialBudget((BigDecimal) decimalFormatter.parse(initialBudgetField.getText()));
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-        operation.setDate(dateField.getValue());
-
-        operation.setComment(commentField.getText());
     }
 
-    private void updateControls() {
-        BigDecimal amount = operation.getAmount();
-        if(amount != null) {
-            amountField.setText(amount.abs().toString());
+    public void updateControls() {
+        BigDecimal initialBalance = catBud.getInitialBudget();
+        if(initialBalance != null) {
+            initialBudgetField.setText(initialBalance.toString());
         }
-        final Category category = operation.getCategory();
+        final Category category = catBud.getCategory();
         if(category != null) {
             categoryPicker.getRoot().getChildren().stream()
                     .filter(item -> item.getValue() == category.getTopCategory())
@@ -122,12 +99,5 @@ public class OperationEditController extends DialogController {
                 categoryPicker.scrollTo(categoryPicker.getSelectionModel().getSelectedIndex());
             });
         }
-
-        LocalDate date = operation.getDate();
-        if(date != null) {
-            dateField.setValue(date);
-        }
-
-        commentField.setText(operation.getComment());
     }
 }

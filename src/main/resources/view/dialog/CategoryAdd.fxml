@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<BorderPane prefHeight="400.0" prefWidth="600.0" styleClass="light-blue-background" stylesheets="@../../styles/CreationStyles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.dialog.CategoryEditController">
+    <top>
+        <Label alignment="CENTER" prefHeight="54.0" prefWidth="270.0" styleClass="main-label" text="New Category" textAlignment="CENTER" BorderPane.alignment="CENTER" />
+    </top>
+    <center>
+        <GridPane BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label styleClass="form-label" text="Top Category" />
+                <Label styleClass="form-label" text="Name" GridPane.rowIndex="1" />
+                <TextField fx:id="name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1">
+               <children>
+                  <ChoiceBox fx:id="topCategorySelection" prefWidth="300.0" />
+                  <Button fx:id="addTopButton" mnemonicParsing="false" text="+" />
+               </children>
+            </HBox>
+            </children>
+        </GridPane>
+    </center>
+    <left>
+        <Pane prefHeight="200.0" prefWidth="200.0" styleClass="empty-pane" BorderPane.alignment="CENTER" />
+    </left>
+    <right>
+        <Pane prefHeight="200.0" prefWidth="200.0" styleClass="empty-pane" BorderPane.alignment="CENTER" />
+    </right>
+    <bottom>
+        <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" styleClass="button-box" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="confirmButton" alignment="CENTER_RIGHT" styleClass="yellow-background" contentDisplay="TOP" mnemonicParsing="false" text="Create" textAlignment="RIGHT" />
+            </children>
+        </HBox>
+    </bottom>
+</BorderPane>

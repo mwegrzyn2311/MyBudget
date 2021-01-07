@@ -1,24 +1,16 @@
 .main-label {
-    -fx-font-size: 22px;
+    -fx-font-size: 24px;
     -fx-text-alignment: justify;
+    -fx-font-weight: bold;
     -fx-wrap-text: true;
+    -fx-text-fill: #023047;
 }
 .form-label {
     -fx-font-size: 16px;
+    -fx-text-fill: #023047;
+    -fx-font-weight: bold;
 }
 .empty-pane {
     -fx-min-width: 30px;
     -fx-max-width: 30px;
-}
-.button-box {
-    -fx-padding: 10px;
-    -fx-spacing: 10px;
-    -fx-alignment: right;
-}
-.button-box Button {
-    -fx-pref-height: 30px;
-    -fx-font-size: 18px;
-}
-TextField {
-    -fx-pref-height: 20px;
 }

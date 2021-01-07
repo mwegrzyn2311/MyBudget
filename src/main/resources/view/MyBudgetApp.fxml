@@ -1,23 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.controlsfx.glyphfont.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="703.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MyBudgetAppController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="703.0" stylesheets="@../styles/ListViewStyles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MyBudgetAppController">
    <center>
-      <SplitPane dividerPositions="0.23252496433666192" prefHeight="221.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <SplitPane prefHeight="526.0" prefWidth="756.0" BorderPane.alignment="CENTER">
          <items>
-            <VBox maxWidth="180.0" minWidth="180.0" prefHeight="200.0" prefWidth="180.0">
-               <children>
-                   <Button fx:id="accountsLink" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Accounts" />
-                  <Button fx:id="categoriesLink" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Transaction categories" />
-               </children>
-            </VBox>
-            <TabPane fx:id="mainArea" prefHeight="385.0" prefWidth="574.0" tabClosingPolicy="UNAVAILABLE" />
+            <TabPane fx:id="mainArea" prefHeight="481.0" prefWidth="398.0" styleClass="light-blue-background" tabClosingPolicy="UNAVAILABLE" SplitPane.resizableWithParent="false" />
          </items>
       </SplitPane>
    </center>
-   <top>
-      <Pane prefHeight="95.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
-   </top>
+   <left>
+      <Pane prefHeight="482.0" prefWidth="151.0" styleClass="dark-background" BorderPane.alignment="CENTER">
+         <children>
+             <Button fx:id="accountsLink" alignment="BOTTOM_CENTER" contentDisplay="CENTER" layoutX="-1.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="85.0" prefWidth="153.0" styleClass="menu-button-style" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <graphic>
+                  <VBox>
+                     <children>
+                         <Glyph alignment="CENTER" contentDisplay="CENTER" fontFamily="FontAwesome" fontSize="36.0" icon="CREDIT_CARD" prefHeight="55.0" prefWidth="55.0" styleClass="medium-background" textAlignment="CENTER">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </Glyph>
+                        <TextFlow>
+                           <children>
+                              <Text text="Accounts" />
+                           </children>
+                        </TextFlow>
+                     </children>
+                  </VBox>
+               </graphic>
+            </Button>
+            <Button fx:id="categoriesLink" alignment="BOTTOM_CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="85.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="85.0" prefWidth="153.0" styleClass="menu-button-style">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <graphic>
+                  <VBox>
+                     <children>
+                        <Glyph alignment="CENTER" contentDisplay="CENTER" fontFamily="FontAwesome" fontSize="36.0" icon="LIST_UL" prefHeight="55.0" prefWidth="55.0" styleClass="medium-background" />
+                        <TextFlow>
+                           <children>
+                              <Text text="Transaction Categories" />
+                           </children>
+                        </TextFlow>
+                     </children>
+                  </VBox>
+               </graphic>
+            </Button>
+            <Button fx:id="monthlyBudgetsLink" alignment="BOTTOM_CENTER" layoutX="-1.0" layoutY="170.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="85.0" prefWidth="153.0" styleClass="menu-button-style">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <graphic>
+                  <VBox>
+                     <children>
+                        <Glyph alignment="CENTER" contentDisplay="CENTER" fontFamily="FontAwesome" fontSize="36.0" graphicTextGap="0.0" icon="MONEY" prefHeight="55.0" prefWidth="55.0" styleClass="medium-background" />
+                        <TextFlow>
+                           <children>
+                              <Text text="Monthly Budgets" />
+                           </children>
+                        </TextFlow>
+                     </children>
+                  </VBox>
+               </graphic>
+            </Button>
+         </children>
+      </Pane>
+   </left>
 </BorderPane>

@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
@@ -24,11 +25,10 @@ import javax.inject.Inject;
 import javax.persistence.PersistenceException;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class OperationListController extends TabController {
-
     FxmlLoaderService fxmlLoaderService;
     AccountDao accountDao;
     OperationDao operationDao;
@@ -48,16 +48,18 @@ public class OperationListController extends TabController {
     @FXML
     TableColumn<Operation, BigDecimal> amountColumn;
     @FXML
-    TableColumn<Operation, Date> dateColumn;
+    TableColumn<Operation, LocalDate> dateColumn;
     @FXML
     TableColumn<Operation, String> commentColumn;
     @FXML
     TableColumn<Operation, Category> categoryColumn;
 
     @FXML
-    public TextFlow name;
+    TextFlow name;
     @FXML
-    public TextFlow currentBalance;
+    TextFlow currentBalance;
+    @FXML
+    TextFlow initialBalance;
 
     @Inject
     public OperationListController(FxmlLoaderService fxmlLoaderService, AccountDao accountDao, OperationDao operationDao) {
@@ -82,16 +84,15 @@ public class OperationListController extends TabController {
         });
 
         dateColumn.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
-        dateColumn.setCellFactory(column -> new TableCell<Operation, Date>() {
-            private final SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+        dateColumn.setCellFactory(column -> new TableCell<Operation, LocalDate>() {
             @Override
-            protected void updateItem(Date item, boolean empty) {
+            protected void updateItem(LocalDate item, boolean empty) {
                 super.updateItem(item, empty);
                 if(empty) {
                     setText(null);
                 }
                 else {
-                    setText(format.format(item));
+                    setText(item.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
                 }
             }
         });
@@ -137,19 +138,16 @@ public class OperationListController extends TabController {
         if(account != null) {
             operationTableView.refresh();
             name.getChildren().clear();
-            name.getChildren().add(new Text(account.getName()));
+            initialBalance.getChildren().clear();
             currentBalance.getChildren().clear();
-            currentBalance.getChildren().add(new Text(account.getInitialBalance()
-                    .add(account.getOperations().stream().map(Operation::getAmount)
-                            .reduce(BigDecimal.ZERO, BigDecimal::add)).toString()));
+            setTextFloats();
             operationTableView.setItems(account.operationsObservableList());
         }
     }
 
     private void onDeleteAction(ActionEvent event) {
-        for(Operation operation : operationTableView.getSelectionModel().getSelectedItems()) {
-            account.removeOperation(operation);
-        }
+        account.getOperations()
+                .removeAll(operationTableView.getSelectionModel().getSelectedItems());
         accountDao.save(account);
 
         refreshList();
@@ -168,12 +166,12 @@ public class OperationListController extends TabController {
             controller.setModel(operation);
             controller.setConfirmButtonText("Confirm");
 
-            stage.setTitle("Edit operation creation");
+            stage.setTitle("Operation edit");
             stage.showAndWait();
 
             if(controller.isApproved()) {
                 try {
-                    operationDao.update(operation);
+                    accountDao.update(account);
                     refreshList();
                 } catch (PersistenceException e) {
                     e.printStackTrace();
@@ -204,7 +202,6 @@ public class OperationListController extends TabController {
             if(controller.isApproved()) {
                 try {
                     account.addOperation(operation);
-                    operationDao.save(operation);
                     accountDao.save(account);
                     refreshList();
                 } catch (PersistenceException e) {
@@ -221,17 +218,29 @@ public class OperationListController extends TabController {
         Long accountId = (Long) param;
         account = accountDao.findOne(accountId).orElse(null);
         if(account != null) {
-            operationTableView.setItems(account.operationsObservableList());
-            name.getChildren().add(new Text(account.getName()));
-            currentBalance.getChildren().add(new Text(account.getInitialBalance()
-                    .add(account.getOperations().stream().map(Operation::getAmount)
-                            .reduce(BigDecimal.ZERO, BigDecimal::add)).toString()));
-            operationTableView.setItems(account.operationsObservableList());
+            setTextFloats();
         }
     }
 
     @Override
     public void onSelected() {
         refreshList();
+    }
+
+    private void setTextFloats(){
+        Text nameText = new Text(account.getName());
+        nameText.setFill(Color.web("0xffb703"));
+        nameText.setStyle("-fx-font-weight: bold");
+        name.getChildren().add(nameText);
+        Text initialText = new Text(account.getInitialBalance().toString());
+        initialText.setFill(Color.web("0xffb703"));
+        initialText.setStyle("-fx-font-weight: bold");
+        initialBalance.getChildren().add(initialText);
+        Text currentText = new Text(account.getInitialBalance()
+                .add(account.getOperations().stream().map(Operation::getAmount)
+                        .reduce(BigDecimal.ZERO, BigDecimal::add)).toString());
+        currentText.setFill(Color.web("0xffb703"));
+        currentText.setStyle("-fx-font-weight: bold");
+        currentBalance.getChildren().add(currentText);
     }
 }

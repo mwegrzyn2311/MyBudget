@@ -4,11 +4,9 @@ import com.google.inject.Inject;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.layout.GridPane;
 import service.FxmlLoaderService;
 
 import java.io.IOException;
@@ -29,13 +27,18 @@ public class MyBudgetAppController implements Initializable, ITabAreaController 
     @FXML
     private Button accountsLink;
 
+    @FXML
+    private Button categoriesLink;
+
+    @FXML
+    private Button monthlyBudgetsLink;
+
+
     @Inject
     public MyBudgetAppController(final FxmlLoaderService fxmlLoaderService) {
         this.fxmlLoaderService = fxmlLoaderService;
     }
 
-    @FXML
-    private Button categoriesLink;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -48,6 +51,10 @@ public class MyBudgetAppController implements Initializable, ITabAreaController 
         categoriesLink.setOnAction(event->
                 openTab(fxmlLoaderService.getLoader(getClass()
                         .getResource("/view/Categories.fxml")), "Transaction categories"));
+
+        monthlyBudgetsLink.setOnAction(event ->
+            openTab(fxmlLoaderService.getLoader(getClass()
+                    .getResource("/view/MonthlyBudgetList.fxml")), "Monthly budgets"));
 
         openTab(fxmlLoaderService.getLoader(getClass().getResource("/view/AccountList.fxml")), "Account list");
     }
@@ -64,9 +71,10 @@ public class MyBudgetAppController implements Initializable, ITabAreaController 
             } catch(IOException ex) {
                 ex.printStackTrace();
             }
-            TabController tabController = (TabController)loader.getController();
+            TabController tabController = loader.getController();
             tabController.setTabAreaController(this);
             tabController.setTabParameter(param);
+            tabController.onSelected();
 
             mainArea.getTabs().add(newTab);
             openTabs.put(name, newTab);

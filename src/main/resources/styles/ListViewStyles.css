@@ -1,9 +1,65 @@
 .button-box {
-    -fx-padding: 5px;
-    -fx-spacing: 5px;
-    -fx-pref-height: 40px;
+    -fx-padding: 10px;
+    -fx-spacing: 10px;
+    -fx-alignment: right;
 }
 .button-box Button {
-    -fx-pref-height: 40px;
-    -fx-pref-width: 80px;
+    -fx-pref-height: 30px;
+    -fx-font-size: 18px;
+}
+.button-box Button {
+    -fx-cursor: hand;
+}
+.button-box Button:hover, .button-box Button:hover Glyph {
+    -fx-text-fill: #5d5d5d;
+}
+TextField {
+    -fx-pref-height: 20px;
+}
+
+.dark-background{
+    -fx-background-color: #023047;
+}
+
+.yellow-background{
+    -fx-background-color: #ffb703;
+    -fx-text-fill: #023047;
+}
+
+.light-blue-background{
+    -fx-background-color: #8ecae6;
+}
+
+.medium-background{
+    -fx-background-color: #8ecae6;
+}
+
+.menu-button-style{
+    -fx-background-color: #8ecae6;
+    -fx-border-color: #023047;
+    -fx-text-fill: #8ecae6;
+}
+.menu-button-style:hover {
+    -fx-cursor: hand;
+}
+
+.menu-button-style:hover Label, .menu-button-style:hover Glyph {
+    -fx-text-fill: #5d5d5d;
+}
+
+.menu-button-style Button {
+    -fx-pref-width: 153px;
+    -fx-pref-height: 85px;
+}
+.menu-button-style VBox {
+    -fx-alignment: center;
+}
+.menu-button-style TextFlow {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-alignment: center;
+}
+
+.bright-text{
+    -fx-text-fill: #8ecae6;
 }

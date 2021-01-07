@@ -6,21 +6,20 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Access(AccessType.PROPERTY)
 @Table(name = "Operation")
-public class Operation implements Serializable {
+public class Operation {
     private Long id;
 
     private ObjectProperty<Account> account;
 
     private ObjectProperty<BigDecimal> amount;
 
-    private ObjectProperty<Date> date;
+    private ObjectProperty<LocalDate> date;
 
     private StringProperty comment;
 
@@ -35,7 +34,7 @@ public class Operation implements Serializable {
         this.category = new SimpleObjectProperty<>();
     }
 
-    public Operation(Account account, BigDecimal amount, Date date, String comment, Category category) {
+    public Operation(Account account, BigDecimal amount, LocalDate date, String comment, Category category) {
         this.account = new SimpleObjectProperty<>(account);
         this.amount = new SimpleObjectProperty<>(amount);
         this.date = new SimpleObjectProperty<>(date);
@@ -76,14 +75,13 @@ public class Operation implements Serializable {
     }
 
     @Column(name = "date")
-    @Temporal(TemporalType.TIMESTAMP)
-    public Date getDate() {
+    public LocalDate getDate() {
         return date.getValue();
     }
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = new SimpleObjectProperty<>(date);
     }
-    public ObjectProperty<Date> dateProperty() {
+    public ObjectProperty<LocalDate> dateProperty() {
         return date;
     }
 
@@ -98,7 +96,8 @@ public class Operation implements Serializable {
         return comment;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="category_fk")
     public Category getCategory() {return this.category.getValue();}
     public void setCategory(Category category) {this.category=new SimpleObjectProperty<>(category);}
     public ObjectProperty<Category> categoryProperty() {return this.category;}

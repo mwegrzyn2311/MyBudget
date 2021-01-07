@@ -2,7 +2,6 @@
 /shelf/
 /workspace.xml
 # Datasource local storage ignored files
-/../../../../../../../../:\Users\kicaj\Documents\Technologie obiektowe\Projekt\MyBudget\.idea/dataSources/
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
@@ -35,3 +34,4 @@ gradle-app.setting
 # Cache of project
 .gradletasknamecache
 
+*.db
