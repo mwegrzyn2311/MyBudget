@@ -33,6 +33,9 @@ public class MyBudgetAppController implements Initializable, ITabAreaController 
     @FXML
     private Button monthlyBudgetsLink;
 
+    @FXML
+    private Button statisticLink;
+
 
     @Inject
     public MyBudgetAppController(final FxmlLoaderService fxmlLoaderService) {
@@ -55,6 +58,10 @@ public class MyBudgetAppController implements Initializable, ITabAreaController 
         monthlyBudgetsLink.setOnAction(event ->
             openTab(fxmlLoaderService.getLoader(getClass()
                     .getResource("/view/MonthlyBudgetList.fxml")), "Monthly budgets"));
+        statisticLink.setOnAction(event ->
+            openTab(fxmlLoaderService.getLoader(getClass()
+                    .getResource("/view/GraphSelect.fxml")), "Statistic select"));
+
 
         openTab(fxmlLoaderService.getLoader(getClass().getResource("/view/AccountList.fxml")), "Account list");
     }

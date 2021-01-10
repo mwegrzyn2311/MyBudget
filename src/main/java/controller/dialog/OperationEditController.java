@@ -90,15 +90,12 @@ public class OperationEditController extends DialogController {
 
         DecimalFormat decimalFormatter = new DecimalFormat();
         decimalFormatter.setParseBigDecimal(true);
-        try {
-            if(category.getTopCategory().getOperationType().compareTo(OperationType.Income)==0){
-                operation.setAmount((BigDecimal) decimalFormatter.parse(amountField.getText()));
-            } else {
-                BigDecimal amount = (BigDecimal) decimalFormatter.parse(amountField.getText());
-                operation.setAmount(amount.negate());
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
+
+        if(category.getTopCategory().getOperationType().compareTo(OperationType.Income)==0){
+            operation.setAmount(BigDecimal.valueOf(Double.parseDouble(amountField.getText())));
+        } else {
+            BigDecimal amount = BigDecimal.valueOf(Double.parseDouble(amountField.getText()));
+            operation.setAmount(amount.negate());
         }
 
         operation.setDate(dateField.getValue());

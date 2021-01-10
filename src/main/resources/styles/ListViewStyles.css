@@ -63,3 +63,6 @@ TextField {
 .bright-text{
     -fx-text-fill: #8ecae6;
 }
+
+.default-color0.chart-bar { -fx-bar-fill: "red" }
+.default-color1.chart-bar { -fx-bar-fill: "green" }

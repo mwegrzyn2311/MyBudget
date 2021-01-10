@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import org.controlsfx.control.SegmentedButton?>
+
+<BorderPane prefHeight="400.0" prefWidth="705.0" styleClass="light-blue-background" stylesheets="@../../styles/ListViewStyles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.graphs.IncomeOutcomeController">
+    <center>
+    </center>
+    <top>
+        <HBox prefHeight="35.0" prefWidth="340.0" styleClass="button-box, dark-background" BorderPane.alignment="CENTER">
+            <children>
+                <SegmentedButton fx:id="modeSelect" maxWidth="Infinity" prefWidth="200.0">
+                    <buttons>
+                        <ToggleButton fx:id="yearlyToggle" maxWidth="Infinity" mnemonicParsing="false" selected="true" text="Yearly" />
+                        <ToggleButton fx:id="monthlyToggle" maxWidth="Infinity" mnemonicParsing="false" text="Monthly" />
+                    </buttons>
+                </SegmentedButton>
+            <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+            <ComboBox prefWidth="150.0" fx:id="yearSelect"/>
+            </children>
+        </HBox>
+    </top>
+   <center>
+      <BarChart BorderPane.alignment="CENTER" fx:id="chart">
+        <xAxis>
+          <CategoryAxis fx:id="categoryAxis" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis fx:id="valueAxis" side="LEFT" />
+        </yAxis>
+      </BarChart>
+   </center>
+</BorderPane>
