@@ -49,10 +49,8 @@
       <Pane prefHeight="200.0" prefWidth="200.0" styleClass="empty-pane" BorderPane.alignment="CENTER" />
    </right>
    <bottom>
-      <HBox prefHeight="100.0" prefWidth="200.0" styleClass="button-box" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="confirmButton" mnemonicParsing="false" text="Create" styleClass="yellow-background"/>
-         </children>
-      </HBox>
+       <HBox prefHeight="100.0" prefWidth="200.0" styleClass="button-box" BorderPane.alignment="CENTER">
+           <Button fx:id="confirmButton" mnemonicParsing="false" text="Create" styleClass="yellow-background"/>
+       </HBox>
    </bottom>
 </BorderPane>

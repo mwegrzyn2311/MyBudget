@@ -38,7 +38,7 @@ public class CategoriesViewController extends TabController {
     @FXML
     private TreeView<BaseCategory> categoriesView;
 
-    private TreeItem<String> root = new TreeItem<>("Categories");
+    private final TreeItem<String> root = new TreeItem<>("Categories");
 
 
     @Inject

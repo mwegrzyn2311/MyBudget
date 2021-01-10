@@ -13,11 +13,7 @@ import org.controlsfx.validation.Validator;
 import javax.inject.Inject;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 
 public class OperationEditController extends DialogController {
     Operation operation;
@@ -32,9 +28,9 @@ public class OperationEditController extends DialogController {
     @FXML
     TreeView<BaseCategory> categoryPicker;
 
-    ValidationSupport validationSupport = new ValidationSupport();
+    private final ValidationSupport validationSupport = new ValidationSupport();
 
-    final private TopCategoryDao topCategoryDao;
+    private final TopCategoryDao topCategoryDao;
 
     @Inject
     public OperationEditController(TopCategoryDao topCategoryDao){

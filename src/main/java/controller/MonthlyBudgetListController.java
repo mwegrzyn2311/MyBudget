@@ -22,8 +22,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class MonthlyBudgetListController extends TabController {
-    MonthlyBudgetDao monthlyBudgetDao;
-    FxmlLoaderService fxmlLoaderService;
+    private final MonthlyBudgetDao monthlyBudgetDao;
+    private final FxmlLoaderService fxmlLoaderService;
 
     // buttons
     @FXML

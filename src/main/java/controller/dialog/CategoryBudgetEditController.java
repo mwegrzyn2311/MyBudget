@@ -18,7 +18,7 @@ import java.text.ParseException;
 public class CategoryBudgetEditController extends DialogController {
     private CategoryBudget catBud;
 
-    ValidationSupport validationSupport = new ValidationSupport();
+    private final ValidationSupport validationSupport = new ValidationSupport();
 
     @FXML
     TreeView<BaseCategory> categoryPicker;

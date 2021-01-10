@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 public class AccountEditController extends DialogController {
     Account account;
 
-    ValidationSupport validationSupport = new ValidationSupport();
+    private final ValidationSupport validationSupport = new ValidationSupport();
 
     @FXML
     TextField nameField;

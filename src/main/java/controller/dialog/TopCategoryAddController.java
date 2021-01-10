@@ -14,7 +14,7 @@ import java.util.Arrays;
 public class TopCategoryAddController extends DialogController{
     TopCategory topCategory;
 
-    ValidationSupport validationSupport = new ValidationSupport();
+    private final ValidationSupport validationSupport = new ValidationSupport();
 
     @FXML
     public ChoiceBox<OperationType> typeChoice;

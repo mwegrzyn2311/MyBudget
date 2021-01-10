@@ -8,15 +8,12 @@ import model.MonthlyBudget;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
 
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 
 public class MonthlyBudgetEditController extends DialogController {
     private MonthlyBudget mb;
 
-    ValidationSupport validationSupport = new ValidationSupport();
+    private final ValidationSupport validationSupport = new ValidationSupport();
 
     @FXML
     TextField nameField;

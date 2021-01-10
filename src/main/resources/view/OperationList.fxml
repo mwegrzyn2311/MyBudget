@@ -27,53 +27,57 @@
         </TableView>
     </center>
     <top>
-      <Pane prefHeight="86.0" prefWidth="600.0" styleClass="dark-background" BorderPane.alignment="CENTER">
-         <children>
-             <HBox prefHeight="35.0" prefWidth="340.0" styleClass="button-box" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
-                 <children>
-                     <Button fx:id="addButton" mnemonicParsing="false" styleClass="yellow-background" text="Add">
-                         <graphic>
-                             <Glyph fontFamily="FontAwesome" icon="PLUS" />
-                         </graphic>
-                     </Button>
-                     <Button fx:id="editButton" mnemonicParsing="false" styleClass="yellow-background" text="Edit">
-                         <graphic>
-                             <Glyph fontFamily="FontAwesome" icon="EDIT" />
-                         </graphic>
-                     </Button>
-                     <Button fx:id="deleteButton" layoutX="100.0" layoutY="15.0" mnemonicParsing="false" styleClass="yellow-background" text="Delete">
-                         <graphic>
-                             <Glyph fontFamily="FontAwesome" icon="TRASH" />
-                         </graphic>
-                     </Button>
-                 </children>
-             </HBox>
-            <Label layoutX="14.0" layoutY="56.0" prefHeight="18.0" prefWidth="91.0" text="Account Name" styleClass="bright-text">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font></Label>
+        <Pane prefHeight="86.0" prefWidth="600.0" styleClass="dark-background" BorderPane.alignment="CENTER">
+            <HBox prefHeight="35.0" prefWidth="340.0" styleClass="button-box" BorderPane.alignment="CENTER"
+                  xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+                <Button fx:id="addButton" mnemonicParsing="false" styleClass="yellow-background" text="Add">
+                    <graphic>
+                        <Glyph fontFamily="FontAwesome" icon="PLUS"/>
+                    </graphic>
+                </Button>
+                <Button fx:id="editButton" mnemonicParsing="false" styleClass="yellow-background" text="Edit">
+                    <graphic>
+                        <Glyph fontFamily="FontAwesome" icon="EDIT"/>
+                    </graphic>
+                </Button>
+                <Button fx:id="deleteButton" layoutX="100.0" layoutY="15.0" mnemonicParsing="false"
+                        styleClass="yellow-background" text="Delete">
+                    <graphic>
+                        <Glyph fontFamily="FontAwesome" icon="TRASH"/>
+                    </graphic>
+                </Button>
+            </HBox>
+            <Label layoutX="14.0" layoutY="56.0" prefHeight="18.0" prefWidth="91.0" text="Account Name"
+                   styleClass="bright-text">
+                <font>
+                    <Font name="System Bold" size="12.0"/>
+                </font>
+            </Label>
             <Label layoutX="203.0" layoutY="56.0" text="Current balance" styleClass="bright-text">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font></Label>
+                <font>
+                    <Font name="System Bold" size="12.0"/>
+                </font>
+            </Label>
             <TextFlow fx:id="name" layoutX="103.0" layoutY="53.0" prefHeight="23.0" prefWidth="100.0">
-               <padding>
-                  <Insets top="2.0" />
-               </padding></TextFlow>
-            <TextFlow fx:id="currentBalance" layoutX="293.0" layoutY="53.0" prefHeight="23.0" prefWidth="95.0">
-               <padding>
-                  <Insets top="3.0" />
-               </padding></TextFlow>
-            <Label layoutX="388.0" layoutY="56.0" text="Initial balance" styleClass="bright-text">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font></Label>
-            <TextFlow fx:id="initialBalance" layoutX="470.0" layoutY="52.0" prefHeight="23.0" prefWidth="95.0">
-               <padding>
-                  <Insets top="3.0" />
-               </padding>
+                <padding>
+                    <Insets top="2.0"/>
+                </padding>
             </TextFlow>
-         </children>
-      </Pane>
+            <TextFlow fx:id="currentBalance" layoutX="293.0" layoutY="53.0" prefHeight="23.0" prefWidth="95.0">
+                <padding>
+                    <Insets top="3.0"/>
+                </padding>
+            </TextFlow>
+            <Label layoutX="388.0" layoutY="56.0" text="Initial balance" styleClass="bright-text">
+                <font>
+                    <Font name="System Bold" size="12.0"/>
+                </font>
+            </Label>
+            <TextFlow fx:id="initialBalance" layoutX="470.0" layoutY="52.0" prefHeight="23.0" prefWidth="95.0">
+                <padding>
+                    <Insets top="3.0"/>
+                </padding>
+            </TextFlow>
+        </Pane>
     </top>
 </BorderPane>

@@ -5,7 +5,6 @@
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -15,17 +14,17 @@
     <center>
     </center>
     <top>
-        <HBox prefHeight="35.0" prefWidth="340.0" styleClass="button-box, dark-background" BorderPane.alignment="CENTER">
-            <children>
-                <SegmentedButton fx:id="modeSelect" maxWidth="Infinity" prefWidth="200.0">
-                    <buttons>
-                        <ToggleButton fx:id="yearlyToggle" maxWidth="Infinity" mnemonicParsing="false" selected="true" text="Yearly" />
-                        <ToggleButton fx:id="monthlyToggle" maxWidth="Infinity" mnemonicParsing="false" text="Monthly" />
-                    </buttons>
-                </SegmentedButton>
-            <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+        <HBox prefHeight="35.0" prefWidth="340.0" styleClass="button-box, dark-background"
+              BorderPane.alignment="CENTER">
+            <SegmentedButton fx:id="modeSelect" maxWidth="Infinity" prefWidth="200.0">
+                <buttons>
+                    <ToggleButton fx:id="yearlyToggle" maxWidth="Infinity" mnemonicParsing="false" selected="true"
+                                  text="Yearly"/>
+                    <ToggleButton fx:id="monthlyToggle" maxWidth="Infinity" mnemonicParsing="false" text="Monthly"/>
+                </buttons>
+            </SegmentedButton>
+            <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS"/>
             <ComboBox prefWidth="150.0" fx:id="yearSelect"/>
-            </children>
         </HBox>
     </top>
    <center>

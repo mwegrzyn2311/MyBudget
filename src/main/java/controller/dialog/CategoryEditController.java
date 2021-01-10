@@ -23,7 +23,7 @@ public class CategoryEditController extends DialogController{
 
     Category category;
 
-    ValidationSupport validationSupport = new ValidationSupport();
+    private final ValidationSupport validationSupport = new ValidationSupport();
 
     @FXML
     Button addTopButton;

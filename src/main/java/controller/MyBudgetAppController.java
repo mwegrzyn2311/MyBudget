@@ -47,9 +47,9 @@ public class MyBudgetAppController implements Initializable, ITabAreaController 
     public void initialize(URL location, ResourceBundle resources) {
         mainArea.setTabClosingPolicy(TabPane.TabClosingPolicy.ALL_TABS);
 
-        accountsLink.setOnAction(event -> {
-            openTab(fxmlLoaderService.getLoader(getClass().getResource("/view/AccountList.fxml")), "Account list");
-        });
+        accountsLink.setOnAction(event ->
+                openTab(fxmlLoaderService.getLoader(getClass()
+                        .getResource("/view/AccountList.fxml")), "Account list"));
 
         categoriesLink.setOnAction(event->
                 openTab(fxmlLoaderService.getLoader(getClass()

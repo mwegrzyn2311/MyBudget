@@ -6,16 +6,14 @@ import dao.StatisticDao;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
+import javafx.util.Callback;
 import javafx.util.Duration;
 import org.controlsfx.control.SegmentedButton;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class OutcomePerTopCategoryController extends TabController {
     final StatisticDao statisticDao;
@@ -58,9 +56,7 @@ public class OutcomePerTopCategoryController extends TabController {
             monthSelect.setItems(FXCollections.observableList(
                     statisticDao.getAvailableOutcomeHistoryMonthsInYear(
                             yearSelect.getSelectionModel().getSelectedItem()
-                    ).stream()
-                            .map(StatisticDao::mapMonthToName)
-                            .collect(Collectors.toList())
+                    )
             ));
             if(monthSelect.getSelectionModel().isEmpty()) {
                 monthSelect.getSelectionModel().selectFirst();
@@ -79,6 +75,37 @@ public class OutcomePerTopCategoryController extends TabController {
         pieChart.setTitle("Outcome per top category");
         pieChart.setLabelsVisible(false);
 
+        monthSelect.setCellFactory(new Callback<>() {
+
+            @Override
+            public ListCell<String> call(ListView<String> param) {
+                return new ListCell<>() {
+
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item != null) {
+                            setText(StatisticDao.mapMonthToName(item));
+                        } else {
+                            setText(null);
+                        }
+                    }
+                };
+            }
+        });
+
+        monthSelect.setButtonCell(new ListCell<>() {
+
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item != null) {
+                    setText(StatisticDao.mapMonthToName(item));
+                } else {
+                    setText(null);
+                }
+            }
+        });
     }
 
     void setupChart(Map<String, BigDecimal> stats) {
@@ -104,14 +131,16 @@ public class OutcomePerTopCategoryController extends TabController {
     private void update() {
         pieChart.getData().clear();
         if(yearlyToggle.isSelected()) {
-            setupChart(statisticDao.getTopCategoryOutcomeInYear(
+            setupChart(statisticDao.getPerTopCategoryOutcomeInYear(
                     yearSelect.getSelectionModel().getSelectedItem()
             ));
         } else {
-            setupChart(statisticDao.getTopCategoryOutcomeInMonth(
-                    yearSelect.getSelectionModel().getSelectedItem(),
-                    StatisticDao.mapMonthNameToMonth(monthSelect.getSelectionModel().getSelectedItem())
-            ));
+            setupChart(
+                    statisticDao.getTopCategoryOutcomeInMonth(
+                        yearSelect.getSelectionModel().getSelectedItem(),
+                        monthSelect.getSelectionModel().getSelectedItem()
+                    )
+            );
         }
     }
 
@@ -124,9 +153,7 @@ public class OutcomePerTopCategoryController extends TabController {
             monthSelect.setItems(FXCollections.observableList(
                     statisticDao.getAvailableOutcomeHistoryMonthsInYear(
                             yearSelect.getSelectionModel().getSelectedItem()
-                    ).stream()
-                            .map(StatisticDao::mapMonthToName)
-                            .collect(Collectors.toList())
+                    )
             ));
             if(monthSelect.getSelectionModel().isEmpty()) {
                 monthSelect.getSelectionModel().selectFirst();

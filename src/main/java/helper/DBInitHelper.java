@@ -30,9 +30,7 @@ public class DBInitHelper {
         for(int i = 0; i < topCategories.length; ++i)
         {
             TopCategory topCategory = new TopCategory(topCategories[i], categoryTypes[i]);
-            Arrays.stream(categories[i]).forEach(s ->  {
-                topCategory.addChildCategory(new Category(s, topCategory));
-            });
+            Arrays.stream(categories[i]).forEach(s -> topCategory.addChildCategory(new Category(s, topCategory)));
             topCategoryDao.save(topCategory);
         }
     }

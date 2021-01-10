@@ -23,36 +23,36 @@
         <Pane prefHeight="200.0" prefWidth="200.0" styleClass="empty-pane" BorderPane.alignment="CENTER" />
     </right>
     <bottom>
-        <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="0.0" prefWidth="600.0" styleClass="button-box" BorderPane.alignment="CENTER">
-            <children>
-                <Button fx:id="confirmButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Create" styleClass="yellow-background"/>
-            </children>
+        <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="0.0" prefWidth="600.0" styleClass="button-box"
+              BorderPane.alignment="CENTER">
+            <Button fx:id="confirmButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
+                    text="Create" styleClass="yellow-background"/>
         </HBox>
     </bottom>
    <center>
-      <GridPane BorderPane.alignment="CENTER">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Label text="Name" GridPane.halignment="CENTER">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label text="Type" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <ChoiceBox fx:id="typeChoice" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <TextField fx:id="nameChoice" maxWidth="150.0" prefHeight="26.0" prefWidth="130.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-         </children>
-      </GridPane>
+       <GridPane BorderPane.alignment="CENTER">
+           <columnConstraints>
+               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+           </columnConstraints>
+           <rowConstraints>
+               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+           </rowConstraints>
+           <Label text="Name" GridPane.halignment="CENTER">
+              <font>
+                  <Font size="18.0"/>
+              </font>
+           </Label>
+           <Label text="Type" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+              <font>
+                  <Font size="18.0"/>
+              </font>
+           </Label>
+           <ChoiceBox fx:id="typeChoice" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER"
+                      GridPane.rowIndex="1"/>
+           <TextField fx:id="nameChoice" maxWidth="150.0" prefHeight="26.0" prefWidth="130.0" GridPane.columnIndex="1"
+                      GridPane.halignment="CENTER"/>
+       </GridPane>
    </center>
 </BorderPane>

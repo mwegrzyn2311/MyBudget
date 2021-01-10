@@ -29,11 +29,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class OperationListController extends TabController {
-    FxmlLoaderService fxmlLoaderService;
-    AccountDao accountDao;
-    OperationDao operationDao;
+    private final FxmlLoaderService fxmlLoaderService;
+    private final AccountDao accountDao;
+    private final OperationDao operationDao;
 
-    Account account;
+    private Account account;
 
     @FXML
     Button addButton;
@@ -71,27 +71,23 @@ public class OperationListController extends TabController {
     @FXML
     private void initialize() {
         amountColumn.setCellValueFactory(cellData -> cellData.getValue().amountProperty());
-        amountColumn.setCellFactory(column -> {
-            TableCell<Operation, BigDecimal> cell = new TableCell<>() {
-                @Override
-                protected void updateItem(BigDecimal item, boolean empty) {
-                    super.updateItem(item, empty);
-                    setText(empty ? "" : getItem().toString());
-                    setGraphic(null);
-                }
-            };
-            return cell;
+        amountColumn.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(BigDecimal item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty ? "" : getItem().toString());
+                setGraphic(null);
+            }
         });
 
         dateColumn.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
-        dateColumn.setCellFactory(column -> new TableCell<Operation, LocalDate>() {
+        dateColumn.setCellFactory(column -> new TableCell<>() {
             @Override
             protected void updateItem(LocalDate item, boolean empty) {
                 super.updateItem(item, empty);
-                if(empty) {
+                if (empty) {
                     setText(null);
-                }
-                else {
+                } else {
                     setText(item.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
                 }
             }
@@ -99,22 +95,20 @@ public class OperationListController extends TabController {
         commentColumn.setCellValueFactory(cellData -> cellData.getValue().commentProperty());
 
         categoryColumn.setCellValueFactory(cellData -> cellData.getValue().categoryProperty());
-        categoryColumn.setCellFactory(column -> {
-            return new TableCell<Operation, Category>() {
-                @Override
-                protected void updateItem(Category item, boolean empty) {
-                    super.updateItem(item, empty);
-                    setText(empty ? "" : getItem().getTopCategory().getName()+"/"+getItem().getName());
-                    setGraphic(null);
-                    TableRow<Operation> currentRow = getTableRow();
-                    if (!isEmpty()) {
-                        int comparison = item.getTopCategory().getOperationType().compareTo(OperationType.Income);
-                        if(comparison == 0)
-                            currentRow.setStyle("-fx-background-color:lightgreen");
-                        else currentRow.setStyle("-fx-background-color:orangered");
-                    }
+        categoryColumn.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(Category item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty ? "" : getItem().getTopCategory().getName() + "/" + getItem().getName());
+                setGraphic(null);
+                TableRow<Operation> currentRow = getTableRow();
+                if (!isEmpty()) {
+                    int comparison = item.getTopCategory().getOperationType().compareTo(OperationType.Income);
+                    if (comparison == 0)
+                        currentRow.setStyle("-fx-background-color:lightgreen");
+                    else currentRow.setStyle("-fx-background-color:orangered");
                 }
-            };
+            }
         });
 
         deleteButton.disableProperty().bind(

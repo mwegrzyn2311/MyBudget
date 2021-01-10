@@ -10,19 +10,18 @@
     <center>
         <GridPane BorderPane.alignment="CENTER">
             <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="75.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0"
+                                   prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="75.0" prefWidth="100.0"/>
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
             </rowConstraints>
-            <children>
-                <Label styleClass="form-label" text="Name" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                <Label styleClass="form-label" text="Date" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                <TextField fx:id="nameField" GridPane.columnIndex="1" />
-                <DatePicker fx:id="dateField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            </children>
+            <Label styleClass="form-label" text="Name" GridPane.halignment="CENTER" GridPane.valignment="CENTER"/>
+            <Label styleClass="form-label" text="Date" GridPane.halignment="CENTER" GridPane.rowIndex="1"/>
+            <TextField fx:id="nameField" GridPane.columnIndex="1"/>
+            <DatePicker fx:id="dateField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
         </GridPane>
     </center>
     <left>
@@ -33,9 +32,7 @@
     </right>
     <bottom>
         <HBox prefHeight="100.0" prefWidth="200.0" styleClass="button-box" BorderPane.alignment="CENTER">
-            <children>
-                <Button fx:id="confirmButton" mnemonicParsing="false" text="Create" styleClass="yellow-background"/>
-            </children>
+            <Button fx:id="confirmButton" mnemonicParsing="false" text="Create" styleClass="yellow-background"/>
         </HBox>
     </bottom>
 </BorderPane>
