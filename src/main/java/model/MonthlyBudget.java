@@ -104,10 +104,6 @@ public class MonthlyBudget {
     private LocalDate calculateLastDay() {
         LocalDate first = this.firstDay.get();
         return first.plusMonths(1).minusDays(1);
-//        Calendar c = Calendar.getInstance();
-//        c.setTime(firstDay.getValue());
-//        c.add(Calendar.MONTH, 1);
-//        c.add(Calendar.DAY_OF_MONTH, -1);
     }
 
     public BigDecimal initialBalance() {

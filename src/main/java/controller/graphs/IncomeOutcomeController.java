@@ -3,29 +3,22 @@ package controller.graphs;
 import com.google.inject.Inject;
 import controller.TabController;
 import dao.StatisticDao;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.SingleSelectionModel;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import org.controlsfx.control.SegmentedButton;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Locale;
 import java.util.Map;
-import java.util.function.ToIntFunction;
 
 public class IncomeOutcomeController extends TabController {
     final StatisticDao statisticDao;
@@ -51,11 +44,6 @@ public class IncomeOutcomeController extends TabController {
     @FXML
     NumberAxis valueAxis;
 
-    enum Mode {
-        YEARLY, MONTHLY
-    }
-
-    private Mode mode = Mode.YEARLY;
 
     @Inject
     public IncomeOutcomeController(final StatisticDao statisticDao) {
@@ -66,15 +54,10 @@ public class IncomeOutcomeController extends TabController {
     public void initialize() {
         modeSelect.getToggleGroup().selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
             yearSelect.setVisible(monthlyToggle.isSelected());
-            if(monthlyToggle.isSelected()) {
-                mode = Mode.MONTHLY;
-            } else {
-                mode = Mode.YEARLY;
-            }
             update();
         });
 
-        yearSelect.setOnAction((value) -> update());
+        yearSelect.valueProperty().addListener((observable) -> update());
         chart.setAnimated(false);
     }
 
@@ -109,8 +92,9 @@ public class IncomeOutcomeController extends TabController {
         outcome.setName("Outcome");
 
         for(String month: monthlyStats.keySet()) {
-            income.getData().add(new XYChart.Data<>(month, monthlyStats.get(month).income));
-            outcome.getData().add(new XYChart.Data<>(month, monthlyStats.get(month).outcome.abs()));
+            String monthName = StatisticDao.mapMonthToName(month);
+            income.getData().add(new XYChart.Data<>(monthName, monthlyStats.get(month).income));
+            outcome.getData().add(new XYChart.Data<>(monthName, monthlyStats.get(month).outcome.abs()));
         }
         Comparator<XYChart.Data<String, BigDecimal>> monthComparator = new Comparator<>() {
             @Override
@@ -132,7 +116,7 @@ public class IncomeOutcomeController extends TabController {
     }
 
     private void update() {
-        if(mode == Mode.YEARLY) {
+        if(yearlyToggle.isSelected()) {
             chart.getData().clear();
             setupChartYearly();
         } else {
@@ -141,9 +125,9 @@ public class IncomeOutcomeController extends TabController {
         }
     }
 
-        @Override
+    @Override
     public void onSelected() {
-            yearSelect.setItems(FXCollections.observableList(statisticDao.availableHistoryYears()));
+            yearSelect.setItems(FXCollections.observableList(statisticDao.getAvailableHistoryYears()));
             if(yearSelect.getSelectionModel().isEmpty()) {
                 yearSelect.getSelectionModel().selectFirst();
             }

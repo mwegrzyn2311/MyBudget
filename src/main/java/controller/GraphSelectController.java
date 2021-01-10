@@ -26,6 +26,12 @@ public class GraphSelectController extends TabController{
                     getClass().getResource("/view/graphs/IncomeOutcome.fxml")
                 ), "Income/Outcome"
         ));
+
+        outcomeStatisticButton.setOnAction(event -> tabAreaController.openTab(
+                fxmlLoaderService.getLoader(
+                        getClass().getResource("/view/graphs/OutcomePerTopCategory.fxml")
+                ), "Outcome per top category"
+        ));
     }
 
     @Override

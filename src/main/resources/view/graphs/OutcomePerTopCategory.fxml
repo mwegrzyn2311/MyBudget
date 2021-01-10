@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import org.controlsfx.control.SegmentedButton?>
+
+<BorderPane prefHeight="400.0" prefWidth="705.0" styleClass="light-blue-background" stylesheets="@../../styles/ListViewStyles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.graphs.OutcomePerTopCategoryController">
+    <center>
+    </center>
+    <top>
+        <HBox prefHeight="35.0" prefWidth="340.0" styleClass="button-box, dark-background" BorderPane.alignment="CENTER">
+            <children>
+                <SegmentedButton fx:id="modeSelect" maxWidth="Infinity" prefWidth="200.0">
+                    <buttons>
+                        <ToggleButton fx:id="yearlyToggle" maxWidth="Infinity" mnemonicParsing="false" selected="true" text="Yearly" />
+                        <ToggleButton fx:id="monthlyToggle" maxWidth="Infinity" mnemonicParsing="false" text="Monthly" />
+                    </buttons>
+                </SegmentedButton>
+                <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                <ComboBox fx:id="yearSelect" prefWidth="150.0" />
+                <ComboBox fx:id="monthSelect" prefWidth="150.0" />
+            </children>
+        </HBox>
+    </top>
+    <center>
+
+    </center>
+   <center>
+      <PieChart BorderPane.alignment="CENTER" fx:id="pieChart"/>
+   </center>
+</BorderPane>
