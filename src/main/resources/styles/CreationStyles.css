@@ -14,3 +14,14 @@
     -fx-min-width: 30px;
     -fx-max-width: 30px;
 }
+
+.yellow-button{
+    -fx-background-color: #ffb703;
+    -fx-text-fill: #023047;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.light-blue-background{
+    -fx-background-color: #8ecae6;
+}

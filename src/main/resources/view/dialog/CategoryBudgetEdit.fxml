@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 
 <BorderPane prefHeight="400.0" prefWidth="600.0" styleClass="light-blue-background" stylesheets="@../../styles/CreationStyles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.dialog.CategoryBudgetEditController">
     <top>
@@ -34,7 +43,10 @@
     <bottom>
         <HBox prefHeight="100.0" prefWidth="200.0" styleClass="button-box" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="confirmButton" mnemonicParsing="false" text="Create" styleClass="yellow-background"/>
+                <Button fx:id="confirmButton" mnemonicParsing="false" styleClass="yellow-button" text="Create">
+               <HBox.margin>
+                  <Insets left="60.0" top="20.0" />
+               </HBox.margin></Button>
             </children>
         </HBox>
     </bottom>

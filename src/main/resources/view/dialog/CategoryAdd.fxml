@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -47,7 +48,10 @@
     <bottom>
         <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" styleClass="button-box" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="confirmButton" alignment="CENTER_RIGHT" styleClass="yellow-background" contentDisplay="TOP" mnemonicParsing="false" text="Create" textAlignment="RIGHT" />
+                <Button fx:id="confirmButton" alignment="CENTER_RIGHT" contentDisplay="TOP" mnemonicParsing="false" styleClass="yellow-button" text="Create" textAlignment="RIGHT">
+               <HBox.margin>
+                  <Insets right="30.0" top="20.0" />
+               </HBox.margin></Button>
             </children>
         </HBox>
     </bottom>
