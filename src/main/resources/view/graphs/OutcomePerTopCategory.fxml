@@ -12,18 +12,18 @@
     <center>
     </center>
     <top>
-        <HBox prefHeight="35.0" prefWidth="340.0" styleClass="button-box, dark-background" BorderPane.alignment="CENTER">
-            <children>
-                <SegmentedButton fx:id="modeSelect" maxWidth="Infinity" prefWidth="200.0">
-                    <buttons>
-                        <ToggleButton fx:id="yearlyToggle" maxWidth="Infinity" mnemonicParsing="false" selected="true" text="Yearly" />
-                        <ToggleButton fx:id="monthlyToggle" maxWidth="Infinity" mnemonicParsing="false" text="Monthly" />
-                    </buttons>
-                </SegmentedButton>
-                <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                <ComboBox fx:id="yearSelect" prefWidth="150.0" />
-                <ComboBox fx:id="monthSelect" prefWidth="150.0" />
-            </children>
+        <HBox prefHeight="35.0" prefWidth="340.0" styleClass="button-box, dark-background"
+              BorderPane.alignment="CENTER">
+            <SegmentedButton fx:id="modeSelect" maxWidth="Infinity" prefWidth="200.0">
+                <buttons>
+                    <ToggleButton fx:id="yearlyToggle" maxWidth="Infinity" mnemonicParsing="false" selected="true"
+                                  text="Yearly"/>
+                    <ToggleButton fx:id="monthlyToggle" maxWidth="Infinity" mnemonicParsing="false" text="Monthly"/>
+                </buttons>
+            </SegmentedButton>
+            <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS"/>
+            <ComboBox fx:id="yearSelect" prefWidth="150.0"/>
+            <ComboBox fx:id="monthSelect" prefWidth="150.0"/>
         </HBox>
     </top>
     <center>

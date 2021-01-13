@@ -10,60 +10,58 @@
 <?import javafx.scene.text.TextFlow?>
 <?import org.controlsfx.glyphfont.Glyph?>
 
-<Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="346.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GraphSelectController">
-   <children>
-      <FlowPane alignment="CENTER" prefHeight="400.0" prefWidth="705.0">
-         <children>
-             <Button fx:id="incomeOutcomeStatisticButton" alignment="BOTTOM_CENTER" layoutX="-1.0" layoutY="170.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="85.0" prefWidth="153.0" styleClass="menu-button-style">
-                 <font>
-                     <Font name="System Bold" size="13.0" />
-                 </font>
-                 <graphic>
-                     <VBox>
-                         <children>
-                             <Glyph alignment="CENTER" contentDisplay="CENTER" fontFamily="FontAwesome" fontSize="36.0" graphicTextGap="0.0" icon="BAR_CHART" prefHeight="55.0" prefWidth="55.0" styleClass="medium-background" />
-                             <TextFlow>
-                                 <children>
-                                     <Text text="Income/Outcome" />
-                                 </children>
-                             </TextFlow>
-                         </children>
-                     </VBox>
-                 </graphic>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <FlowPane.margin>
-                  <Insets right="10.0" />
-               </FlowPane.margin>
-             </Button>
-             <Button fx:id="outcomeStatisticButton" alignment="BOTTOM_CENTER" layoutX="-1.0" layoutY="170.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="85.0" prefWidth="153.0" styleClass="menu-button-style">
-                 <font>
-                     <Font name="System Bold" size="13.0" />
-                 </font>
-                 <graphic>
-                     <VBox>
-                         <children>
-                             <Glyph alignment="CENTER" contentDisplay="CENTER" fontFamily="FontAwesome" fontSize="36.0" graphicTextGap="0.0" icon="PIE_CHART" prefHeight="55.0" prefWidth="55.0" styleClass="medium-background" />
-                             <TextFlow>
-                                 <children>
-                                     <Text text="Outcome" />
-                                 </children>
-                             </TextFlow>
-                         </children>
-                     </VBox>
-                 </graphic>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <FlowPane.margin>
-                  <Insets left="10.0" />
-               </FlowPane.margin>
-             </Button>
-         </children>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </FlowPane>
-   </children>
+<Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="346.0" prefWidth="600.0"
+      xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controller.GraphSelectController">
+    <FlowPane alignment="CENTER" prefHeight="400.0" prefWidth="705.0">
+        <opaqueInsets>
+            <Insets/>
+        </opaqueInsets>
+        <Button fx:id="incomeOutcomeStatisticButton" alignment="BOTTOM_CENTER" layoutX="-1.0" layoutY="170.0"
+                maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                prefHeight="85.0" prefWidth="153.0" styleClass="menu-button-style">
+            <font>
+                <Font name="System Bold" size="13.0"/>
+            </font>
+            <graphic>
+                <VBox>
+                    <Glyph alignment="CENTER" contentDisplay="CENTER" fontFamily="FontAwesome" fontSize="36.0"
+                           graphicTextGap="0.0" icon="BAR_CHART" prefHeight="55.0" prefWidth="55.0"
+                           styleClass="medium-background"/>
+                    <TextFlow>
+                        <Text text="Income/Outcome"/>
+                    </TextFlow>
+                </VBox>
+            </graphic>
+            <opaqueInsets>
+                <Insets/>
+            </opaqueInsets>
+            <FlowPane.margin>
+                <Insets right="10.0"/>
+            </FlowPane.margin>
+        </Button>
+        <Button fx:id="outcomeStatisticButton" alignment="BOTTOM_CENTER" layoutX="-1.0" layoutY="170.0"
+                maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                prefHeight="85.0" prefWidth="153.0" styleClass="menu-button-style">
+            <font>
+                <Font name="System Bold" size="13.0"/>
+            </font>
+            <graphic>
+                <VBox>
+                    <Glyph alignment="CENTER" contentDisplay="CENTER" fontFamily="FontAwesome" fontSize="36.0"
+                           graphicTextGap="0.0" icon="PIE_CHART" prefHeight="55.0" prefWidth="55.0"
+                           styleClass="medium-background"/>
+                    <TextFlow>
+                        <Text text="Outcome"/>
+                    </TextFlow>
+                </VBox>
+            </graphic>
+            <opaqueInsets>
+                <Insets/>
+            </opaqueInsets>
+            <FlowPane.margin>
+                <Insets left="10.0"/>
+            </FlowPane.margin>
+        </Button>
+    </FlowPane>
 </Pane>

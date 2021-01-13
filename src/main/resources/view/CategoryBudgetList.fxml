@@ -11,7 +11,7 @@
 <?import javafx.scene.text.TextFlow?>
 <?import org.controlsfx.glyphfont.Glyph?>
 
-<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="346.0" prefWidth="600.0" stylesheets="@../styles/GraphStyles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CategoryBudgetListController">
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="346.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CategoryBudgetListController">
     <center>
         <TableView fx:id="categoryBudgetTableView" prefHeight="200.0" prefWidth="600.0">
             <columns>
@@ -26,32 +26,32 @@
     </center>
     <top>
         <Pane prefHeight="86.0" prefWidth="600.0" styleClass="dark-background" BorderPane.alignment="CENTER">
-            <children>
-                <HBox prefHeight="35.0" prefWidth="340.0" styleClass="button-box, dark-background" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
-                    <children>
-                        <Button fx:id="addButton" mnemonicParsing="false" styleClass="yellow-background" text="Add">
-                            <graphic>
-                                <Glyph fontFamily="FontAwesome" icon="PLUS" />
-                            </graphic>
-                        </Button>
-                        <Button fx:id="editButton" mnemonicParsing="false" styleClass="yellow-background" text="Edit">
-                            <graphic>
-                                <Glyph fontFamily="FontAwesome" icon="EDIT" />
-                            </graphic>
-                        </Button>
-                        <Button fx:id="deleteButton" layoutX="100.0" layoutY="15.0" mnemonicParsing="false" styleClass="yellow-background" text="Delete">
-                            <graphic>
-                                <Glyph fontFamily="FontAwesome" icon="TRASH" />
-                            </graphic>
-                        </Button>
-                    </children>
-                </HBox>
-                <Label layoutX="82.0" layoutY="56.0" prefHeight="18.0" prefWidth="138.0" text="Monthly Budget Name" textFill="#8ecae6">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font></Label>
-                <TextFlow fx:id="mbName" layoutX="254.0" layoutY="53.0" opacity="0.66" prefHeight="23.0" prefWidth="334.0" />
-            </children>
+            <HBox prefHeight="35.0" prefWidth="340.0" styleClass="button-box, dark-background"
+                  BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+                <Button fx:id="addButton" mnemonicParsing="false" styleClass="yellow-background" text="Add">
+                    <graphic>
+                        <Glyph fontFamily="FontAwesome" icon="PLUS"/>
+                    </graphic>
+                </Button>
+                <Button fx:id="editButton" mnemonicParsing="false" styleClass="yellow-background" text="Edit">
+                    <graphic>
+                        <Glyph fontFamily="FontAwesome" icon="EDIT"/>
+                    </graphic>
+                </Button>
+                <Button fx:id="deleteButton" layoutX="100.0" layoutY="15.0" mnemonicParsing="false"
+                        styleClass="yellow-background" text="Delete">
+                    <graphic>
+                        <Glyph fontFamily="FontAwesome" icon="TRASH"/>
+                    </graphic>
+                </Button>
+            </HBox>
+            <Label layoutX="82.0" layoutY="56.0" prefHeight="18.0" prefWidth="138.0" text="Monthly Budget Name"
+                   textFill="#8ecae6">
+                <font>
+                    <Font name="System Bold" size="12.0"/>
+                </font>
+            </Label>
+            <TextFlow fx:id="mbName" layoutX="254.0" layoutY="53.0" opacity="0.66" prefHeight="23.0" prefWidth="334.0"/>
         </Pane>
     </top>
 </BorderPane>

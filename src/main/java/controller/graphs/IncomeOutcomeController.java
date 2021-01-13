@@ -11,6 +11,8 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.Tooltip;
+import javafx.util.Duration;
 import org.controlsfx.control.SegmentedButton;
 
 import java.math.BigDecimal;
@@ -62,12 +64,11 @@ public class IncomeOutcomeController extends TabController {
     }
 
     void setupChartYearly() {
-        Map<String, StatisticDao.IncomeOutcome> stats = statisticDao.getYearlyStatistic();
+        Map<String, StatisticDao.IncomeOutcome> stats = statisticDao.getYearlyIncomeOutcome();
         XYChart.Series<String, BigDecimal> income = new XYChart.Series<>();
         XYChart.Series<String, BigDecimal> outcome = new XYChart.Series<>();
 
         income.setName("Income");
-
         outcome.setName("Outcome");
 
         for(String year: stats.keySet()) {
@@ -83,12 +84,11 @@ public class IncomeOutcomeController extends TabController {
     }
 
     void setupChartMonthly(String year) {
-        Map<String, StatisticDao.IncomeOutcome> monthlyStats = statisticDao.getMonthlyStatistic(year);
+        Map<String, StatisticDao.IncomeOutcome> monthlyStats = statisticDao.getMonthlyIncomeOutcome(year);
         XYChart.Series<String, BigDecimal> income = new XYChart.Series<>();
         XYChart.Series<String, BigDecimal> outcome = new XYChart.Series<>();
 
         income.setName("Income");
-
         outcome.setName("Outcome");
 
         for(String month: monthlyStats.keySet()) {
@@ -96,15 +96,12 @@ public class IncomeOutcomeController extends TabController {
             income.getData().add(new XYChart.Data<>(monthName, monthlyStats.get(month).income));
             outcome.getData().add(new XYChart.Data<>(monthName, monthlyStats.get(month).outcome.abs()));
         }
-        Comparator<XYChart.Data<String, BigDecimal>> monthComparator = new Comparator<>() {
-            @Override
-            public int compare(XYChart.Data<String, BigDecimal> lhs, XYChart.Data<String, BigDecimal> rhs) {
-                try {
-                    SimpleDateFormat fmt = new SimpleDateFormat("MMM", Locale.US );
-                    return fmt.parse(lhs.getXValue()).compareTo(fmt.parse(rhs.getXValue()));
-                } catch (ParseException ex) {
-                    return lhs.getXValue().compareTo(rhs.getXValue());
-                }
+        Comparator<XYChart.Data<String, BigDecimal>> monthComparator = (lhs, rhs) -> {
+            try {
+                SimpleDateFormat fmt = new SimpleDateFormat("MMM", Locale.US );
+                return fmt.parse(lhs.getXValue()).compareTo(fmt.parse(rhs.getXValue()));
+            } catch (ParseException ex) {
+                return lhs.getXValue().compareTo(rhs.getXValue());
             }
         };
 
@@ -115,6 +112,21 @@ public class IncomeOutcomeController extends TabController {
         chart.getData().add(income);
     }
 
+    private void installTooltips() {
+        for (XYChart.Series<String, BigDecimal> series : chart.getData()) {
+            for (XYChart.Data<String, BigDecimal> item : series.getData()) {
+                final Tooltip tooltip = new Tooltip(
+                        series.getName() + " " + item.getXValue() + "\n"
+                                + "Amount: " + item.getYValue()
+                );
+                tooltip.setShowDelay(new Duration(0));
+                Tooltip.install(
+                        item.getNode(), tooltip
+                );
+            }
+        }
+    }
+
     private void update() {
         if(yearlyToggle.isSelected()) {
             chart.getData().clear();
@@ -123,6 +135,7 @@ public class IncomeOutcomeController extends TabController {
             chart.getData().clear();
             setupChartMonthly(yearSelect.getSelectionModel().getSelectedItem());
         }
+        installTooltips();
     }
 
     @Override

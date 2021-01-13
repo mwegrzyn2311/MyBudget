@@ -24,9 +24,9 @@ import java.io.IOException;
 import java.math.BigDecimal;
 
 public class CategoryBudgetListController extends TabController {
-    FxmlLoaderService fxmlLoaderService;
-    MonthlyBudgetDao monthlyBudgetDao;
-    CategoryBudgetDao categoryBudgetDao;
+    private final FxmlLoaderService fxmlLoaderService;
+    private final MonthlyBudgetDao monthlyBudgetDao;
+    private final CategoryBudgetDao categoryBudgetDao;
 
     MonthlyBudget mb;
 
@@ -65,7 +65,7 @@ public class CategoryBudgetListController extends TabController {
 
         initialBalanceCol.setCellValueFactory(cellData -> cellData.getValue().initialBudgetProperty());
         initialBalanceCol.setCellFactory(column -> {
-            TableCell<CategoryBudget, BigDecimal> cell = new TableCell<>() {
+            return new TableCell<CategoryBudget, BigDecimal>() {
                 @Override
                 protected void updateItem(BigDecimal item, boolean empty) {
                     super.updateItem(item, empty);
@@ -73,26 +73,22 @@ public class CategoryBudgetListController extends TabController {
                     setGraphic(null);
                 }
             };
-            return cell;
         });
         currBalanceCol.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCurrentBalance()));
-        currBalanceCol.setCellFactory(column -> {
-            TableCell<CategoryBudget, BigDecimal> cell = new TableCell<>() {
-                @Override
-                protected void updateItem(BigDecimal item, boolean empty) {
-                    super.updateItem(item, empty);
-                    setText(empty ? "" : getItem().toString());
-                    setGraphic(null);
-                    TableRow<CategoryBudget> currentRow = getTableRow();
-                    if (!isEmpty()) {
-                        int comparison = item.compareTo(BigDecimal.ZERO);
-                        if(comparison >= 0)
-                            currentRow.setStyle("-fx-background-color:lightgreen");
-                        else currentRow.setStyle("-fx-background-color:orangered");
-                    }
+        currBalanceCol.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(BigDecimal item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty ? "" : getItem().toString());
+                setGraphic(null);
+                TableRow<CategoryBudget> currentRow = getTableRow();
+                if (!isEmpty()) {
+                    int comparison = item.compareTo(BigDecimal.ZERO);
+                    if (comparison >= 0)
+                        currentRow.setStyle("-fx-background-color:lightgreen");
+                    else currentRow.setStyle("-fx-background-color:orangered");
                 }
-            };
-            return cell;
+            }
         });
 
 

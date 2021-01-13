@@ -22,24 +22,24 @@
       </TableView>
    </center>
    <top>
-       <HBox prefHeight="35.0" prefWidth="340.0" styleClass="button-box, dark-background" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
-           <children>
-               <Button fx:id="addButton" mnemonicParsing="false" styleClass="yellow-background" text="Add">
-                   <graphic>
-                       <Glyph fontFamily="FontAwesome" icon="PLUS" />
-                   </graphic>
-               </Button>
-               <Button fx:id="editButton" mnemonicParsing="false" styleClass="yellow-background" text="Edit">
-                   <graphic>
-                       <Glyph fontFamily="FontAwesome" icon="EDIT" />
-                   </graphic>
-               </Button>
-               <Button fx:id="deleteButton" layoutX="100.0" layoutY="15.0" mnemonicParsing="false" styleClass="yellow-background" text="Delete">
-                   <graphic>
-                       <Glyph fontFamily="FontAwesome" icon="TRASH" />
-                   </graphic>
-               </Button>
-           </children>
+       <HBox prefHeight="35.0" prefWidth="340.0" styleClass="button-box, dark-background" BorderPane.alignment="CENTER"
+             xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+           <Button fx:id="addButton" mnemonicParsing="false" styleClass="yellow-background" text="Add">
+               <graphic>
+                   <Glyph fontFamily="FontAwesome" icon="PLUS"/>
+               </graphic>
+           </Button>
+           <Button fx:id="editButton" mnemonicParsing="false" styleClass="yellow-background" text="Edit">
+               <graphic>
+                   <Glyph fontFamily="FontAwesome" icon="EDIT"/>
+               </graphic>
+           </Button>
+           <Button fx:id="deleteButton" layoutX="100.0" layoutY="15.0" mnemonicParsing="false"
+                   styleClass="yellow-background" text="Delete">
+               <graphic>
+                   <Glyph fontFamily="FontAwesome" icon="TRASH"/>
+               </graphic>
+           </Button>
        </HBox>
    </top>
 </BorderPane>

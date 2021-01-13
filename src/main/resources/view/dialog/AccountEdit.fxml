@@ -50,6 +50,7 @@
       <Pane prefHeight="200.0" prefWidth="200.0" styleClass="empty-pane" BorderPane.alignment="CENTER" />
    </right>
    <bottom>
+<<<<<<< HEAD
       <HBox prefHeight="100.0" prefWidth="200.0" styleClass="button-box" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="confirmButton" mnemonicParsing="false" styleClass="yellow-button" text="Create">
@@ -58,5 +59,10 @@
                </HBox.margin></Button>
          </children>
       </HBox>
+=======
+       <HBox prefHeight="100.0" prefWidth="200.0" styleClass="button-box" BorderPane.alignment="CENTER">
+           <Button fx:id="confirmButton" mnemonicParsing="false" text="Create" styleClass="yellow-background"/>
+       </HBox>
+>>>>>>> graph-refactor
    </bottom>
 </BorderPane>

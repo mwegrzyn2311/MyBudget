@@ -10,8 +10,6 @@ import javafx.collections.ObservableList;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,15 +25,15 @@ public class MonthlyBudget {
 
     public MonthlyBudget() {
         this.name = new SimpleStringProperty();
-        this.firstDay = new SimpleObjectProperty<LocalDate>();
-        this.lastDay = new SimpleObjectProperty<LocalDate>();
+        this.firstDay = new SimpleObjectProperty<>();
+        this.lastDay = new SimpleObjectProperty<>();
         this.categoryBudgets = new LinkedList<>();
     }
 
     public MonthlyBudget(String name, LocalDate firstDay, List<CategoryBudget> categoryBudgets) {
         this.name = new SimpleStringProperty(name);
-        this.firstDay = new SimpleObjectProperty<LocalDate>(firstDay);
-        this.lastDay = new SimpleObjectProperty<LocalDate>(calculateLastDay());
+        this.firstDay = new SimpleObjectProperty<>(firstDay);
+        this.lastDay = new SimpleObjectProperty<>(calculateLastDay());
         this.categoryBudgets = categoryBudgets;
     }
 
