@@ -25,3 +25,7 @@
 .light-blue-background{
     -fx-background-color: #8ecae6;
 }
+
+.text-area .content {
+    -fx-background-color: #8ecae6 ;
+}

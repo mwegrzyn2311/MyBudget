@@ -1,7 +1,9 @@
 package controller;
 
+import controller.dialog.CategoryDeleteController;
 import controller.dialog.CategoryEditController;
 import controller.dialog.TopCategoryAddController;
+import dao.CategoryDao;
 import dao.TopCategoryDao;
 import helper.CategoryTreeListHelper;
 import javafx.beans.binding.Bindings;
@@ -24,6 +26,7 @@ import java.io.IOException;
 public class CategoriesViewController extends TabController {
 
     private final TopCategoryDao topCategoryDao;
+    private final CategoryDao categoryDao;
     private final FxmlLoaderService fxmlLoaderService;
 
     @FXML
@@ -42,9 +45,11 @@ public class CategoriesViewController extends TabController {
 
 
     @Inject
-    public CategoriesViewController(TopCategoryDao topCategoryDao, FxmlLoaderService loaderService){
+    public CategoriesViewController(TopCategoryDao topCategoryDao, FxmlLoaderService loaderService,
+                                    CategoryDao categoryDao){
         this.topCategoryDao = topCategoryDao;
         this.fxmlLoaderService=loaderService;
+        this.categoryDao=categoryDao;
     }
 
 
@@ -65,16 +70,38 @@ public class CategoriesViewController extends TabController {
 
     private void deleteCategory(ActionEvent actionEvent) {
         TreeItem<BaseCategory> selected = categoriesView.getSelectionModel().getSelectedItem();
-        if(selected.getValue() instanceof Category){
-            final Category category = (Category) selected.getValue();
-            final TopCategory topCategory = category.getTopCategory();
-            topCategory.removeChildCategory(category);
-            topCategoryDao.update(topCategory);
-        } else {
-            TopCategory topCategory = (TopCategory) selected.getValue();
-            this.topCategoryDao.delete(topCategory);
+        Stage stage = new Stage();
+
+        FXMLLoader loader = fxmlLoaderService.getLoader(getClass().getResource("/view/dialog/CategoryDelete.fxml"));
+        try {
+            Parent root = loader.load();
+            stage.setScene(new Scene(root, 500 ,200));
+            CategoryDeleteController controller = loader.getController();
+            controller.setStage(stage);
+
+            stage.setTitle("Warning!");
+            stage.showAndWait();
+
+            if(controller.isApproved()) {
+                try {
+                    if(selected.getValue() instanceof Category){
+                        final Category category = (Category) selected.getValue();
+                        final TopCategory topCategory = category.getTopCategory();
+                        topCategory.removeChildCategory(category);
+                        categoryDao.delete(category);
+                        topCategoryDao.update(topCategory);
+                    } else {
+                        TopCategory topCategory = (TopCategory) selected.getValue();
+                        this.topCategoryDao.delete(topCategory);
+                    }
+                    refreshList();
+                } catch (PersistenceException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch(IOException ex) {
+            ex.printStackTrace();
         }
-        refreshList();
     }
 
     private void editCategory(ActionEvent actionEvent) {

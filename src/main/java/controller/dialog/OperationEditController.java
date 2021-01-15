@@ -1,5 +1,6 @@
 package controller.dialog;
 
+import dao.CategoryDao;
 import helper.CategoryTreeListHelper;
 import dao.TopCategoryDao;
 import javafx.application.Platform;
@@ -31,10 +32,12 @@ public class OperationEditController extends DialogController {
     private final ValidationSupport validationSupport = new ValidationSupport();
 
     private final TopCategoryDao topCategoryDao;
+    private final CategoryDao categoryDao;
 
     @Inject
-    public OperationEditController(TopCategoryDao topCategoryDao){
+    public OperationEditController(TopCategoryDao topCategoryDao, CategoryDao categoryDao){
         this.topCategoryDao = topCategoryDao;
+        this.categoryDao = categoryDao;
     }
 
     @FXML
