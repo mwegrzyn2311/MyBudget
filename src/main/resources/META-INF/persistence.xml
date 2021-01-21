@@ -16,6 +16,9 @@
             <property name="hibernate.connection.url" value="jdbc:sqlite:dby.db"/>
             <property name="hibernate.connection.driver_class" value="org.sqlite.JDBC"/>
             <property name="hibernate.connection.pool_size" value="1"/>
+            <property name="hibernate.connection.foreign_key" value="true"/>
+            <property name="hibernate.connection.autocommit" value="true"/>
+            <property name="hibernate.connection.release_mode" value="auto"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.SQLiteDialect"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <!-- Default is false for backwards compatibility.  Should be used on all new projects -->

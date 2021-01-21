@@ -87,8 +87,8 @@ public class CategoriesViewController extends TabController {
                     if(selected.getValue() instanceof Category){
                         final Category category = (Category) selected.getValue();
                         final TopCategory topCategory = category.getTopCategory();
-                        topCategory.removeChildCategory(category);
                         categoryDao.delete(category);
+                        topCategory.removeChildCategory(category);
                         topCategoryDao.update(topCategory);
                     } else {
                         TopCategory topCategory = (TopCategory) selected.getValue();

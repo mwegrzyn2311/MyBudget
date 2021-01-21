@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 public class OperationListController extends TabController {
     private final FxmlLoaderService fxmlLoaderService;
@@ -128,7 +129,8 @@ public class OperationListController extends TabController {
     }
 
     private void refreshList() {
-        accountDao.refresh(account);
+        Optional<Account> accountRefresh = accountDao.findOne(account.getId());
+        account = accountRefresh.get();
         if(account != null) {
             operationTableView.refresh();
             name.getChildren().clear();

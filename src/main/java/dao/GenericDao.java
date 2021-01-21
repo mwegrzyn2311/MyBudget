@@ -22,6 +22,10 @@ public abstract class GenericDao<T> {
 		entityManager.get().persist(entity);
 	}
 
+	public void merge(T entity) {
+	    entityManager.get().merge(entity);
+    }
+
     @Transactional
     public void update(T entity) {
         entityManager.get().merge(entity);
