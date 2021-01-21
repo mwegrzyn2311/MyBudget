@@ -2,6 +2,8 @@ package dao;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.persist.Transactional;
+import model.Category;
 import model.TopCategory;
 
 import javax.persistence.EntityManager;
@@ -25,5 +27,21 @@ public class TopCategoryDao extends GenericDao<TopCategory> {
             e.printStackTrace();
         }
         return Optional.empty();
+    }
+
+    @Override
+    @Transactional
+    public void delete(TopCategory entity) {
+        entityManager.get().createQuery("DELETE FROM CategoryBudget cb WHERE cb.category " +
+                "IN (SELECT c FROM Category c where c.topCategory = :entity)")
+                .setParameter("entity", entity).executeUpdate();
+        entityManager.get().createQuery("DELETE FROM Operation o WHERE o.category " +
+                "IN (SELECT c FROM Category c where c.topCategory = :entity)")
+                .setParameter("entity", entity).executeUpdate();
+        entityManager.get().remove(entity);
+    }
+
+    public void clear(){
+        entityManager.get().clear();
     }
 }

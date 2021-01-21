@@ -93,6 +93,7 @@ public class CategoriesViewController extends TabController {
                     } else {
                         TopCategory topCategory = (TopCategory) selected.getValue();
                         this.topCategoryDao.delete(topCategory);
+                        this.topCategoryDao.clear();
                     }
                     refreshList();
                 } catch (PersistenceException e) {

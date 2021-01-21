@@ -45,6 +45,7 @@ public abstract class GenericDao<T> {
 	}
 
     public void refresh(T entity) {
+	    entityManager.get().merge(entity);
 	    entityManager.get().refresh(entity);
     }
 }
